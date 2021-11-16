@@ -1,12 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-
-interface Post {
-    title?: string,
-    description?: string,
-    username?: string,
-    date?: string,
-    likesCount?: number
-}
+import {Post} from './post.model';
 
 @Component({
     selector: 'app-post',
@@ -14,12 +7,10 @@ interface Post {
     styleUrls: ['./post.component.less']
 })
 export class PostComponent implements OnInit {
-    @Input() post: Post = {};
+    @Input() post: Post = new Post('', '');
 
-    constructor() {
-    }
+    constructor() {}
 
-    ngOnInit(): void {
-    }
+    ngOnInit(): void {}
 
 }
