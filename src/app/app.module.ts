@@ -14,6 +14,7 @@ import { StoreModule } from '@ngrx/store';
 import { counterReducer } from './counter.reducer';
 import { CounterComponent } from './counter/counter.component';
 import { SettingsComponent } from './settings/settings.component';
+import { EditorComponent } from './editor/editor.component';
 
 @NgModule({
     declarations: [
@@ -25,6 +26,7 @@ import { SettingsComponent } from './settings/settings.component';
         MainComponent,
         CounterComponent,
         SettingsComponent,
+        EditorComponent,
     ],
     imports: [
         BrowserModule,
