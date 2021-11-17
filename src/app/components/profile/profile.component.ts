@@ -1,26 +1,15 @@
-import {Component, OnInit, Input} from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'app-profile',
     templateUrl: './profile.component.html',
-    styleUrls: ['./profile.component.less']
+    styleUrls: ['./profile.component.less'],
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent {
     @Input() username?: string = '';
     @Input() date?: string = '';
 
-    constructor() {
-    }
+    constructor() {}
 
-    ngOnInit(): void {
-    }
-
-    // onType(event: Event){
-    //     console.log(this.username);
-    //     this.username = (<HTMLDataElement>event.target).value
-    // }
-
-    onClick() {
-
-    }
+    onClick() {}
 }

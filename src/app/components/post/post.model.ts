@@ -5,7 +5,13 @@ export class Post {
     public date?: string;
     public likesCount?: number;
 
-    constructor(title: string, description: string, username?: string, date?: string, likesCount?: number) {
+    constructor(
+        title: string,
+        description: string,
+        username?: string,
+        date?: string,
+        likesCount?: number
+    ) {
         this.title = title;
         this.description = description;
         this.username = username;

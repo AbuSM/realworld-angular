@@ -1,6 +1,9 @@
 <a href="#" class="post">
     <div class="post-header">
-        <app-profile [username]="post.username" [date]="post.username"></app-profile>
+        <app-profile
+            [username]="post.username"
+            [date]="post.username"
+        ></app-profile>
         <button class="btn like-button">
             <i class="ion-heart"></i>
             <span>{{ post.likesCount || 0 }}</span>
