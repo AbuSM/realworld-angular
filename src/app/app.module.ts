@@ -31,7 +31,7 @@ import { SettingsComponent } from './settings/settings.component';
         AppRoutingModule,
         FormsModule,
         ReactiveFormsModule,
-        StoreModule.forRoot({ count: counterReducer })
+        StoreModule.forRoot({ count: counterReducer }),
     ],
     providers: [],
     bootstrap: [AppComponent],

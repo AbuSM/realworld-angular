@@ -9,16 +9,36 @@
                     <a routerLink="" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item" *ngIf="!isLogged">
-                    <a routerLink="/login" routerLinkActive="active" class="nav-link">Sign in</a>
+                    <a
+                        routerLink="/login"
+                        routerLinkActive="active"
+                        class="nav-link"
+                        >Sign in</a
+                    >
                 </li>
                 <li class="nav-item" *ngIf="!isLogged">
-                    <a routerLink="/register" routerLinkActive="active" class="nav-link">Sign up</a>
+                    <a
+                        routerLink="/register"
+                        routerLinkActive="active"
+                        class="nav-link"
+                        >Sign up</a
+                    >
                 </li>
                 <li class="nav-item" *ngIf="isLogged">
-                    <a routerLink="/register" routerLinkActive="active" class="nav-link">New article</a>
+                    <a
+                        routerLink="/register"
+                        routerLinkActive="active"
+                        class="nav-link"
+                        >New article</a
+                    >
                 </li>
                 <li class="nav-item" *ngIf="isLogged">
-                    <a routerLink="/settings" routerLinkActive="active" class="nav-link">Settings</a>
+                    <a
+                        routerLink="/settings"
+                        routerLinkActive="active"
+                        class="nav-link"
+                        >Settings</a
+                    >
                 </li>
             </ul>
         </div>
