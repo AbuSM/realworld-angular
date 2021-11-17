@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
     styleUrls: ['./header.component.less'],
 })
 export class HeaderComponent {
+    isLogged: boolean = true;
     constructor() {}
 }

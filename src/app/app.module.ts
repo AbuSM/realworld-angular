@@ -10,6 +10,11 @@ import { HeaderComponent } from './header/header.component';
 import { AuthComponent } from './auth/auth.component';
 import { MainComponent } from './main/main.component';
 
+import { StoreModule } from '@ngrx/store';
+import { counterReducer } from './counter.reducer';
+import { CounterComponent } from './counter/counter.component';
+import { SettingsComponent } from './settings/settings.component';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -18,12 +23,15 @@ import { MainComponent } from './main/main.component';
         HeaderComponent,
         AuthComponent,
         MainComponent,
+        CounterComponent,
+        SettingsComponent,
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         FormsModule,
         ReactiveFormsModule,
+        StoreModule.forRoot({ count: counterReducer })
     ],
     providers: [],
     bootstrap: [AppComponent],
