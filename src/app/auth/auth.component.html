@@ -1,0 +1,26 @@
+<div class="container row">
+    <div class="col-md-6 offset-md-3 col-xs-12">
+
+        <div class="text-center">
+            <h2>{{ title }}</h2>
+            <p>
+                <a routerLink="/register" *ngIf="authType === 'login'">Need an account?</a>
+                <a routerLink="/login" *ngIf="authType === 'register'">Have an account?</a>
+            </p>
+        </div>
+        <form action="">
+            <div class="form-group" *ngIf="authType === 'register'">
+                <input type="text" class="form-control form-control-lg" placeholder="Username"/>
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control form-control-lg" id="exampleInputEmail1"
+                       aria-describedby="emailHelp" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control form-control-lg" id="exampleInputPassword1"
+                       placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg pull-xs-right">{{ title }}</button>
+        </form>
+    </div>
+</div>
