@@ -9,13 +9,15 @@ export class AuthService {
 
     authUser(authType: String, credentials: UserCredentialsModel) {
         return this.apiService
-            .post(`users${authType === 'login' ? '/login': ''}`, {user: credentials})
-            .pipe(
-            map((data) => {
-                this.setAuth(data);
-                return data;
+            .post(`users${authType === 'login' ? '/login' : ''}`, {
+                user: credentials,
             })
-        );
+            .pipe(
+                map((data) => {
+                    this.setAuth(data);
+                    return data;
+                })
+            );
     }
 
     setAuth(user) {

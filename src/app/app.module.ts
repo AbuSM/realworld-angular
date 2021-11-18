@@ -10,11 +10,11 @@ import { HeaderComponent } from './header/header.component';
 import { MainComponent } from './main/main.component';
 
 import { AuthModule } from './auth/auth.module';
+import { EditorModule } from './editor/editor.module';
 import { StoreModule } from '@ngrx/store';
 import { counterReducer } from './counter.reducer';
 import { CounterComponent } from './counter/counter.component';
 import { SettingsComponent } from './settings/settings.component';
-import { EditorComponent } from './editor/editor.component';
 
 @NgModule({
     declarations: [
@@ -25,10 +25,10 @@ import { EditorComponent } from './editor/editor.component';
         MainComponent,
         CounterComponent,
         SettingsComponent,
-        EditorComponent,
     ],
     imports: [
         AuthModule,
+        EditorModule,
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
