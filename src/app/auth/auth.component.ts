@@ -18,8 +18,8 @@ import { AuthService } from '../services';
 export class AuthComponent implements OnInit, OnDestroy {
     authType: String = '';
     title: String = '';
-    // errors: Errors = {errors: {}};
-    isSubmitting = false;
+    errors = {};
+    isLoading = false;
     authForm: FormGroup;
     subscriptions: Subscription[] = [];
 
@@ -29,7 +29,6 @@ export class AuthComponent implements OnInit, OnDestroy {
         private authService: AuthService,
         private fb: FormBuilder
     ) {
-        // use FormBuilder to create a form group
         this.authForm = this.fb.group({
             email: ['', Validators.required],
             password: ['', Validators.required],
@@ -39,7 +38,6 @@ export class AuthComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.subscriptions.push(
             this.route.url.subscribe((data) => {
-                console.log(1111);
                 this.authType = data[data.length - 1].path;
                 this.title = this.authType === 'login' ? 'Sign in' : 'Sign up';
                 if (this.authType === 'register') {
@@ -50,13 +48,14 @@ export class AuthComponent implements OnInit, OnDestroy {
     }
 
     onSubmit() {
+        this.isLoading = true;
         const credentials: AuthModel = this.authForm.value;
         this.subscriptions.push(
             this.authService.authUser(this.authType, credentials).subscribe(
-                (data) => this.router.navigateByUrl('/'),
+                () => this.router.navigateByUrl('/'),
                 (err) => {
-                    // this.errors = err;
-                    this.isSubmitting = false;
+                    this.errors = err;
+                    this.isLoading = false;
                 }
             )
         );

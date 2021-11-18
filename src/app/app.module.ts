@@ -9,7 +9,7 @@ import { ProfileComponent } from './shared/profile/profile.component';
 import { HeaderComponent } from './header/header.component';
 import { MainComponent } from './main/main.component';
 
-import {AuthModule} from './auth/auth.module';
+import { AuthModule } from './auth/auth.module';
 import { StoreModule } from '@ngrx/store';
 import { counterReducer } from './counter.reducer';
 import { CounterComponent } from './counter/counter.component';
@@ -32,7 +32,7 @@ import { EditorComponent } from './editor/editor.component';
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
-        StoreModule.forRoot({ count: counterReducer })
+        StoreModule.forRoot({ count: counterReducer }),
     ],
     providers: [AuthService, ApiService],
     bootstrap: [AppComponent],
