@@ -6,7 +6,7 @@ import {
     FormControl,
     Validators,
 } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { AuthModel } from '../models/auth.model';
 import { AuthService } from '../services';
 
@@ -21,7 +21,7 @@ export class AuthComponent implements OnInit, OnDestroy {
     // errors: Errors = {errors: {}};
     isSubmitting = false;
     authForm: FormGroup;
-    subscriptions: Subscription[];
+    subscriptions: Subscription[] = [];
 
     constructor(
         private route: ActivatedRoute,
@@ -39,6 +39,7 @@ export class AuthComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.subscriptions.push(
             this.route.url.subscribe((data) => {
+                console.log(1111);
                 this.authType = data[data.length - 1].path;
                 this.title = this.authType === 'login' ? 'Sign in' : 'Sign up';
                 if (this.authType === 'register') {
