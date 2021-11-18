@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { HttpClientModule } from '@angular/common/http';
+import { AuthService, ApiService } from './services';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PostComponent } from './shared/post/post.component';
@@ -33,9 +34,10 @@ import { EditorComponent } from './editor/editor.component';
         AppRoutingModule,
         FormsModule,
         ReactiveFormsModule,
+        HttpClientModule,
         StoreModule.forRoot({ count: counterReducer }),
     ],
-    providers: [],
+    providers: [AuthService, ApiService],
     bootstrap: [AppComponent],
 })
 export class AppModule {}
