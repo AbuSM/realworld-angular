@@ -40,6 +40,9 @@
                         >Settings</a
                     >
                 </li>
+                <li class="nav-item" *ngIf="isLogged">
+                    <app-profile username="test"></app-profile>
+                </li>
             </ul>
         </div>
     </nav>
