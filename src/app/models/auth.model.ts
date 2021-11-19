@@ -1,4 +1,4 @@
-import { UserCredentialsModel } from './user.model';
+import { UserCredentialsModel } from './user-credentials.model';
 
 export interface AuthModel extends UserCredentialsModel {
     username: string;

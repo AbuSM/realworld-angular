@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
     selector: 'app-main',
@@ -20,6 +20,8 @@ export class MainComponent {
             username: 'Anton',
         },
     ];
+
+    isLogged: boolean = true;
 
     constructor() {}
 }

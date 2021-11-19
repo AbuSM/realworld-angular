@@ -7,7 +7,7 @@ import {
     Validators,
 } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { AuthModel } from '../models';
+import {AuthModel, ErrorsModel} from '../models';
 import { AuthService } from '../services';
 
 @Component({
@@ -18,7 +18,7 @@ import { AuthService } from '../services';
 export class AuthComponent implements OnInit, OnDestroy {
     authType: string = '';
     title: string = '';
-    errors = {};
+    errors: ErrorsModel = {errors: {}};
     isLoading = false;
     authForm: FormGroup;
     subscriptions: Subscription[] = [];
@@ -48,6 +48,7 @@ export class AuthComponent implements OnInit, OnDestroy {
     }
 
     onSubmit() {
+        this.errors = {errors: {}};
         this.isLoading = true;
         const credentials: AuthModel = this.authForm.value;
         this.subscriptions.push(

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MainComponent } from './main/main.component';
+import { MainComponent } from './layout/main/main.component';
 import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [

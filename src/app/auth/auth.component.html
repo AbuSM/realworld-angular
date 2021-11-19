@@ -12,6 +12,7 @@
                     </a>
                 </p>
             </div>
+            <app-errors-list [errors]="errors"></app-errors-list>
             <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
                 <div class="form-group" *ngIf="authType === 'register'">
                     <input

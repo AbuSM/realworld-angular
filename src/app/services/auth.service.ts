@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UserCredentialsModel } from '../models/user.model';
+import { UserCredentialsModel } from '../models';
 import { ApiService } from './api.service';
 import { map } from 'rxjs';
 
