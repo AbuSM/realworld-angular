@@ -7,7 +7,7 @@ import { map } from 'rxjs';
 export class AuthService {
     constructor(private apiService: ApiService) {}
 
-    authUser(authType: String, credentials: UserCredentialsModel) {
+    authUser(authType: string, credentials: UserCredentialsModel) {
         return this.apiService
             .post(`users${authType === 'login' ? '/login' : ''}`, {
                 user: credentials,

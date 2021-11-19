@@ -24,20 +24,22 @@
                         >Sign up</a
                     >
                 </li>
-                <li class="nav-item" *ngIf="isLogged">
-                    <a
-                        routerLink="/register"
-                        routerLinkActive="active"
-                        class="nav-link"
-                        >New article</a
+                <li class="nav-item" *ngIf="!isLogged">
+                    <a routerLink="/editor"
+                       routerLinkActive="active"
+                       class="nav-link">
+                        <i class="ion-compose"></i>
+                        New article
+                    </a
                     >
                 </li>
                 <li class="nav-item" *ngIf="isLogged">
-                    <a
-                        routerLink="/settings"
-                        routerLinkActive="active"
-                        class="nav-link"
-                        >Settings</a
+                    <a routerLink="/settings"
+                       routerLinkActive="active"
+                       class="nav-link">
+                        <i class="ion-gear-a"></i>
+                        Settings
+                    </a
                     >
                 </li>
                 <li class="nav-item" *ngIf="isLogged">

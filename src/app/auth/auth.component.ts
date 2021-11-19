@@ -7,7 +7,7 @@ import {
     Validators,
 } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { AuthModel } from '../models/auth.model';
+import { AuthModel } from '../models';
 import { AuthService } from '../services';
 
 @Component({
@@ -16,8 +16,8 @@ import { AuthService } from '../services';
     styleUrls: ['./auth.component.less'],
 })
 export class AuthComponent implements OnInit, OnDestroy {
-    authType: String = '';
-    title: String = '';
+    authType: string = '';
+    title: string = '';
     errors = {};
     isLoading = false;
     authForm: FormGroup;
