@@ -18,7 +18,7 @@ export class ApiService {
 
     get(path: string, config: {}): Observable<any> {
         return this.http
-            .get(`${environment.api_url}${path}`, config )
+            .get(`${environment.api_url}${path}`, config)
             .pipe(catchError(ApiService.formatErrors));
     }
 

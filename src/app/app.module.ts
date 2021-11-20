@@ -15,11 +15,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        SettingsComponent,
-        NotFoundPageComponent,
-    ],
+    declarations: [AppComponent, SettingsComponent, NotFoundPageComponent],
     imports: [
         AuthModule,
         EditorModule,
