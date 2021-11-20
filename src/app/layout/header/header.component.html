@@ -8,7 +8,7 @@
                 <li class="nav-item">
                     <a routerLink="" class="nav-link">Home</a>
                 </li>
-                <li class="nav-item" *ngIf="!isLogged">
+                <li class="nav-item" *ngIf="(isLogged$ | async) === false">
                     <a
                         routerLink="/login"
                         routerLinkActive="active"
@@ -16,7 +16,7 @@
                         >Sign in</a
                     >
                 </li>
-                <li class="nav-item" *ngIf="!isLogged">
+                <li class="nav-item" *ngIf="(isLogged$ | async) === false">
                     <a
                         routerLink="/register"
                         routerLinkActive="active"
@@ -24,25 +24,27 @@
                         >Sign up</a
                     >
                 </li>
-                <li class="nav-item" *ngIf="!isLogged">
-                    <a routerLink="/editor"
-                       routerLinkActive="active"
-                       class="nav-link">
+                <li class="nav-item" *ngIf="isLogged$ | async">
+                    <a
+                        routerLink="/editor"
+                        routerLinkActive="active"
+                        class="nav-link"
+                    >
                         <i class="ion-compose"></i>
                         New article
-                    </a
-                    >
+                    </a>
                 </li>
-                <li class="nav-item" *ngIf="isLogged">
-                    <a routerLink="/settings"
-                       routerLinkActive="active"
-                       class="nav-link">
+                <li class="nav-item" *ngIf="isLogged$ | async">
+                    <a
+                        routerLink="/settings"
+                        routerLinkActive="active"
+                        class="nav-link"
+                    >
                         <i class="ion-gear-a"></i>
                         Settings
-                    </a
-                    >
+                    </a>
                 </li>
-                <li class="nav-item" *ngIf="isLogged">
+                <li class="nav-item" *ngIf="isLogged$">
                     <app-profile username="test"></app-profile>
                 </li>
             </ul>

@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MainComponent } from './layout/main/main.component';
+import { MainComponent } from './layout';
 import { SettingsComponent } from './settings/settings.component';
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
 const routes: Routes = [
     {
@@ -11,6 +12,10 @@ const routes: Routes = [
     {
         path: 'settings',
         component: SettingsComponent,
+    },
+    {
+        path: '**',
+        component: NotFoundPageComponent,
     },
 ];
 

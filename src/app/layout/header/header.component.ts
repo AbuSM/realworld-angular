@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-header',
@@ -6,6 +8,8 @@ import { Component } from '@angular/core';
     styleUrls: ['./header.component.less'],
 })
 export class HeaderComponent {
-    isLogged: boolean = false;
-    constructor() {}
+    isLogged$: Observable<boolean>;
+    constructor(private store: Store<{ auth: boolean }>) {
+        this.isLogged$ = store.select('auth');
+    }
 }
