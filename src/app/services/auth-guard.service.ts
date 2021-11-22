@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, map } from 'rxjs';
+import { Observable, map, takeLast } from 'rxjs';
 import {
     CanActivate,
     ActivatedRouteSnapshot,
@@ -20,12 +20,7 @@ export class AuthGuardService implements CanActivate {
         state: RouterStateSnapshot
     ): Observable<boolean> {
         return this.store.select('auth').pipe(
-            map((isLogged) => {
-                if (!isLogged) {
-                    this.router.navigateByUrl('/');
-                }
-                return isLogged;
-            })
+            map(isLogged => isLogged)
         );
     }
 }
