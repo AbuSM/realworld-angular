@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthComponent } from './auth.component';
-import { AuthGuardService } from './auth-guard.service';
+import { NoAuthService } from './no-auth.service';
 
 const routes: Routes = [
     {
         path: 'login',
         component: AuthComponent,
-        canActivate: [AuthGuardService],
+        canActivate: [NoAuthService],
     },
     {
         path: 'register',
         component: AuthComponent,
-        canActivate: [AuthGuardService],
+        canActivate: [NoAuthService],
     },
 ];
 @NgModule({

@@ -4,7 +4,7 @@ import { ApiService } from './api.service';
 import { map } from 'rxjs';
 import { clear, getItem, setItem } from '../utils';
 import { Store } from '@ngrx/store';
-import { authorize } from '../auth/+store/auth.actions';
+import { authorize, logout } from '../auth/+store/auth.actions';
 
 @Injectable()
 export class AuthService {
@@ -32,6 +32,7 @@ export class AuthService {
 
     logout() {
         clear();
+        this.store.dispatch(logout());
     }
 
     checkUser() {
@@ -41,6 +42,7 @@ export class AuthService {
                 .get('user', { headers: { Authorization: `Bearer ${token}` } })
                 .subscribe({
                     next: () => this.store.dispatch(authorize()),
+                    error: () => this.logout(),
                 });
         } else {
             this.logout();

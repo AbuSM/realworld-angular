@@ -1,4 +1,4 @@
-<a href="#" class="post">
+<div class="post">
     <div class="post-header">
         <app-profile
             [username]="post.username"
@@ -9,9 +9,9 @@
             <span>{{ post.likesCount || 0 }}</span>
         </button>
     </div>
-    <div class="post-body">
+    <a routerLink="/post" class="post-body">
         <h1>{{ post.title }}</h1>
         <p>{{ post.description }}</p>
         <span>Read more...</span>
-    </div>
-</a>
+    </a>
+</div>

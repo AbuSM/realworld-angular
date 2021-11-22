@@ -10,8 +10,6 @@ import {
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
-    isLogged$: Observable<boolean>;
-
     constructor(
         private store: Store<{ auth: boolean }>,
         private router: Router

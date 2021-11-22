@@ -1,12 +1,15 @@
 <div class="profile">
-    <div>
+    <a routerLink="/user">
         <img
+            alt="user-img"
             class="user-img"
             src="https://api.realworld.io/images/smiley-cyrus.jpeg"
         />
-    </div>
+    </a>
     <div>
-        <a href="#">{{ username }}</a>
-        <span *ngIf="date">{{ date }}</span>
+        <a routerLink="/user" [class]="!date ? 'nav-link' : 'profile-link'">{{
+            username
+        }}</a>
+        <span *ngIf="date" class="date">{{ date }}</span>
     </div>
 </div>
