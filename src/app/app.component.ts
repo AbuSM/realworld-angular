@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Store} from '@ngrx/store';
-import {checkAccess} from "./auth/+store/auth.actions";
+import { Store } from '@ngrx/store';
+import { checkAccess } from './auth/+store/auth.actions';
 
 @Component({
     selector: 'app-root',

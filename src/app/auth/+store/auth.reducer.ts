@@ -10,34 +10,34 @@ import {
 export const initialState = {
     isLoading: false,
     isLogged: false,
-    error: null
+    error: null,
 };
 
 const _authReducer = createReducer(
     initialState,
     on(authorize, (state) => ({
         ...state,
-        isLoading: true
+        isLoading: true,
     })),
     on(authorizeSuccess, (state) => ({
         ...state,
         isLoading: false,
-        isLogged: true
+        isLogged: true,
     })),
     on(authorizeFailure, (state, payload) => ({
         ...state,
         isLoading: false,
         isLogged: false,
-        error: payload
+        error: payload,
     })),
-    on(checkAccess, state => ({
+    on(checkAccess, (state) => ({
         ...state,
-        isLoading: true
+        isLoading: true,
     })),
     on(logout, (state) => ({
         ...state,
         isLoading: false,
-        isLogged: false
+        isLogged: false,
     }))
 );
 

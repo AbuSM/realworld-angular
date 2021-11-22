@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import {getIsLogged} from "../../auth/+store/auth.selector";
-import {AuthState} from "../../auth/+store/auth.state";
+import { getIsLogged } from '../../auth/+store/auth.selector';
+import { AuthState } from '../../auth/+store/auth.state';
 
 @Component({
     selector: 'app-header',

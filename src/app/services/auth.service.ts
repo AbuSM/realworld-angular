@@ -4,12 +4,9 @@ import { ApiService } from './api.service';
 import { map } from 'rxjs';
 import { clear, getItem, setItem } from '../utils';
 
-
 @Injectable()
 export class AuthService {
-    constructor(
-        private apiService: ApiService,
-    ) {}
+    constructor(private apiService: ApiService) {}
 
     authUser(authType: string, credentials: UserCredentialsModel) {
         return this.apiService
@@ -30,7 +27,9 @@ export class AuthService {
 
     checkUser() {
         const token = getItem();
-        return this.apiService.get('user', { headers: { Authorization: `Bearer ${token}` } })
+        return this.apiService.get('user', {
+            headers: { Authorization: `Bearer ${token}` },
+        });
     }
 
     logout() {

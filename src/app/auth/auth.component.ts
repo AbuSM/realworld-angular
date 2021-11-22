@@ -54,7 +54,9 @@ export class AuthComponent implements OnInit, OnDestroy {
         this.errors = { errors: {} };
         this.isLoading = true;
         const credentials: AuthModel = this.authForm.value;
-        this.store.dispatch(authorize({loginType: this.authType, credentials}));
+        this.store.dispatch(
+            authorize({ loginType: this.authType, credentials })
+        );
     }
 
     ngOnDestroy(): void {
