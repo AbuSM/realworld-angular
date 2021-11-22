@@ -1,4 +1,4 @@
-import {createAction} from '@ngrx/store';
+import { createAction } from '@ngrx/store';
 
 export const AUTHORIZE_REQUEST = '[Auth Component] Authorize Request';
 export const AUTHORIZE_SUCCESS = '[Auth Component] Authorize Success';

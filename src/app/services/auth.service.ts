@@ -5,7 +5,7 @@ import { map } from 'rxjs';
 import { clear, getItem, setItem } from '../utils';
 import { Store } from '@ngrx/store';
 import { authorize, logout } from '../auth/+store/auth.actions';
-import {Router} from "@angular/router";
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
