@@ -16,8 +16,6 @@ export class ApiService {
         return throwError(error.error);
     }
 
-    getToken() {}
-
     get(path: string, config: {} = {}): Observable<any> {
         return this.http
             .get(`${environment.api_url}${path}`, config)

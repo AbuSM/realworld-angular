@@ -18,6 +18,7 @@ import { SharedModule } from './shared';
 import { StoreModule } from '@ngrx/store';
 import { authReducer } from './auth/+store/auth.reducer';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
     declarations: [AppComponent, NotFoundPageComponent],
@@ -30,6 +31,7 @@ import { NotFoundPageComponent } from './not-found-page/not-found-page.component
         AppRoutingModule,
         HttpClientModule,
         StoreModule.forRoot({ auth: authReducer }),
+        EffectsModule.forRoot([]),
     ],
     providers: [
         AuthService,
