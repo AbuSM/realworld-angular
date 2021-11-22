@@ -1,10 +1,23 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../services';
+import { UserModel, ProfileModel } from '../models';
 
 @Component({
-    selector: 'app-user',
-    templateUrl: './user.component.html',
-    styleUrls: ['./user.component.less'],
+    selector: 'app-profile-page',
+    templateUrl: './profile.component.html',
 })
 export class UserComponent {
-    constructor() {}
+    constructor(
+        private route: ActivatedRoute,
+        private userService: AuthService
+    ) {}
+
+    profile: ProfileModel;
+    currentUser: UserModel;
+    isUser: boolean;
+
+    onToggleFollowing(following: boolean) {
+        this.profile.following = following;
+    }
 }

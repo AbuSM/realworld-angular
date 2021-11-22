@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { TagsService } from '../../services';
 
 @Component({
     selector: 'app-main',
     templateUrl: './main.component.html',
     styleUrls: ['./main.component.less'],
 })
-export class MainComponent {
+export class MainComponent implements OnInit {
     posts = [
         {
             title: 'test',
@@ -20,6 +21,14 @@ export class MainComponent {
             username: 'Anton',
         },
     ];
+    tags: object[] = [];
+    isLogged: boolean = true;
 
-    constructor() {}
+    constructor(private tagsService: TagsService) {}
+
+    ngOnInit() {
+        this.tagsService.fetchAll().subscribe({
+            next: (tags) => (this.tags = tags),
+        });
+    }
 }

@@ -1,40 +1,43 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthService, ApiService } from './services';
+import {
+    AuthService,
+    ApiService,
+    ArticlesService,
+    AuthGuardService,
+    TagsService,
+} from './services';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PostComponent } from './shared/post/post.component';
-import { ProfileComponent } from './shared/profile/profile.component';
-import { HeaderComponent } from './header/header.component';
-import { MainComponent } from './main/main.component';
 
+import { LayoutModule } from './layout/layout.module';
 import { AuthModule } from './auth/auth.module';
 import { EditorModule } from './editor/editor.module';
+import { SharedModule } from './shared';
 import { StoreModule } from '@ngrx/store';
-import { counterReducer } from './counter.reducer';
-import { CounterComponent } from './counter/counter.component';
-import { SettingsComponent } from './settings/settings.component';
+import { authReducer } from './auth/+store/auth.reducer';
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        PostComponent,
-        ProfileComponent,
-        HeaderComponent,
-        MainComponent,
-        CounterComponent,
-        SettingsComponent,
-    ],
+    declarations: [AppComponent, NotFoundPageComponent],
     imports: [
-        AuthModule,
         EditorModule,
+        SharedModule,
+        AuthModule,
+        LayoutModule,
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
-        StoreModule.forRoot({ count: counterReducer }),
+        StoreModule.forRoot({ auth: authReducer }),
     ],
-    providers: [AuthService, ApiService],
+    providers: [
+        AuthService,
+        ApiService,
+        ArticlesService,
+        AuthGuardService,
+        TagsService,
+    ],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

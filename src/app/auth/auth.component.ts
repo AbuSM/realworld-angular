@@ -7,8 +7,10 @@ import {
     Validators,
 } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { AuthModel } from '../models/auth.model';
+import { AuthModel, ErrorsModel } from '../models';
 import { AuthService } from '../services';
+import { authorize } from './+store/auth.actions';
+import { Store } from '@ngrx/store';
 
 @Component({
     selector: 'app-login',
@@ -16,9 +18,9 @@ import { AuthService } from '../services';
     styleUrls: ['./auth.component.less'],
 })
 export class AuthComponent implements OnInit, OnDestroy {
-    authType: String = '';
-    title: String = '';
-    errors = {};
+    authType: string = '';
+    title: string = '';
+    errors: ErrorsModel = { errors: {} };
     isLoading = false;
     authForm: FormGroup;
     subscriptions: Subscription[] = [];
@@ -27,7 +29,8 @@ export class AuthComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private router: Router,
         private authService: AuthService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private store: Store<{ auth: boolean }>
     ) {
         this.authForm = this.fb.group({
             email: ['', Validators.required],
@@ -48,16 +51,20 @@ export class AuthComponent implements OnInit, OnDestroy {
     }
 
     onSubmit() {
+        this.errors = { errors: {} };
         this.isLoading = true;
         const credentials: AuthModel = this.authForm.value;
         this.subscriptions.push(
-            this.authService.authUser(this.authType, credentials).subscribe(
-                () => this.router.navigateByUrl('/'),
-                (err) => {
+            this.authService.authUser(this.authType, credentials).subscribe({
+                next: () => {
+                    this.store.dispatch(authorize());
+                    this.router.navigateByUrl('/');
+                },
+                error: (err) => {
                     this.errors = err;
                     this.isLoading = false;
-                }
-            )
+                },
+            })
         );
     }
 
