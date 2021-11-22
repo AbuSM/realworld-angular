@@ -7,20 +7,19 @@ import {
     RouterStateSnapshot,
     Router,
 } from '@angular/router';
+import {getIsLogged} from "../auth/+store/auth.selector";
+import {AuthState} from "../auth/+store/auth.state";
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
     constructor(
-        private store: Store<{ auth: boolean }>,
-        private router: Router
+        private store: Store<AuthState>,
     ) {}
 
     canActivate(
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<boolean> {
-        return this.store.select('auth').pipe(
-            map(isLogged => isLogged)
-        );
+        return this.store.select(getIsLogged);
     }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './services';
+import {Store} from '@ngrx/store';
+import {checkAccess} from "./auth/+store/auth.actions";
 
 @Component({
     selector: 'app-root',
@@ -9,9 +10,9 @@ import { AuthService } from './services';
 export class AppComponent implements OnInit {
     title = 'realworld-angular';
 
-    constructor(private authService: AuthService) {}
+    constructor(private store: Store) {}
 
     ngOnInit() {
-        this.authService.checkUser();
+        this.store.dispatch(checkAccess());
     }
 }

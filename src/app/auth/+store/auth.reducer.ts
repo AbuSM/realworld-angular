@@ -1,12 +1,44 @@
 import { createReducer, on } from '@ngrx/store';
-import { authorize, logout } from './auth.actions';
+import {
+    authorize,
+    authorizeSuccess,
+    authorizeFailure,
+    checkAccess,
+    logout,
+} from './auth.actions';
 
-export const initialState = false;
+export const initialState = {
+    isLoading: false,
+    isLogged: false,
+    error: null
+};
 
 const _authReducer = createReducer(
     initialState,
-    on(authorize, () => true),
-    on(logout, () => false)
+    on(authorize, (state) => ({
+        ...state,
+        isLoading: true
+    })),
+    on(authorizeSuccess, (state) => ({
+        ...state,
+        isLoading: false,
+        isLogged: true
+    })),
+    on(authorizeFailure, (state, payload) => ({
+        ...state,
+        isLoading: false,
+        isLogged: false,
+        error: payload
+    })),
+    on(checkAccess, state => ({
+        ...state,
+        isLoading: true
+    })),
+    on(logout, (state) => ({
+        ...state,
+        isLoading: false,
+        isLogged: false
+    }))
 );
 
 export function authReducer(state: any, action: any) {
