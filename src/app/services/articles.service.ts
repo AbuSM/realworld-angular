@@ -16,4 +16,8 @@ export class ArticlesService {
     create(data: ArticleModel): Observable<ArticleModel> {
         return this.apiService.post('articles', { article: data });
     }
+
+    get(slug) {
+        return this.apiService.get('articles/' + slug);
+    }
 }

@@ -14,6 +14,10 @@ const routes: Routes = [
             import('./settings/settings.module').then((m) => m.SettingsModule),
     },
     {
+        path: 'post',
+        loadChildren: () => import('./article/article.module').then(m => m.ArticleModule)
+    },
+    {
         path: '**',
         component: NotFoundPageComponent,
     },

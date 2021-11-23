@@ -9,20 +9,6 @@ import { ArticleModel } from '../../models';
     styleUrls: ['./main.component.less'],
 })
 export class MainComponent implements OnInit {
-    posts = [
-        {
-            title: 'test',
-            description: 'asasa',
-            likesCount: 2,
-            username: 'Fattoh',
-            date: 'November 16, 2021',
-        },
-        {
-            title: 'test2',
-            description: 'new post 2',
-            username: 'Anton',
-        },
-    ];
     tags$: Observable<{ tags: Array<string> }>;
     posts$: Observable<{ articles: ArticleModel[] }>;
     isLogged: boolean = true;
