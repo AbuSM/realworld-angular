@@ -10,11 +10,7 @@ export class ArticlesService {
     constructor(private apiService: ApiService) {}
 
     query(config: QueryModel): Observable<ArticleModel> {
-        const params = {};
-        return this.apiService.get(
-            'articles',
-            new HttpParams({ fromObject: params })
-        );
+        return this.apiService.get('articles', config);
     }
 
     create(data: ArticleModel): Observable<ArticleModel> {
