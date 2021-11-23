@@ -54,17 +54,8 @@ export class AuthComponent implements OnInit, OnDestroy {
         this.errors = { errors: {} };
         this.isLoading = true;
         const credentials: AuthModel = this.authForm.value;
-        this.subscriptions.push(
-            this.authService.authUser(this.authType, credentials).subscribe({
-                next: () => {
-                    this.store.dispatch(authorize());
-                    this.router.navigateByUrl('/');
-                },
-                error: (err) => {
-                    this.errors = err;
-                    this.isLoading = false;
-                },
-            })
+        this.store.dispatch(
+            authorize({ loginType: this.authType, credentials })
         );
     }
 

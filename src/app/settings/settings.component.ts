@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../services';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { logout } from '../auth/+store/auth.actions';
 
 @Component({
     selector: 'app-settings',
@@ -8,10 +9,9 @@ import { Router } from '@angular/router';
     styleUrls: ['./settings.component.less'],
 })
 export class SettingsComponent {
-    constructor(private router: Router, private authService: AuthService) {}
+    constructor(private router: Router, private store: Store) {}
 
     logout() {
-        this.authService.logout();
-        this.router.navigateByUrl('/');
+        this.store.dispatch(logout());
     }
 }
