@@ -1,17 +1,12 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'app-favorite-button',
     templateUrl: './favorite-button.component.html',
 })
-export class FavoriteButtonComponent implements OnInit {
+export class FavoriteButtonComponent {
     @Input() article;
-    constructor() {
-    }
-
-    ngOnInit(): void {
-    }
+    constructor() {}
 
     toggleFavorite() {}
-
 }

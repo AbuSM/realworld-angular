@@ -1,11 +1,11 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {ErrorsListComponent, PostComponent, ProfileComponent} from './';
-import {RouterModule} from '@angular/router';
-import {ArticleMetaComponent} from './article-meta/article-meta.component';
-import {FollowButtonComponent} from './follow-button/follow-button.component';
-import {FavoriteButtonComponent} from './favorite-button/favorite-button.component';
-import {ArticleCommentComponent} from './article-comment/article-comment.component';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ErrorsListComponent, PostComponent, ProfileComponent } from './';
+import { RouterModule } from '@angular/router';
+import { ArticleMetaComponent } from './article-meta/article-meta.component';
+import { FollowButtonComponent } from './follow-button/follow-button.component';
+import { FavoriteButtonComponent } from './favorite-button/favorite-button.component';
+import { ArticleCommentComponent } from './article-comment/article-comment.component';
 
 @NgModule({
     declarations: [
@@ -15,7 +15,7 @@ import {ArticleCommentComponent} from './article-comment/article-comment.compone
         ArticleMetaComponent,
         FollowButtonComponent,
         FavoriteButtonComponent,
-        ArticleCommentComponent
+        ArticleCommentComponent,
     ],
     imports: [CommonModule, RouterModule],
     exports: [
@@ -25,8 +25,7 @@ import {ArticleCommentComponent} from './article-comment/article-comment.compone
         ArticleMetaComponent,
         ArticleCommentComponent,
         FollowButtonComponent,
-        FavoriteButtonComponent
+        FavoriteButtonComponent,
     ],
 })
-export class SharedModule {
-}
+export class SharedModule {}

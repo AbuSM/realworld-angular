@@ -15,11 +15,13 @@ const routes: Routes = [
     },
     {
         path: 'editor',
-        loadChildren: () => import('./editor/editor.module').then(m => m.EditorModule)
+        loadChildren: () =>
+            import('./editor/editor.module').then((m) => m.EditorModule),
     },
     {
         path: 'post',
-        loadChildren: () => import('./article/article.module').then(m => m.ArticleModule)
+        loadChildren: () =>
+            import('./article/article.module').then((m) => m.ArticleModule),
     },
     {
         path: '**',

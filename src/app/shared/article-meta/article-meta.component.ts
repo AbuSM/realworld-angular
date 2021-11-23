@@ -1,17 +1,12 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'app-article-meta',
     templateUrl: './article-meta.component.html',
-    styleUrls: ['./article-meta.component.less']
+    styleUrls: ['./article-meta.component.less'],
 })
-export class ArticleMetaComponent implements OnInit {
+export class ArticleMetaComponent {
     @Input() article;
 
-    constructor() {
-    }
-
-    ngOnInit(): void {
-    }
-
+    constructor() {}
 }

@@ -20,7 +20,7 @@ import { StoreModule } from '@ngrx/store';
 import { authReducer } from './auth/+store/auth.reducer';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { EffectsModule } from '@ngrx/effects';
-import {ArticleModule} from "./article/article.module";
+import { ArticleModule } from './article/article.module';
 
 @NgModule({
     declarations: [AppComponent, NotFoundPageComponent],

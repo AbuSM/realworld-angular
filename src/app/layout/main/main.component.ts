@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticlesService, TagsService } from '../../services';
-import {Observable, startWith} from 'rxjs';
+import { Observable, startWith } from 'rxjs';
 import { ArticleModel } from '../../models';
 
 @Component({
@@ -20,7 +20,9 @@ export class MainComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.tags$ = this.tagsService.fetchAll().pipe(startWith({tags: []}));
-        this.posts$ = this.articleService.query().pipe(startWith({articles: []}));
+        this.tags$ = this.tagsService.fetchAll().pipe(startWith({ tags: [] }));
+        this.posts$ = this.articleService
+            .query()
+            .pipe(startWith({ articles: [] }));
     }
 }

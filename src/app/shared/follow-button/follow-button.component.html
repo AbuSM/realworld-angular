@@ -1,10 +1,13 @@
 <button
     class="btn btn-sm action-btn m-2"
-    [ngClass]="{ 'disabled': false,
-               'btn-outline-secondary': !profile.following,
-               'btn-secondary': profile.following }"
-    (click)="toggleFollow()">
+    [ngClass]="{
+        disabled: false,
+        'btn-outline-secondary': !profile.following,
+        'btn-secondary': profile.following
+    }"
+    (click)="toggleFollow()"
+>
     <i class="ion-plus-round"></i>
     &nbsp;
-    {{ profile.following ? 'Unfollow' : 'Follow' }} {{ profile.username }}
+    {{ profile.following ? "Unfollow" : "Follow" }} {{ profile.username }}
 </button>

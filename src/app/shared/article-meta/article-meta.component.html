@@ -4,13 +4,12 @@
     </a>
 
     <div class="info">
-        <a class="author"
-           [routerLink]="['/profile', article.author.username]">
+        <a class="author" [routerLink]="['/profile', article.author.username]">
             {{ article.author.username }}
         </a>
         <span class="date">
-      {{ article.createdAt | date: 'longDate' }}
-    </span>
+            {{ article.createdAt | date: "longDate" }}
+        </span>
     </div>
 
     <ng-content></ng-content>

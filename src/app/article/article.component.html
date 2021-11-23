@@ -1,35 +1,42 @@
 <div class="article-page">
-
     <div class="banner">
         <div class="container">
             <h1>{{ article.title }}</h1>
 
             <app-article-meta [article]="article">
-
                 <span [hidden]="!canModify">
-                    <button class="btn btn-sm btn-outline-secondary m-1"
-                            [routerLink]="['/editor', article.slug]">
+                    <button
+                        class="btn btn-sm btn-outline-secondary m-1"
+                        [routerLink]="['/editor', article.slug]"
+                    >
                         <i class="ion-edit"></i>
                         Edit Article
                     </button>
 
-                    <button class="btn btn-sm btn-outline-danger"
-                            (click)="onDeleteArticle()">
+                    <button
+                        class="btn btn-sm btn-outline-danger"
+                        (click)="onDeleteArticle()"
+                    >
                         <i class="ion-trash-a"></i>
-                          Delete Article
+                        Delete Article
                     </button>
                 </span>
                 <span [hidden]="canModify">
                     <app-follow-button
                         [profile]="article.author"
-                        (toggle)="onToggleFollowing($event)">
+                        (toggle)="onToggleFollowing($event)"
+                    >
                     </app-follow-button>
 
                     <app-favorite-button
                         [article]="article"
-                        (toggle)="onToggleFavorite($event)">
-                        {{ article.favorited ? 'Unfavorite' : 'Favorite' }} Article
-                        <span class="counter">({{ article.favoritesCount }})</span>
+                        (toggle)="onToggleFavorite($event)"
+                    >
+                        {{ article.favorited ? "Unfavorite" : "Favorite" }}
+                        Article
+                        <span class="counter"
+                            >({{ article.favoritesCount }})</span
+                        >
                     </app-favorite-button>
                 </span>
             </app-article-meta>
@@ -37,51 +44,59 @@
     </div>
 
     <div class="container page">
-
         <div class="row article-content">
             <div class="col-md-12">
-
                 <div [innerHTML]="article.body"></div>
 
                 <ul class="tag-list">
-                    <li *ngFor="let tag of article.tagList"
-                        class="tag-default tag-pill tag-outline">
+                    <li
+                        *ngFor="let tag of article.tagList"
+                        class="tag-default tag-pill tag-outline"
+                    >
                         {{ tag }}
                     </li>
                 </ul>
-
             </div>
         </div>
 
-        <hr/>
+        <hr />
 
         <div class="article-actions">
             <app-article-meta [article]="article">
                 <span [hidden]="!canModify">
-                    <a class="btn btn-sm btn-outline-secondary"
-                       [routerLink]="['/editor', article.slug]">
+                    <a
+                        class="btn btn-sm btn-outline-secondary"
+                        [routerLink]="['/editor', article.slug]"
+                    >
                         <i class="ion-edit"></i>
                         Edit Article
                     </a>
 
-                  <button class="btn btn-sm btn-outline-danger"
-                          [ngClass]="{disabled: false}"
-                          (click)="onDeleteArticle()">
-                    <i class="ion-trash-a"></i> Delete Article
-                  </button>
+                    <button
+                        class="btn btn-sm btn-outline-danger"
+                        [ngClass]="{ disabled: false }"
+                        (click)="onDeleteArticle()"
+                    >
+                        <i class="ion-trash-a"></i> Delete Article
+                    </button>
                 </span>
 
                 <span [hidden]="canModify">
                     <app-follow-button
                         [profile]="article.author"
-                        (toggle)="onToggleFollowing($event)">
+                        (toggle)="onToggleFollowing($event)"
+                    >
                     </app-follow-button>
 
                     <app-favorite-button
                         [article]="article"
-                        (toggle)="onToggleFavorite($event)">
-                    {{ article.favorited ? 'Unfavorite' : 'Favorite' }} Article <span
-                        class="counter">({{ article.favoritesCount }})</span>
+                        (toggle)="onToggleFavorite($event)"
+                    >
+                        {{ article.favorited ? "Unfavorite" : "Favorite" }}
+                        Article
+                        <span class="counter"
+                            >({{ article.favoritesCount }})</span
+                        >
                     </app-favorite-button>
                 </span>
             </app-article-meta>
