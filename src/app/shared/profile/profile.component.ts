@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { formatDate } from '@angular/common';
 
 @Component({
     selector: 'app-profile',
@@ -6,8 +7,16 @@ import { Component, Input } from '@angular/core';
     styleUrls: ['./profile.component.less'],
 })
 export class ProfileComponent {
+    _date: string;
     @Input() username?: string = '';
-    @Input() date?: string = '';
+
+    get date() {
+        return this._date;
+    }
+    @Input()
+    set date(date) {
+        this._date = formatDate(date, 'MMMM d, y', 'en');
+    }
 
     constructor() {}
 

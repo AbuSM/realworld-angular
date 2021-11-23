@@ -1,15 +1,15 @@
 <div class="post">
     <div class="post-header">
         <app-profile
-            [username]="post.username"
-            [date]="post.username"
+            [username]="post.author.username"
+            [date]="post.createdAt"
         ></app-profile>
         <button class="btn like-button">
             <i class="ion-heart"></i>
-            <span>{{ post.likesCount || 0 }}</span>
+            <span>{{ post.favoritesCount || 0 }}</span>
         </button>
     </div>
-    <a routerLink="/post" class="post-body">
+    <a routerLink="/post/{{ post.slug }}" class="post-body">
         <h1>{{ post.title }}</h1>
         <p>{{ post.description }}</p>
         <span>Read more...</span>

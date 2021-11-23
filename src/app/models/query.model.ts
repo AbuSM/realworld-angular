@@ -1,4 +1,4 @@
 export interface QueryModel {
-    limit: number;
-    offset: number;
+    limit?: number;
+    offset?: number;
 }

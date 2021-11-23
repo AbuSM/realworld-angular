@@ -9,15 +9,11 @@ import { ArticleModel } from '../models';
 export class ArticlesService {
     constructor(private apiService: ApiService) {}
 
-    query(config: QueryModel): Observable<ArticleModel> {
-        const params = {};
-        return this.apiService.get(
-            'articles',
-            new HttpParams({ fromObject: params })
-        );
+    query(config: QueryModel = {}): Observable<{ articles: ArticleModel[] }> {
+        return this.apiService.get('articles', config);
     }
 
     create(data: ArticleModel): Observable<ArticleModel> {
-        return this.apiService.post('articles', data);
+        return this.apiService.post('articles', { article: data });
     }
 }

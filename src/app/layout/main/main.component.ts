@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { TagsService } from '../../services';
+import { ArticlesService, TagsService } from '../../services';
+import { Observable } from 'rxjs';
+import { ArticleModel } from '../../models';
 
 @Component({
     selector: 'app-main',
@@ -21,14 +23,18 @@ export class MainComponent implements OnInit {
             username: 'Anton',
         },
     ];
-    tags: object[] = [];
+    tags$: Observable<{ tags: Array<string> }>;
+    posts$: Observable<{ articles: ArticleModel[] }>;
     isLogged: boolean = true;
+    activeTab: number = 1;
 
-    constructor(private tagsService: TagsService) {}
+    constructor(
+        private tagsService: TagsService,
+        private articleService: ArticlesService
+    ) {}
 
     ngOnInit() {
-        this.tagsService.fetchAll().subscribe({
-            next: (tags) => (this.tags = tags),
-        });
+        this.tags$ = this.tagsService.fetchAll();
+        this.posts$ = this.articleService.query();
     }
 }
