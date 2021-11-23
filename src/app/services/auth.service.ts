@@ -5,12 +5,14 @@ import { map } from 'rxjs';
 import { clear, getItem, setItem } from '../utils';
 import { Store } from '@ngrx/store';
 import { authorize, logout } from '../auth/+store/auth.actions';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
     constructor(
         private apiService: ApiService,
-        private store: Store<{ auth: object }>
+        private store: Store<{ auth: object }>,
+        private router: Router
     ) {}
 
     authUser(authType: string, credentials: UserCredentialsModel) {
@@ -33,6 +35,7 @@ export class AuthService {
     logout() {
         clear();
         this.store.dispatch(logout());
+        this.router.navigateByUrl('/');
     }
 
     checkUser() {

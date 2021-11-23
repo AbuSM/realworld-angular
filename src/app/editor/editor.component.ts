@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PostModel } from '../models';
+import { ArticleModel } from '../models';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ArticlesService } from '../services';
@@ -10,7 +10,7 @@ import { ArticlesService } from '../services';
     styleUrls: ['./editor.component.less'],
 })
 export class EditorComponent {
-    article: PostModel = {} as PostModel;
+    article: ArticleModel = {} as ArticleModel;
     articleForm: FormGroup;
     tagField = new FormControl();
     errors: object = {};
