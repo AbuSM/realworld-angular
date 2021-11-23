@@ -47,7 +47,10 @@
                                     *ngFor="let tag of article.tagList"
                                     class="tag tag-pill"
                                 >
-                                    <i class="ion-close-round" (click)="removeTag(tag)"></i>
+                                    <i
+                                        class="ion-close-round"
+                                        (click)="removeTag(tag)"
+                                    ></i>
                                     {{ tag }}
                                 </span>
                             </div>

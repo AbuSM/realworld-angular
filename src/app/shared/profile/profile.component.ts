@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import {formatDate} from "@angular/common";
+import { formatDate } from '@angular/common';
 
 @Component({
     selector: 'app-profile',

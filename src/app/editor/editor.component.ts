@@ -26,7 +26,7 @@ export class EditorComponent {
             title: '',
             description: '',
             body: '',
-            tagList: []
+            tagList: [],
         });
 
         this.article.tagList = [];
@@ -34,7 +34,7 @@ export class EditorComponent {
 
     onSubmit() {
         this.isLoading = true;
-        this.articleForm.patchValue(this.article)
+        this.articleForm.patchValue(this.article);
         const data = this.articleForm.value;
         this.articlesService.create(data).subscribe({
             next: (article) => this.router.navigateByUrl('/'),
@@ -48,14 +48,18 @@ export class EditorComponent {
 
     addTag() {
         const value: string = this.tagField.value.trim() as string;
-        if (this.article.tagList.findIndex((item: string) => item.toLowerCase() === value.toLowerCase()) === -1) {
-            this.article.tagList.push(this.tagField.value)
-            this.tagField.setValue('')
+        if (
+            this.article.tagList.findIndex(
+                (item: string) => item.toLowerCase() === value.toLowerCase()
+            ) === -1
+        ) {
+            this.article.tagList.push(this.tagField.value);
+            this.tagField.setValue('');
         }
     }
 
     removeTag(tag) {
-        this.article.tagList.splice(this.article.tagList.indexOf(tag), 1)
+        this.article.tagList.splice(this.article.tagList.indexOf(tag), 1);
     }
 
     updateArticle(values: Object) {}
