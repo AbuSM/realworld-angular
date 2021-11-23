@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Post } from './post.model';
+import {ArticleModel} from "../../models";
 
 @Component({
     selector: 'app-post',
@@ -7,7 +7,7 @@ import { Post } from './post.model';
     styleUrls: ['./post.component.less'],
 })
 export class PostComponent {
-    @Input() post: Post = new Post('', '');
+    @Input() post: ArticleModel;
 
     constructor() {}
 }

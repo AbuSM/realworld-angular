@@ -7,39 +7,26 @@
         <div class="col-md-9">
             <div class="tabs">
                 <ul class="nav nav-pills outline-active">
-                    <li
-                        class="nav-item"
-                        show-authed="true"
-                        style="display: none"
-                    >
-                        <a
-                            href=""
-                            class="nav-link"
-                            ng-class="{
-                                active: $ctrl.listConfig.type === 'feed'
-                            }"
-                            ng-click="$ctrl.changeList({ type: 'feed' })"
-                        >
-                            Your Feed
+                    <li class="nav-item ng-hide">
+                        <a href="#" [ngClass]="{'active': activeTab === 1}" class="nav-link" (click)="activeTab = 1">
+                            Your feed
                         </a>
                     </li>
-
-                    <li class="nav-item ng-hide">
-                        <a href="#" class="nav-link active"> Your feed </a>
-                    </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link active"> Global Feed </a>
+                        <a href="#" [ngClass]="{'active': activeTab === 2}" class="nav-link" (click)="activeTab = 2">
+                            Global Feed
+                        </a>
                     </li>
                 </ul>
-                <app-post *ngFor="let post of posts" [post]="post"></app-post>
+                <app-post *ngFor="let post of (posts$ | async)?.articles" [post]="post"></app-post>
             </div>
         </div>
         <div class="col-md-3">
             <div class="sidebar">
                 <p>Popular Tags</p>
-                <div *ngIf="!tags.length">No tags are here... yet.</div>
-                <div *ngFor="let tag of tags">
-                    <div class="tag">{{ tag }}</div>
+                <div *ngIf="!(tags$ | async)?.tags?.length">No tags are here... yet.</div>
+                <div>
+                    <span *ngFor="let tag of (tags$ | async)?.tags " class="tag tag-pill">{{ tag }}</span>
                 </div>
             </div>
         </div>
