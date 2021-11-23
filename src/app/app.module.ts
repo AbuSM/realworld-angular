@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {HttpTokenInterceptor} from "./http-token.interceptor";
 import {
     AuthService,
     ApiService,
@@ -39,6 +40,7 @@ import { EffectsModule } from '@ngrx/effects';
         ArticlesService,
         AuthGuardService,
         TagsService,
+        { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
     ],
     bootstrap: [AppComponent],
 })
