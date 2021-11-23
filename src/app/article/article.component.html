@@ -6,12 +6,12 @@
 
             <app-article-meta [article]="article">
 
-                <span [hidden]="false">
-                    <a class="btn btn-sm btn-outline-secondary"
-                       [routerLink]="['/editor', article.slug]">
+                <span [hidden]="!canModify">
+                    <button class="btn btn-sm btn-outline-secondary m-1"
+                            [routerLink]="['/editor', article.slug]">
                         <i class="ion-edit"></i>
                         Edit Article
-                    </a>
+                    </button>
 
                     <button class="btn btn-sm btn-outline-danger"
                             (click)="onDeleteArticle()">
@@ -19,7 +19,7 @@
                           Delete Article
                     </button>
                 </span>
-                <span [hidden]="false">
+                <span [hidden]="canModify">
                     <app-follow-button
                         [profile]="article.author"
                         (toggle)="onToggleFollowing($event)">
@@ -57,74 +57,74 @@
 
         <div class="article-actions">
             <app-article-meta [article]="article">
-        <span [hidden]="false">
-            <a class="btn btn-sm btn-outline-secondary"
-               [routerLink]="['/editor', article.slug]">
-                <i class="ion-edit"></i>
-                Edit Article
-            </a>
+                <span [hidden]="!canModify">
+                    <a class="btn btn-sm btn-outline-secondary"
+                       [routerLink]="['/editor', article.slug]">
+                        <i class="ion-edit"></i>
+                        Edit Article
+                    </a>
 
-          <button class="btn btn-sm btn-outline-danger"
-                  [ngClass]="{disabled: false}"
-                  (click)="onDeleteArticle()">
-            <i class="ion-trash-a"></i> Delete Article
-          </button>
-        </span>
+                  <button class="btn btn-sm btn-outline-danger"
+                          [ngClass]="{disabled: false}"
+                          (click)="onDeleteArticle()">
+                    <i class="ion-trash-a"></i> Delete Article
+                  </button>
+                </span>
 
-                <span [hidden]="false">
-            <app-follow-button
-                [profile]="article.author"
-                (toggle)="onToggleFollowing($event)">
-            </app-follow-button>
+                <span [hidden]="canModify">
+                    <app-follow-button
+                        [profile]="article.author"
+                        (toggle)="onToggleFollowing($event)">
+                    </app-follow-button>
 
-            <app-favorite-button
-                [article]="article"
-                (toggle)="onToggleFavorite($event)">
-            {{ article.favorited ? 'Unfavorite' : 'Favorite' }} Article <span
-                class="counter">({{ article.favoritesCount }})</span>
-            </app-favorite-button>
-        </span>
+                    <app-favorite-button
+                        [article]="article"
+                        (toggle)="onToggleFavorite($event)">
+                    {{ article.favorited ? 'Unfavorite' : 'Favorite' }} Article <span
+                        class="counter">({{ article.favoritesCount }})</span>
+                    </app-favorite-button>
+                </span>
             </app-article-meta>
         </div>
 
-<!--        <div class="row">-->
-<!--            <div class="col-xs-12 col-md-8 offset-md-2">-->
+        <!--        <div class="row">-->
+        <!--            <div class="col-xs-12 col-md-8 offset-md-2">-->
 
-<!--                <div *appShowAuthed="true">-->
-<!--                    <app-errors-list [errors]="commentErrors"></app-errors-list>-->
-<!--                    <form class="card comment-form" (ngSubmit)="addComment()">-->
-<!--                        <fieldset [disabled]="isSubmitting">-->
-<!--                            <div class="card-block">-->
-<!--                <textarea class="form-control"-->
-<!--                          placeholder="Write a comment..."-->
-<!--                          rows="3"-->
-<!--                          [formControl]="commentControl"-->
-<!--                >-->
+        <!--                <div *appShowAuthed="true">-->
+        <!--                    <app-errors-list [errors]="commentErrors"></app-errors-list>-->
+        <!--                    <form class="card comment-form" (ngSubmit)="addComment()">-->
+        <!--                        <fieldset [disabled]="isSubmitting">-->
+        <!--                            <div class="card-block">-->
+        <!--                <textarea class="form-control"-->
+        <!--                          placeholder="Write a comment..."-->
+        <!--                          rows="3"-->
+        <!--                          [formControl]="commentControl"-->
+        <!--                >-->
 
-<!--                </textarea>-->
-<!--                            </div>-->
-<!--                            <div class="card-footer">-->
-<!--                                <img [src]="currentUser.image" class="comment-author-img"/>-->
-<!--                                <button class="btn btn-sm btn-primary" type="submit">-->
-<!--                                    Post Comment-->
-<!--                                </button>-->
-<!--                            </div>-->
-<!--                        </fieldset>-->
-<!--                    </form>-->
-<!--                </div>-->
+        <!--                </textarea>-->
+        <!--                            </div>-->
+        <!--                            <div class="card-footer">-->
+        <!--                                <img [src]="currentUser.image" class="comment-author-img"/>-->
+        <!--                                <button class="btn btn-sm btn-primary" type="submit">-->
+        <!--                                    Post Comment-->
+        <!--                                </button>-->
+        <!--                            </div>-->
+        <!--                        </fieldset>-->
+        <!--                    </form>-->
+        <!--                </div>-->
 
-<!--                <div *appShowAuthed="false">-->
-<!--                    <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add-->
-<!--                    comments on this article.-->
-<!--                </div>-->
+        <!--                <div *appShowAuthed="false">-->
+        <!--                    <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add-->
+        <!--                    comments on this article.-->
+        <!--                </div>-->
 
-<!--                <app-article-comment-->
-<!--                    *ngFor="let comment of comments"-->
-<!--                    [comment]="comment"-->
-<!--                    (deleteComment)="onDeleteComment(comment)">-->
-<!--                </app-article-comment>-->
+        <!--                <app-article-comment-->
+        <!--                    *ngFor="let comment of comments"-->
+        <!--                    [comment]="comment"-->
+        <!--                    (deleteComment)="onDeleteComment(comment)">-->
+        <!--                </app-article-comment>-->
 
-<!--            </div>-->
-<!--        </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
     </div>
 </div>

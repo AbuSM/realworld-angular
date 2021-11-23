@@ -9,6 +9,10 @@ const routes: Routes = [
         component: EditorComponent,
         canActivate: [AuthGuardService],
     },
+    // {
+    //     path: ':slug',
+    //     canActivate: [AuthGuardService]
+    // }
 ];
 
 @NgModule({

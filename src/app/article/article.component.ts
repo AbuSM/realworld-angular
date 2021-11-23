@@ -12,7 +12,7 @@ export class ArticleComponent implements OnInit {
     commentErrors;
     comments;
     article: ArticleModel;
-
+    canModify: boolean = false;
 
     constructor(
         private articlesService: ArticlesService,
