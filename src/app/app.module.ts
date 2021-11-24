@@ -25,14 +25,12 @@ import { ArticleModule } from './article/article.module';
 @NgModule({
     declarations: [AppComponent, NotFoundPageComponent],
     imports: [
-        EditorModule,
+        BrowserModule,
         SharedModule,
         AuthModule,
         LayoutModule,
-        ArticleModule,
-        BrowserModule,
-        AppRoutingModule,
         HttpClientModule,
+        AppRoutingModule,
         StoreModule.forRoot({ auth: authReducer }),
         EffectsModule.forRoot([]),
     ],

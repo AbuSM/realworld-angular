@@ -5,14 +5,15 @@ import { AuthGuardService } from '../services';
 
 const routes: Routes = [
     {
-        path: 'editor',
+        path: '',
         component: EditorComponent,
         canActivate: [AuthGuardService],
     },
-    // {
-    //     path: ':slug',
-    //     canActivate: [AuthGuardService]
-    // }
+    {
+        path: ':slug',
+        component: EditorComponent,
+        canActivate: [AuthGuardService],
+    },
 ];
 
 @NgModule({
