@@ -9,7 +9,7 @@ import { ArticleModel } from '../../models';
     styleUrls: ['./main.component.less'],
 })
 export class MainComponent implements OnInit {
-    tags$: Observable<{ tags: Array<string> }>;
+    tags$: Observable<{ tags: string[] }>;
     posts$: Observable<{ articles: ArticleModel[] }>;
     isLogged: boolean = true;
     activeTab: number = 1;
