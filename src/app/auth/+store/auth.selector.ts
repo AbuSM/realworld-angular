@@ -8,12 +8,7 @@ export const getIsLogged = createSelector(
     (state) => state.isLogged
 );
 
-export const getUserData = createSelector(
-    getAuthState,
-    (state) => state.user
-)
+export const getUserData = createSelector(getAuthState, (state) => state.user);
 
-export const getIsUser = (username) => createSelector(
-    getAuthState,
-    (state) => state.user.username === username
-)
+export const getIsUser = (username) =>
+    createSelector(getAuthState, (state) => state.user.username === username);

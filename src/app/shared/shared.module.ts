@@ -28,7 +28,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
         ArticleCommentComponent,
         FollowButtonComponent,
         FavoriteButtonComponent,
-        SpinnerComponent
+        SpinnerComponent,
     ],
 })
 export class SharedModule {}

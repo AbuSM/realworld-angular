@@ -1,9 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ArticleModel} from '../models';
-import {FormGroup, FormControl, FormBuilder} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ArticlesService} from '../services';
-import {Subscription} from "rxjs";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ArticleModel } from '../models';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ArticlesService } from '../services';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-editor',
@@ -37,13 +37,12 @@ export class EditorComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         // TODO make data with url state instead of http requests
-        const article = this.route.snapshot.data['article']
+        const article = this.route.snapshot.data['article'];
         if (article) {
             this.article = article.article;
             this.submitType = 'update';
             this.articleForm.patchValue(this.article);
         }
-
     }
 
     private errorHandler(err) {
@@ -52,22 +51,25 @@ export class EditorComponent implements OnInit, OnDestroy {
         this.isLoading = false;
     }
 
-
     onSubmit() {
         this.isLoading = true;
         if (this.submitType === 'create') {
             this.articleForm.patchValue(this.article);
-            const data:ArticleModel = this.articleForm.value;
+            const data: ArticleModel = this.articleForm.value;
             this.subscription = this.articlesService.create(data).subscribe({
-                next: ({article}) => this.router.navigateByUrl(`/post/${article.slug}`),
-                error: this.errorHandler
-            })
+                next: ({ article }) =>
+                    this.router.navigateByUrl(`/post/${article.slug}`),
+                error: this.errorHandler,
+            });
         } else {
             const data: ArticleModel = this.articleForm.value;
-            this.subscription = this.articlesService.update(data, this.article.slug).subscribe({
-                next: ({article}) => this.router.navigateByUrl(`/post/${article.slug}`),
-                error: this.errorHandler
-            })
+            this.subscription = this.articlesService
+                .update(data, this.article.slug)
+                .subscribe({
+                    next: ({ article }) =>
+                        this.router.navigateByUrl(`/post/${article.slug}`),
+                    error: this.errorHandler,
+                });
         }
     }
 

@@ -1,11 +1,11 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {Router} from '@angular/router';
-import {Store} from '@ngrx/store';
-import {logout, updateUser} from '../auth/+store/auth.actions';
-import {getUserData} from "../auth/+store/auth.selector";
-import {Observable, startWith, Subscription} from "rxjs";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {AuthService} from "../services";
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { logout, updateUser } from '../auth/+store/auth.actions';
+import { getUserData } from '../auth/+store/auth.selector';
+import { Observable, startWith, Subscription } from 'rxjs';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { AuthService } from '../services';
 
 @Component({
     selector: 'app-settings',
@@ -29,25 +29,28 @@ export class SettingsComponent implements OnInit, OnDestroy {
             username: '',
             bio: '',
             image: '',
-            password: ''
-        })
+            password: '',
+        });
     }
 
     ngOnInit() {
         this.subscriptions.push(
-            this.store.select(getUserData).pipe(startWith({})).subscribe({
-                next: user => this.settingsForm.patchValue(user)
-            })
-        )
+            this.store
+                .select(getUserData)
+                .pipe(startWith({}))
+                .subscribe({
+                    next: (user) => this.settingsForm.patchValue(user),
+                })
+        );
     }
 
     onSubmit() {
         const user = this.settingsForm.value;
         this.subscriptions.push(
             this.authService.updateUser(user).subscribe({
-                next: (data) => this.store.dispatch(updateUser(data))
+                next: (data) => this.store.dispatch(updateUser(data)),
             })
-        )
+        );
     }
 
     logout() {
@@ -55,6 +58,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.subscriptions.forEach(subscription => subscription.unsubscribe());
+        this.subscriptions.forEach((subscription) =>
+            subscription.unsubscribe()
+        );
     }
 }

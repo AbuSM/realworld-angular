@@ -8,11 +8,11 @@ import {
     logout,
     updateUser,
 } from './auth.actions';
-import { exhaustMap, map, of, catchError, tap } from 'rxjs';
+import { exhaustMap, map, of, catchError } from 'rxjs';
 import { AuthService } from '../../services';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
-import {ProfileModel} from "../../models";
+import { ProfileModel } from '../../models';
 
 @Injectable()
 export class AuthEffects {
@@ -30,7 +30,7 @@ export class AuthEffects {
                 return this.authService
                     .authUser(action.loginType, action.credentials)
                     .pipe(
-                        map(({user}) => {
+                        map(({ user }) => {
                             this.router.navigateByUrl('/');
                             return authorizeSuccess(user);
                         }),
@@ -48,7 +48,7 @@ export class AuthEffects {
             ofType(checkAccess),
             exhaustMap((action) => {
                 return this.authService.checkUser().pipe(
-                    map(({user}) => authorizeSuccess(user)),
+                    map(({ user }) => authorizeSuccess(user)),
                     catchError((error) => {
                         this.store.dispatch(logout());
                         this.router.navigateByUrl('/');
@@ -76,11 +76,11 @@ export class AuthEffects {
         () => {
             return this.actions$.pipe(
                 ofType(updateUser),
-                map(({user}: {user: ProfileModel}) => {
-                    this.router.navigateByUrl(`/@${user.username}`)
+                map(({ user }: { user: ProfileModel }) => {
+                    this.router.navigateByUrl(`/@${user.username}`);
                 })
-            )
+            );
         },
-        {dispatch: false}
-    )
+        { dispatch: false }
+    );
 }

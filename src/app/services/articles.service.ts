@@ -16,8 +16,11 @@ export class ArticlesService {
         return this.apiService.post('articles', { article: data });
     }
 
-    update(data: ArticleModel, slug: string): Observable<{article: ArticleModel}> {
-        return this.apiService.put(`articles/${slug}`, {article: data})
+    update(
+        data: ArticleModel,
+        slug: string
+    ): Observable<{ article: ArticleModel }> {
+        return this.apiService.put(`articles/${slug}`, { article: data });
     }
 
     get(slug: string) {
