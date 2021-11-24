@@ -20,19 +20,18 @@ import { StoreModule } from '@ngrx/store';
 import { authReducer } from './auth/+store/auth.reducer';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { EffectsModule } from '@ngrx/effects';
-import {ArticleModule} from "./article/article.module";
+import { ArticleModule } from './article/article.module';
+import { SettingsModule } from './settings/settings.module';
 
 @NgModule({
     declarations: [AppComponent, NotFoundPageComponent],
     imports: [
-        EditorModule,
+        BrowserModule,
         SharedModule,
         AuthModule,
         LayoutModule,
-        ArticleModule,
-        BrowserModule,
-        AppRoutingModule,
         HttpClientModule,
+        AppRoutingModule,
         StoreModule.forRoot({ auth: authReducer }),
         EffectsModule.forRoot([]),
     ],

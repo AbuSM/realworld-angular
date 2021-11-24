@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
     selector: 'app-follow-button',
@@ -7,11 +7,8 @@ import {Component, OnInit, Input} from '@angular/core';
 export class FollowButtonComponent implements OnInit {
     @Input() profile;
 
-    constructor() {
-    }
+    constructor() {}
 
-    ngOnInit(): void {
-    }
-    toggleFollow(){}
-
+    ngOnInit(): void {}
+    toggleFollow() {}
 }

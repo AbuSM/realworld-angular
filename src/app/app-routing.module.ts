@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 import { MainComponent } from './layout';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
@@ -15,20 +15,28 @@ const routes: Routes = [
     },
     {
         path: 'editor',
-        loadChildren: () => import('./editor/editor.module').then(m => m.EditorModule)
+        loadChildren: () =>
+            import('./editor/editor.module').then((m) => m.EditorModule),
     },
     {
         path: 'post',
-        loadChildren: () => import('./article/article.module').then(m => m.ArticleModule)
+        loadChildren: () =>
+            import('./article/article.module').then((m) => m.ArticleModule),
     },
-    {
-        path: '**',
-        component: NotFoundPageComponent,
-    },
+    // {
+    //     path: '**',
+    //     component: NotFoundPageComponent,
+    // },
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [
+        RouterModule.forRoot(routes, {
+            preloadingStrategy: PreloadAllModules,
+            relativeLinkResolution: 'legacy',
+            useHash: true,
+        }),
+    ],
     exports: [RouterModule],
 })
 export class AppRoutingModule {}

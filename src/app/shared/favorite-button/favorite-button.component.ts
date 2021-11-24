@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-favorite-button',
@@ -6,12 +6,9 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class FavoriteButtonComponent implements OnInit {
     @Input() article;
-    constructor() {
-    }
+    constructor() {}
 
-    ngOnInit(): void {
-    }
+    ngOnInit(): void {}
 
     toggleFavorite() {}
-
 }
