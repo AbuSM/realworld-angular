@@ -52,18 +52,20 @@ export class EditorComponent implements OnInit, OnDestroy {
         this.isLoading = false;
     }
 
+
     onSubmit() {
         this.isLoading = true;
-        this.articleForm.patchValue(this.article);
-        const data = this.articleForm.value;
         if (this.submitType === 'create') {
+            this.articleForm.patchValue(this.article);
+            const data:ArticleModel = this.articleForm.value;
             this.subscription = this.articlesService.create(data).subscribe({
-                next: () => this.router.navigateByUrl('/'),
+                next: ({article}) => this.router.navigateByUrl(`/post/${article.slug}`),
                 error: this.errorHandler
             })
         } else {
+            const data: ArticleModel = this.articleForm.value;
             this.subscription = this.articlesService.update(data, this.article.slug).subscribe({
-                next: () => this.router.navigateByUrl('/'),
+                next: ({article}) => this.router.navigateByUrl(`/post/${article.slug}`),
                 error: this.errorHandler
             })
         }

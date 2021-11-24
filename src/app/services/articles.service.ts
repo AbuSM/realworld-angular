@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { QueryModel } from '../models/query.model';
 import { Observable } from 'rxjs';
-import { HttpParams } from '@angular/common/http';
 import { ArticleModel } from '../models';
 
 @Injectable()
@@ -13,11 +12,11 @@ export class ArticlesService {
         return this.apiService.get('articles', config);
     }
 
-    create(data: ArticleModel): Observable<ArticleModel> {
+    create(data: ArticleModel): Observable<{ article: ArticleModel }> {
         return this.apiService.post('articles', { article: data });
     }
 
-    update(data: ArticleModel, slug: string): Observable<ArticleModel> {
+    update(data: ArticleModel, slug: string): Observable<{article: ArticleModel}> {
         return this.apiService.put(`articles/${slug}`, {article: data})
     }
 
