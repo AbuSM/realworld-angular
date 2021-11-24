@@ -6,11 +6,13 @@ import {
     authorizeSuccess,
     checkAccess,
     logout,
+    updateUser,
 } from './auth.actions';
 import { exhaustMap, map, of, catchError, tap } from 'rxjs';
 import { AuthService } from '../../services';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
+import {ProfileModel} from "../../models";
 
 @Injectable()
 export class AuthEffects {
@@ -69,4 +71,16 @@ export class AuthEffects {
         },
         { dispatch: false }
     );
+
+    updateUser$ = createEffect(
+        () => {
+            return this.actions$.pipe(
+                ofType(updateUser),
+                map(({user}: {user: ProfileModel}) => {
+                    this.router.navigateByUrl(`/@${user.username}`)
+                })
+            )
+        },
+        {dispatch: false}
+    )
 }

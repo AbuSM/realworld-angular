@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { UserCredentialsModel, UserModel } from '../models';
+import {ProfileModel, UserCredentialsModel, UserModel} from '../models';
 import { ApiService } from './api.service';
-import { map } from 'rxjs';
-import { clear, getItem, setItem } from '../utils';
+import {map, Observable} from 'rxjs';
+import { clear, setItem } from '../utils';
 
 @Injectable()
 export class AuthService {
@@ -21,15 +21,16 @@ export class AuthService {
             );
     }
 
-    setAuth(user: UserModel) {
+    setAuth(user: UserModel): void {
         setItem(user.token);
     }
 
-    checkUser() {
-        const token = getItem();
-        return this.apiService.get('user', {
-            headers: { Authorization: `Bearer ${token}` },
-        });
+    checkUser(): Observable<{user: ProfileModel}> {
+        return this.apiService.get('user');
+    }
+
+    updateUser(user: ProfileModel): Observable<{user: ProfileModel}> {
+        return this.apiService.put('user', {user});
     }
 
     logout() {

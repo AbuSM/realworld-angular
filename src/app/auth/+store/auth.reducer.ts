@@ -1,10 +1,10 @@
-import { createReducer, on } from '@ngrx/store';
+import {createReducer, on} from '@ngrx/store';
 import {
     authorize,
     authorizeSuccess,
     authorizeFailure,
     checkAccess,
-    logout,
+    logout, updateUser,
 } from './auth.actions';
 
 export const initialState = {
@@ -40,6 +40,10 @@ const _authReducer = createReducer(
         ...state,
         isLoading: false,
         isLogged: false,
+    })),
+    on(updateUser, (state, {user}) => ({
+        ...state,
+        user
     }))
 );
 
