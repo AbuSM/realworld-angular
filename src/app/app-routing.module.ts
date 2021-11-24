@@ -23,10 +23,10 @@ const routes: Routes = [
         loadChildren: () =>
             import('./article/article.module').then((m) => m.ArticleModule),
     },
-    // {
-    //     path: '**',
-    //     component: NotFoundPageComponent,
-    // },
+    {
+        path: '**',
+        component: NotFoundPageComponent,
+    },
 ];
 
 @NgModule({
