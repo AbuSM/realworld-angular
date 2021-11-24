@@ -24,6 +24,11 @@ const routes: Routes = [
             import('./article/article.module').then((m) => m.ArticleModule),
     },
     {
+        path: 'user',
+        loadChildren: () =>
+            import('./user/user.module').then((m) => m.UserModule),
+    },
+    {
         path: '**',
         component: NotFoundPageComponent,
     },
