@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticlesService, TagsService } from '../../services';
-import { Observable, of } from 'rxjs';
+import { Observable, startWith } from 'rxjs';
 import { ArticleModel } from '../../models';
 
 @Component({
@@ -9,21 +9,7 @@ import { ArticleModel } from '../../models';
     styleUrls: ['./main.component.less'],
 })
 export class MainComponent implements OnInit {
-    posts = [
-        {
-            title: 'test',
-            description: 'asasa',
-            likesCount: 2,
-            username: 'Fattoh',
-            date: 'November 16, 2021',
-        },
-        {
-            title: 'test2',
-            description: 'new post 2',
-            username: 'Anton',
-        },
-    ];
-    tags$: Observable<{ tags: Array<string> }> = of({tags: []});
+    tags$: Observable<{ tags: string[] }>;
     posts$: Observable<{ articles: ArticleModel[] }>;
     isLogged: boolean = true;
     activeTab: number = 1;
@@ -34,7 +20,9 @@ export class MainComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.tags$ = this.tagsService.fetchAll();
-        this.posts$ = this.articleService.query();
+        this.tags$ = this.tagsService.fetchAll().pipe(startWith({ tags: [] }));
+        this.posts$ = this.articleService
+            .query()
+            .pipe(startWith({ articles: [] }));
     }
 }

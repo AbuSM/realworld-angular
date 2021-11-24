@@ -14,6 +14,16 @@ const routes: Routes = [
             import('./settings/settings.module').then((m) => m.SettingsModule),
     },
     {
+        path: 'editor',
+        loadChildren: () =>
+            import('./editor/editor.module').then((m) => m.EditorModule),
+    },
+    {
+        path: 'post',
+        loadChildren: () =>
+            import('./article/article.module').then((m) => m.ArticleModule),
+    },
+    {
         path: '**',
         component: NotFoundPageComponent,
     },
