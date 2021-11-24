@@ -6,6 +6,7 @@ import { ArticleMetaComponent } from './article-meta/article-meta.component';
 import { FollowButtonComponent } from './follow-button/follow-button.component';
 import { FavoriteButtonComponent } from './favorite-button/favorite-button.component';
 import { ArticleCommentComponent } from './article-comment/article-comment.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
     declarations: [
@@ -16,6 +17,7 @@ import { ArticleCommentComponent } from './article-comment/article-comment.compo
         FollowButtonComponent,
         FavoriteButtonComponent,
         ArticleCommentComponent,
+        SpinnerComponent,
     ],
     imports: [CommonModule, RouterModule],
     exports: [
@@ -26,6 +28,7 @@ import { ArticleCommentComponent } from './article-comment/article-comment.compo
         ArticleCommentComponent,
         FollowButtonComponent,
         FavoriteButtonComponent,
+        SpinnerComponent
     ],
 })
 export class SharedModule {}

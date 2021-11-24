@@ -38,7 +38,7 @@
             <div class="sidebar">
                 <p>Popular Tags</p>
                 <ng-container *ngIf="(tags$ | async).tags as tags">
-                    <div *ngIf="tags.length">No tags are here... yet.</div>
+                    <div *ngIf="!tags.length">No tags are here... yet.</div>
                     <div>
                         <span *ngFor="let tag of tags" class="tag tag-pill">
                             {{ tag }}

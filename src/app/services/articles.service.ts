@@ -17,7 +17,15 @@ export class ArticlesService {
         return this.apiService.post('articles', { article: data });
     }
 
-    get(slug) {
-        return this.apiService.get('articles/' + slug);
+    update(data: ArticleModel, slug: string): Observable<ArticleModel> {
+        return this.apiService.put(`articles/${slug}`, {article: data})
+    }
+
+    get(slug: string) {
+        return this.apiService.get(`articles/${slug}`);
+    }
+
+    delete(slug: string) {
+        return this.apiService.delete(`articles/${slug}`);
     }
 }
