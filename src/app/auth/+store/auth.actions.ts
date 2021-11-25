@@ -14,7 +14,10 @@ export const authorize = createAction(
     props<{ loginType: string; credentials: UserCredentialsModel }>()
 );
 
-export const authorizeSuccess = createAction(AUTHORIZE_SUCCESS);
+export const authorizeSuccess = createAction(
+    AUTHORIZE_SUCCESS,
+    (payload = {}) => payload
+);
 
 export const authorizeFailure = createAction(
     AUTHORIZE_FAILURE,

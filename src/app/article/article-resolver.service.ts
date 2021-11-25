@@ -16,7 +16,6 @@ export class ArticleResolverService {
 
     resolve(
         route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot
     ): Observable<any> {
         return this.articlesService.get(route.params['slug']);
     }

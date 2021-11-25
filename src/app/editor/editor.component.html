@@ -61,13 +61,8 @@
                             type="button"
                             (click)="onSubmit()"
                         >
-                            Publish Article
-                            <div
-                                [ngClass]="{
-                                    isLoading:
-                                        'spinner-border spinner-border-sm'
-                                }"
-                            ></div>
+                            {{ submitType === 'create' ? 'Publish' : 'Update' }} Article
+                            <app-spinner [loading]="isLoading"></app-spinner>
                         </button>
                     </fieldset>
                 </form>
