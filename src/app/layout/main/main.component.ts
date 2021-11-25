@@ -12,7 +12,6 @@ export class MainComponent implements OnInit {
     tags$: Observable<{ tags: string[] }>;
     posts$: Observable<{ articles: ArticleModel[] }>;
     isLogged: boolean = true;
-    activeTab: number = 1;
 
     constructor(
         private tagsService: TagsService,

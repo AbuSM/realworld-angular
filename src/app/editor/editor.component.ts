@@ -21,7 +21,7 @@ export class EditorComponent implements OnInit, OnDestroy {
     errors: object = {};
     isLoading = false;
     submitType: 'create' | 'update' = 'create';
-    subscription: Subscription = new Subscription();
+    subscriptions: Subscription = new Subscription();
 
     constructor(
         private articlesService: ArticlesService,
@@ -49,36 +49,35 @@ export class EditorComponent implements OnInit, OnDestroy {
         }
     }
 
-    errorHandler(err) {
+    private errorHandler(err) {
         console.error('Error: ', err);
         this.errors = err;
         this.isLoading = false;
     }
 
     onSubmit() {
-        if (!this.isLoading) {
-            this.isLoading = true;
-            if (this.submitType === 'create') {
-                this.articleForm.patchValue(this.article);
-                const data: ArticleModel = this.articleForm.value;
-                this.subscription = this.articlesService
-                    .create(data)
-                    .subscribe({
-                        next: ({ article }) =>
-                            this.router.navigateByUrl(`/post/${article.slug}`),
-                        error: this.errorHandler,
-                    });
-            } else {
-                const data: ArticleModel = this.articleForm.value;
-                this.subscription = this.articlesService
-                    .update(data, this.article.slug)
-                    .subscribe({
-                        next: ({ article }) =>
-                            this.router.navigateByUrl(`/post/${article.slug}`),
-                        error: this.errorHandler,
-                    });
-            }
+        this.isLoading = true;
+        if (this.submitType === 'create') {
+            this.articleForm.patchValue(this.article);
+            const data: ArticleModel = this.articleForm.value;
+            this.subscriptions.add(
+                this.articlesService.create(data).subscribe({
+                    next: ({ article }) =>
+                        this.router.navigateByUrl(`/post/${article.slug}`),
+                    error: (err) => this.errorHandler(err),
+                })
+            );
+        } else {
+            const data: ArticleModel = this.articleForm.value;
+            this.subscriptions.add(
+                this.articlesService.update(data, this.article.slug).subscribe({
+                    next: ({ article }) =>
+                        this.router.navigateByUrl(`/post/${article.slug}`),
+                    error: (err) => this.errorHandler(err),
+                })
+            );
         }
+        this.articleForm.disabled;
     }
 
     addTag() {
@@ -98,6 +97,6 @@ export class EditorComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.subscription.unsubscribe();
+        this.subscriptions.unsubscribe();
     }
 }
