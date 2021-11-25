@@ -28,9 +28,9 @@ export class AuthEffects {
                 return this.authService
                     .authUser(action.loginType, action.credentials)
                     .pipe(
-                        map((data) => {
+                        map(({user}) => {
                             this.router.navigateByUrl('/');
-                            return authorizeSuccess();
+                            return authorizeSuccess(user);
                         }),
                         catchError((error: any) => {
                             const value = authorizeFailure(error);
@@ -46,7 +46,7 @@ export class AuthEffects {
             ofType(checkAccess),
             exhaustMap((action) => {
                 return this.authService.checkUser().pipe(
-                    map(() => authorizeSuccess()),
+                    map(({user}) => authorizeSuccess(user)),
                     catchError((error) => {
                         this.store.dispatch(logout());
                         this.router.navigateByUrl('/');
