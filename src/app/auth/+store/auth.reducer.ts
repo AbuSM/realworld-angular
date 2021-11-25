@@ -11,7 +11,7 @@ export const initialState = {
     isLoading: false,
     isLogged: false,
     error: null,
-    user: null
+    user: null,
 };
 
 const _authReducer = createReducer(
@@ -24,7 +24,7 @@ const _authReducer = createReducer(
         ...state,
         isLoading: false,
         isLogged: true,
-        user
+        user,
     })),
     on(authorizeFailure, (state, payload) => ({
         ...state,

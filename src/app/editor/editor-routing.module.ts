@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { EditorComponent } from './editor.component';
 import { AuthGuardService } from '../services';
-import {EditorResolverService} from "./editor-resolver.service";
+import { EditorResolverService } from './editor-resolver.service';
 
 const routes: Routes = [
     {
@@ -15,8 +15,8 @@ const routes: Routes = [
         component: EditorComponent,
         canActivate: [AuthGuardService],
         resolve: {
-            article: EditorResolverService
-        }
+            article: EditorResolverService,
+        },
     },
 ];
 
