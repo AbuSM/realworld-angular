@@ -14,7 +14,7 @@ import { AuthService } from '../services';
 })
 export class SettingsComponent implements OnInit, OnDestroy {
     user$: Observable<object>;
-    subscriptions: Subscription[] = [];
+    subscriptions: Subscription = new Subscription();
     settingsForm: FormGroup;
     errors = {};
 
@@ -34,7 +34,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.subscriptions.push(
+        this.subscriptions.add(
             this.store
                 .select(getUserData)
                 .pipe(startWith({}))
@@ -46,7 +46,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
     onSubmit() {
         const user = this.settingsForm.value;
-        this.subscriptions.push(
+        this.subscriptions.add(
             this.authService.updateUser(user).subscribe({
                 next: (data) => this.store.dispatch(updateUser(data)),
             })
@@ -58,8 +58,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.subscriptions.forEach((subscription) =>
-            subscription.unsubscribe()
-        );
+        this.subscriptions.unsubscribe();
     }
 }
