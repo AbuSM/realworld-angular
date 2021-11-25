@@ -7,6 +7,7 @@ import { FollowButtonComponent } from './follow-button/follow-button.component';
 import { FavoriteButtonComponent } from './favorite-button/favorite-button.component';
 import { ArticleCommentComponent } from './article-comment/article-comment.component';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
     declarations: [
@@ -18,6 +19,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
         FavoriteButtonComponent,
         ArticleCommentComponent,
         SpinnerComponent,
+        ModalComponent,
     ],
     imports: [CommonModule, RouterModule],
     exports: [
@@ -28,7 +30,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
         ArticleCommentComponent,
         FollowButtonComponent,
         FavoriteButtonComponent,
-        SpinnerComponent
+        SpinnerComponent,
+        ModalComponent,
     ],
 })
 export class SharedModule {}

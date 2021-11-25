@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditorComponent } from './editor.component';
 import { EditorRoutingModule } from './editor-routing.module';
 import { SharedModule } from '../shared';
-import {EditorResolverService} from "./editor-resolver.service";
+import { EditorResolverService } from './editor-resolver.service';
 
 @NgModule({
     declarations: [EditorComponent],
@@ -16,6 +16,6 @@ import {EditorResolverService} from "./editor-resolver.service";
         SharedModule,
     ],
     exports: [EditorComponent],
-    providers: [EditorResolverService]
+    providers: [EditorResolverService],
 })
 export class EditorModule {}

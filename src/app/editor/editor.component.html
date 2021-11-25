@@ -60,8 +60,10 @@
                             class="btn btn-lg pull-xs-right btn-primary"
                             type="button"
                             (click)="onSubmit()"
+                            [disabled]="isLoading"
                         >
-                            {{ submitType === 'create' ? 'Publish' : 'Update' }} Article
+                            {{ submitType === "create" ? "Publish" : "Update" }}
+                            Article
                             <app-spinner [loading]="isLoading"></app-spinner>
                         </button>
                     </fieldset>
