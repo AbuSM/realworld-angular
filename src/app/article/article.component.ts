@@ -1,11 +1,4 @@
-import {
-    Component,
-    OnInit,
-    ViewChild,
-    TemplateRef,
-    ViewContainerRef,
-    OnDestroy,
-} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ArticleModel } from '../models';
 import { ArticlesService } from '../services';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -24,12 +17,9 @@ export class ArticleComponent implements OnInit, OnDestroy {
     article: ArticleModel;
     canModify$: Observable<boolean>;
     isLoading: boolean = false;
+    isModalOpen: boolean = false;
     errors = null;
     subscription: Subscription = new Subscription();
-    @ViewChild('modal_confirm') modalConfirm: TemplateRef<any>;
-    @ViewChild('vc', { read: ViewContainerRef }) vc: ViewContainerRef;
-
-    backdrop: any;
 
     constructor(
         private articlesService: ArticlesService,
@@ -46,36 +36,18 @@ export class ArticleComponent implements OnInit, OnDestroy {
     }
 
     openModal() {
-        let view = this.modalConfirm.createEmbeddedView(null);
-        this.vc.insert(view);
-        this.modalConfirm.elementRef.nativeElement.previousElementSibling.classList.remove(
-            'fade'
-        );
-        this.modalConfirm.elementRef.nativeElement.previousElementSibling.classList.add(
-            'modal-open'
-        );
-        this.modalConfirm.elementRef.nativeElement.previousElementSibling.style.display =
-            'block';
-        this.backdrop = document.createElement('DIV');
-        this.backdrop.className = 'modal-backdrop';
-        document.body.appendChild(this.backdrop);
+        this.isModalOpen = true;
     }
 
     closeModal() {
-        this.vc.clear();
-        document.body.removeChild(this.backdrop);
+        this.isModalOpen = false;
     }
 
     onDeleteArticle() {
         this.isLoading = true;
         this.subscription = this.articlesService
             .delete(this.article.slug)
-            .pipe(
-                finalize(() => {
-                    this.closeModal();
-                    this.isLoading = false;
-                })
-            )
+            .pipe(finalize(() => (this.isLoading = false)))
             .subscribe({
                 next: () => this.router.navigateByUrl('/'),
                 error: (err) => (this.errors = err),
