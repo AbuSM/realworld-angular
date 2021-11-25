@@ -8,45 +8,56 @@
                 <li class="nav-item">
                     <a routerLink="" class="nav-link">Home</a>
                 </li>
-                <li class="nav-item" *ngIf="(isLogged$ | async) === false">
-                    <a
-                        routerLink="/login"
-                        routerLinkActive="active"
-                        class="nav-link"
-                        >Sign in</a
-                    >
-                </li>
-                <li class="nav-item" *ngIf="(isLogged$ | async) === false">
-                    <a
-                        routerLink="/register"
-                        routerLinkActive="active"
-                        class="nav-link"
-                        >Sign up</a
-                    >
-                </li>
-                <li class="nav-item" *ngIf="isLogged$ | async">
-                    <a
-                        routerLink="/editor"
-                        routerLinkActive="active"
-                        class="nav-link"
-                    >
-                        <i class="ion-compose"></i>
-                        New article
-                    </a>
-                </li>
-                <li class="nav-item" *ngIf="isLogged$ | async">
-                    <a
-                        routerLink="/settings"
-                        routerLinkActive="active"
-                        class="nav-link"
-                    >
-                        <i class="ion-gear-a"></i>
-                        Settings
-                    </a>
-                </li>
-                <li class="nav-item" *ngIf="isLogged$ | async">
-                    <app-profile username="test"></app-profile>
-                </li>
+                <ng-container
+                    *ngIf="
+                        (userState$ | async).isLogged === false as isLogged;
+                        else allowedLinks
+                    "
+                >
+                    <li class="nav-item">
+                        <a
+                            routerLink="/login"
+                            routerLinkActive="active"
+                            class="nav-link"
+                            >Sign in</a
+                        >
+                    </li>
+                    <li class="nav-item">
+                        <a
+                            routerLink="/register"
+                            routerLinkActive="active"
+                            class="nav-link"
+                            >Sign up</a
+                        >
+                    </li>
+                </ng-container>
+                <ng-template #allowedLinks>
+                    <li class="nav-item">
+                        <a
+                            routerLink="/editor"
+                            routerLinkActive="active"
+                            class="nav-link"
+                        >
+                            <i class="ion-compose"></i>
+                            New article
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a
+                            routerLink="/settings"
+                            routerLinkActive="active"
+                            class="nav-link"
+                        >
+                            <i class="ion-gear-a"></i>
+                            Settings
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <app-profile
+                            [username]="(userState$ | async).username"
+                        ></app-profile>
+                    </li>
+                </ng-template>
             </ul>
         </div>
     </nav>

@@ -4,3 +4,8 @@ export interface ProfileModel {
     image: string;
     following: boolean;
 }
+
+export interface ProfileFullModel extends ProfileModel {
+    isLogged: boolean;
+    isLoading: boolean;
+}

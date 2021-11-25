@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { getIsLogged } from '../../auth/+store/auth.selector';
+import { getUserData } from '../../auth/+store/auth.selector';
 import { AuthState } from '../../auth/+store/auth.state';
+import { ProfileFullModel } from '../../models';
 
 @Component({
     selector: 'app-header',
@@ -10,8 +11,8 @@ import { AuthState } from '../../auth/+store/auth.state';
     styleUrls: ['./header.component.less'],
 })
 export class HeaderComponent {
-    isLogged$: Observable<boolean>;
+    userState$: Observable<ProfileFullModel>;
     constructor(private store: Store<AuthState>) {
-        this.isLogged$ = this.store.select(getIsLogged);
+        this.userState$ = this.store.select(getUserData);
     }
 }
