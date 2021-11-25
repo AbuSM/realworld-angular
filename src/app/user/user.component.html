@@ -1,25 +1,26 @@
-<div class="profile-page">
+<div class="profile-page" *ngIf="user">
     <div class="user-info">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-md-10 offset-md-1">
-                    <img [src]="profile.image" class="user-img" />
-                    <h4>{{ profile.username }}</h4>
-                    <p>{{ profile.bio }}</p>
+                    <img [src]="user.image" class="user-img" />
+                    <h4>{{ user.username }}</h4>
+                    <p>{{ user.bio }}</p>
                     <app-follow-button
-                        [hidden]="isOwn"
-                        [profile]="profile"
+                        *ngIf="user.username !== username; else editProfile"
+                        [profile]="user"
                         (toggle)="onToggleFollowing($event)"
                     >
                     </app-follow-button>
-                    <a
-                        [routerLink]="['/settings']"
-                        [hidden]="!isOwn"
-                        class="btn btn-sm btn-outline-secondary action-btn"
-                    >
-                        <i class="ion-gear-a"></i>
-                        Edit Profile Settings
-                    </a>
+                    <ng-template #editProfile>
+                        <a
+                            [routerLink]="['/settings']"
+                            class="btn btn-sm btn-outline-secondary action-btn"
+                        >
+                            <i class="ion-gear-a"></i>
+                            Edit Profile Settings
+                        </a>
+                    </ng-template>
                 </div>
             </div>
         </div>
@@ -35,7 +36,7 @@
                                 class="nav-link"
                                 routerLinkActive="active"
                                 [routerLinkActiveOptions]="{ exact: true }"
-                                [routerLink]="['/profile', profile.username]"
+                                [routerLink]="['/user', user.username]"
                             >
                                 My Posts
                             </a>
@@ -46,8 +47,8 @@
                                 routerLinkActive="active"
                                 [routerLinkActiveOptions]="{ exact: true }"
                                 [routerLink]="[
-                                    '/profile',
-                                    profile.username,
+                                    '/user',
+                                    user.username,
                                     'favorites'
                                 ]"
                             >
@@ -57,7 +58,7 @@
                     </ul>
                 </div>
 
-<!--                <router-outlet></router-outlet>-->
+                <!--                <router-outlet></router-outlet>-->
             </div>
         </div>
     </div>

@@ -1,13 +1,13 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services';
 import { UserModel, ProfileModel } from '../models';
-import {Observable, startWith, Subscription} from "rxjs";
-import {Store} from "@ngrx/store";
-import {getUserData} from "../auth/+store/auth.selector";
+import { Observable, startWith, Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { getUserData } from '../auth/+store/auth.selector';
 
 @Component({
-    selector: 'app-profile-page',
+    selector: 'app-user',
     templateUrl: './user.component.html',
 })
 export class UserComponent implements OnInit, OnDestroy {
@@ -17,21 +17,22 @@ export class UserComponent implements OnInit, OnDestroy {
         private store: Store
     ) {}
 
-    profile: ProfileModel;
     subscription: Subscription = new Subscription();
     currentUser: UserModel;
+    username!: string;
+    user: ProfileModel;
     user$: Observable<any>;
-    isOwn: boolean = false;
 
     ngOnInit() {
-        this.user$ = this.store.select(getUserData)
+        this.username = this.route.snapshot.params['username'];
+        this.user$ = this.store.select(getUserData);
         this.subscription = this.user$.pipe(startWith({})).subscribe({
-            next: ({username}) => this.isOwn = username === this.route.snapshot.params['username']
-        })
+            next: (user) => (this.user = user),
+        });
     }
 
     onToggleFollowing(event: Event) {
-        this.profile.following = false;
+        this.user.following = false;
     }
 
     ngOnDestroy() {

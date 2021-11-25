@@ -1,5 +1,5 @@
 <div class="profile">
-    <a routerLink="/user">
+    <a [routerLink]="['/user', username]">
         <img
             alt="user-img"
             class="user-img"
@@ -7,9 +7,12 @@
         />
     </a>
     <div>
-        <a routerLink="/user" [class]="!date ? 'nav-link' : 'profile-link'">{{
-            username
-        }}</a>
+        <a
+            [routerLink]="['/user', username]"
+            [class]="!date ? 'nav-link' : 'profile-link'"
+        >
+            {{ username }}
+        </a>
         <span *ngIf="date" class="date">{{ date }}</span>
     </div>
 </div>
