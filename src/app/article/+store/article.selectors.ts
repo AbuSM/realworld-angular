@@ -6,4 +6,4 @@ export const getArticlesState = createFeatureSelector<ArticleState>('articles');
 export const getAllArticles = createSelector(
     getArticlesState,
     (state) => state
-)
+);

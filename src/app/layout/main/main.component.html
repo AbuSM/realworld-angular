@@ -7,7 +7,12 @@
         <div class="col-md-9">
             <app-tabs>
                 <tab title="Your feed">
-                    <ng-container *ngIf="(posts$ | async).isLoading === false as isLoading; else spinner">
+                    <ng-container
+                        *ngIf="
+                            (posts$ | async).isLoading === false as isLoading;
+                            else spinner
+                        "
+                    >
                         <app-post
                             *ngFor="let post of (posts$ | async).articles"
                             [post]="post"

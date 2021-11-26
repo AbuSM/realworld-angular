@@ -1,6 +1,6 @@
-import {ArticleModel} from "../../models";
+import { ArticleModel } from '../../models';
 
 export interface ArticleState {
-    isLoading: boolean,
-    articles: ArticleModel[]
+    isLoading: boolean;
+    articles: ArticleModel[];
 }

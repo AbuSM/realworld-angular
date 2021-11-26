@@ -1,16 +1,16 @@
-import {Injectable} from "@angular/core";
-import {Store} from "@ngrx/store";
-import {Actions, createEffect, ofType} from "@ngrx/effects";
+import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
     fetchAllArticles,
     fetchAllArticlesSuccess,
     fetchAllArticlesFailure,
     onToggleFavorite,
     onToggleFavoriteFailure,
-    onToggleFavoriteSuccess
-} from "./article.actions";
-import {exhaustMap, map, of, catchError} from 'rxjs';
-import {ArticlesService} from "../../services";
+    onToggleFavoriteSuccess,
+} from './article.actions';
+import { exhaustMap, map, of, catchError } from 'rxjs';
+import { ArticlesService } from '../../services';
 
 @Injectable()
 export class ArticleEffects {
@@ -25,24 +25,26 @@ export class ArticleEffects {
             ofType(fetchAllArticles),
             exhaustMap(() => {
                 return this.articlesService.query().pipe(
-                    map(({articles}) => fetchAllArticlesSuccess({articles})),
-                    catchError(err => of(fetchAllArticlesFailure(err)))
-                )
+                    map(({ articles }) =>
+                        fetchAllArticlesSuccess({ articles })
+                    ),
+                    catchError((err) => of(fetchAllArticlesFailure(err)))
+                );
             })
-        )
-    })
+        );
+    });
 
     onFavorite$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(onToggleFavorite),
             exhaustMap((action) => {
                 return this.articlesService.favorite(action.slug).pipe(
-                    map(({article}) => {
-                        return onToggleFavoriteSuccess(article)
+                    map(({ article }) => {
+                        return onToggleFavoriteSuccess(article);
                     }),
-                    catchError(err => onToggleFavoriteFailure(err))
-                )
+                    catchError((err) => onToggleFavoriteFailure(err))
+                );
             })
-        )
-    })
+        );
+    });
 }
