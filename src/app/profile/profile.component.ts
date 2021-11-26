@@ -7,10 +7,10 @@ import { Store } from '@ngrx/store';
 import { getUserData } from '../auth/+store/auth.selector';
 
 @Component({
-    selector: 'app-user',
-    templateUrl: './user.component.html',
+    selector: 'app-profile',
+    templateUrl: './profile.component.html',
 })
-export class UserComponent implements OnInit, OnDestroy {
+export class ProfileComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private userService: AuthService,

@@ -2,11 +2,11 @@ import { Component, Input } from '@angular/core';
 import { formatDate } from '@angular/common';
 
 @Component({
-    selector: 'app-profile',
-    templateUrl: './profile.component.html',
-    styleUrls: ['./profile.component.less'],
+    selector: 'app-profile-header',
+    templateUrl: './profile-header.component.html',
+    styleUrls: ['./profile-header.component.less'],
 })
-export class ProfileComponent {
+export class ProfileHeaderComponent {
     _date: string;
     @Input() username?: string = '';
 

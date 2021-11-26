@@ -16,7 +16,7 @@ export const initialState = {
 
 const _articleReducer = createReducer(
     initialState,
-    on(fetchAllArticles, (state) => ({
+    on(fetchAllArticles, onToggleFavorite, (state) => ({
         ...state,
         isLoading: true,
     })),
@@ -29,10 +29,6 @@ const _articleReducer = createReducer(
         ...state,
         isLoading: false,
         error,
-    })),
-    on(onToggleFavorite, (state) => ({
-        ...state,
-        isLoading: true,
     })),
     on(onToggleFavoriteSuccess, (state, article) => ({
         ...state,
