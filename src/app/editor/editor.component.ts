@@ -77,7 +77,6 @@ export class EditorComponent implements OnInit, OnDestroy {
                 })
             );
         }
-        this.articleForm.disabled;
     }
 
     addTag() {
