@@ -38,12 +38,19 @@ export class ArticleEffects {
         return this.actions$.pipe(
             ofType(onToggleFavorite),
             exhaustMap((action) => {
-                return this.articlesService.favorite(action.slug).pipe(
-                    map(({ article }) => {
-                        return onToggleFavoriteSuccess(article);
-                    }),
-                    catchError((err) => onToggleFavoriteFailure(err))
-                );
+                if (action.favorited) {
+                    return this.articlesService.unfavorite(action.slug).pipe(
+                        map(({ article }) => onToggleFavoriteSuccess(article)),
+                        catchError((err) => onToggleFavoriteFailure(err))
+                    );
+                } else {
+                    return this.articlesService.favorite(action.slug).pipe(
+                        map(({ article }) => {
+                            return onToggleFavoriteSuccess(article);
+                        }),
+                        catchError((err) => onToggleFavoriteFailure(err))
+                    );
+                }
             })
         );
     });
