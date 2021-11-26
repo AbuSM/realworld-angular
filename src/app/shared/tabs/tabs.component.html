@@ -1,0 +1,14 @@
+<div class="tabs">
+    <ul class="nav nav-pills outline-active">
+        <li
+            class="nav-item ng-hide"
+            *ngFor="let tab of tabs"
+            (click)="selectTab(tab)"
+        >
+            <a href="#" class="nav-link" [ngClass]="{ active: tab.active }">{{
+                tab.title
+            }}</a>
+        </li>
+    </ul>
+    <ng-content></ng-content>
+</div>
