@@ -4,10 +4,9 @@
             [username]="post.author.username"
             [date]="post.createdAt"
         ></app-profile>
-        <button class="btn like-button">
-            <i class="ion-heart"></i>
-            <span>{{ post.favoritesCount || 0 }}</span>
-        </button>
+        <app-favorite-button [article]="post">
+            {{ post.favoritesCount || 0 }}
+        </app-favorite-button>
     </div>
     <a routerLink="/post/{{ post.slug }}" class="post-body">
         <h1>{{ post.title }}</h1>

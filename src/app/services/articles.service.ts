@@ -30,4 +30,8 @@ export class ArticlesService {
     delete(slug: string) {
         return this.apiService.delete(`articles/${slug}`);
     }
+
+    favorite(slug: string) {
+        return this.apiService.post(`articles/${slug}/favorite`);
+    }
 }

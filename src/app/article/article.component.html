@@ -3,7 +3,7 @@
         <div class="container">
             <h1>{{ article.title }}</h1>
             <app-article-meta [article]="article">
-                <span *ngIf="canModify$ | async; else span1">
+                <span *ngIf="(canModify$ | async) === false; else span1">
                     <button
                         class="btn btn-sm btn-outline-secondary m-1"
                         [routerLink]="['/editor', article.slug]"
