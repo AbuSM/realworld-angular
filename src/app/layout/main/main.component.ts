@@ -5,7 +5,6 @@ import { getAllArticles } from "../../article/+store/article.selectors";
 import { ArticlesService, TagsService } from '../../services';
 import { ArticleModel } from '../../models';
 import { fetchAllArticles } from "../../article/+store/article.actions";
-import {authorize, checkAccess} from "../../auth/+store/auth.actions";
 
 @Component({
     selector: 'app-main',
@@ -16,7 +15,6 @@ export class MainComponent implements OnInit {
     tags$: Observable<{ tags: string[] }>;
     posts$: Observable<{articles: ArticleModel[], isLoading: boolean}>;
     isLogged: boolean = true;
-    activeTab: number = 1;
 
     constructor(
         private tagsService: TagsService,

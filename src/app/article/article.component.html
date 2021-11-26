@@ -29,7 +29,8 @@
                         </app-follow-button>
                         <app-favorite-button
                             [article]="article"
-                            (toggle)="onToggleFavorite($event)">
+                            (toggle)="onToggleFavorite($event)"
+                        >
                             {{ article.favorited ? "Unfavorite" : "Favorite" }}
                             Article
                             <span class="counter">
@@ -91,7 +92,8 @@
                         </app-follow-button>
                         <app-favorite-button
                             [article]="article"
-                            (toggle)="onToggleFavorite($event)">
+                            (toggle)="onToggleFavorite($event)"
+                        >
                             {{ article.favorited ? "Unfavorite" : "Favorite" }}
                             Article
                             <span class="counter"
