@@ -9,6 +9,6 @@ export class TagsService {
     constructor(private apiService: ApiService) {}
 
     fetchAll() {
-        return this.apiService.get('/tags').pipe(take(1));
+        return this.apiService.get('tags').pipe(take(1));
     }
 }
