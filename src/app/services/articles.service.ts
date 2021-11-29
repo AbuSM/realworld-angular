@@ -44,4 +44,18 @@ export class ArticlesService {
     unfavorite(slug: string) {
         return this.apiService.delete(`articles/${slug}/favorite`);
     }
+
+    getComments(slug: string) {
+        return this.apiService.get(`articles/${slug}/comments`);
+    }
+
+    addComment(slug: string, body: string) {
+        return this.apiService.post(`articles/${slug}/comments`, {
+            comment: { body },
+        });
+    }
+
+    deleteComment(slug: string, id: number) {
+        return this.apiService.delete(`articles/${slug}/comments/${id}`);
+    }
 }

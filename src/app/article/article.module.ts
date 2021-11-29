@@ -8,11 +8,14 @@ import { EffectsModule } from '@ngrx/effects';
 import { ArticleEffects } from './+store/article.effects';
 import { StoreModule } from '@ngrx/store';
 import { articleReducer } from './+store/article.reducers';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [ArticleComponent],
     imports: [
         CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
         ArticleRoutingModule,
         SharedModule,
         StoreModule.forFeature('articles', articleReducer),
