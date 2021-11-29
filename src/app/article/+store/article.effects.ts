@@ -10,7 +10,7 @@ import {
     onToggleFavoriteSuccess,
     fetchFeedArticles,
 } from './article.actions';
-import { exhaustMap, map, of, iif, catchError, filter } from 'rxjs';
+import { exhaustMap, map, of, iif, catchError } from 'rxjs';
 import { ArticlesService } from '../../services';
 
 @Injectable()
