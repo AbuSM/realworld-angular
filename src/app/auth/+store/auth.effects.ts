@@ -46,7 +46,7 @@ export class AuthEffects {
     checkAuth$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(checkAccess),
-            exhaustMap((action) => {
+            exhaustMap(() => {
                 return this.authService.checkUser().pipe(
                     map(({ user }) => authorizeSuccess(user)),
                     catchError((error) => {
