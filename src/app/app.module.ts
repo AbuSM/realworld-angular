@@ -8,6 +8,7 @@ import {
     ArticlesService,
     AuthGuardService,
     TagsService,
+    ProfileService,
 } from './services';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +21,7 @@ import { authReducer } from './auth/+store/auth.reducer';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { EffectsModule } from '@ngrx/effects';
 import { articleReducer } from './article/+store/article.reducers';
+import { userReducer } from './profile/+store/profile.reducers';
 
 @NgModule({
     declarations: [AppComponent, NotFoundPageComponent],
@@ -30,7 +32,11 @@ import { articleReducer } from './article/+store/article.reducers';
         LayoutModule,
         HttpClientModule,
         AppRoutingModule,
-        StoreModule.forRoot({ auth: authReducer, articles: articleReducer }),
+        StoreModule.forRoot({
+            auth: authReducer,
+            articles: articleReducer,
+            user: userReducer,
+        }),
         EffectsModule.forRoot([]),
     ],
     providers: [
@@ -39,6 +45,7 @@ import { articleReducer } from './article/+store/article.reducers';
         ArticlesService,
         AuthGuardService,
         TagsService,
+        ProfileService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: HttpTokenInterceptor,

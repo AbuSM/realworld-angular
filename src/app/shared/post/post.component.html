@@ -1,9 +1,9 @@
 <div class="post">
     <div class="post-header">
-        <app-profile
+        <app-profile-header
             [username]="post.author.username"
             [date]="post.createdAt"
-        ></app-profile>
+        ></app-profile-header>
         <app-favorite-button [article]="post">
             {{ post.favoritesCount }}
         </app-favorite-button>

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ErrorsListComponent, PostComponent, ProfileComponent } from './';
+import { ErrorsListComponent, PostComponent, ProfileHeaderComponent } from './';
 import { RouterModule } from '@angular/router';
 import { ArticleMetaComponent } from './article-meta/article-meta.component';
 import { FollowButtonComponent } from './follow-button/follow-button.component';
@@ -14,7 +14,7 @@ import { TabComponent } from './tabs/tab/tab.component';
 @NgModule({
     declarations: [
         PostComponent,
-        ProfileComponent,
+        ProfileHeaderComponent,
         ErrorsListComponent,
         ArticleMetaComponent,
         FollowButtonComponent,
@@ -28,7 +28,7 @@ import { TabComponent } from './tabs/tab/tab.component';
     imports: [CommonModule, RouterModule],
     exports: [
         PostComponent,
-        ProfileComponent,
+        ProfileHeaderComponent,
         ErrorsListComponent,
         ArticleMetaComponent,
         ArticleCommentComponent,
