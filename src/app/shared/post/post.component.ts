@@ -15,7 +15,7 @@ export class PostComponent {
         body: '',
         tagList: [],
         favorited: false,
-        author: null
+        author: null,
     };
 
     constructor() {}
