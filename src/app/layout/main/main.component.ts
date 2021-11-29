@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { Observable, startWith } from 'rxjs';
 import { getAllArticles } from '../../article/+store/article.selectors';
 import { ArticlesService, TagsService } from '../../services';
-import { ArticleModel } from '../../models';
 import { fetchAllArticles } from '../../article/+store/article.actions';
 
 @Component({
@@ -13,7 +12,7 @@ import { fetchAllArticles } from '../../article/+store/article.actions';
 })
 export class MainComponent implements OnInit {
     tags$: Observable<{ tags: string[] }>;
-    posts$: Observable<{ articles: ArticleModel[]; isLoading: boolean }>;
+    posts$: Observable<ReturnType<typeof getAllArticles>>;
     isLogged: boolean = true;
 
     constructor(
