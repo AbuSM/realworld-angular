@@ -9,7 +9,7 @@ import {
     onToggleFavoriteFailure,
     onToggleFavoriteSuccess,
 } from './article.actions';
-import { exhaustMap, map, of, catchError } from 'rxjs';
+import { exhaustMap, map, of, iif, catchError } from 'rxjs';
 import { ArticlesService } from '../../services';
 
 @Injectable()
@@ -38,19 +38,19 @@ export class ArticleEffects {
         return this.actions$.pipe(
             ofType(onToggleFavorite),
             exhaustMap((action) => {
-                if (action.favorited) {
-                    return this.articlesService.unfavorite(action.slug).pipe(
+                return iif(
+                    () => action.favorited,
+                    this.articlesService.unfavorite(action.slug).pipe(
                         map(({ article }) => onToggleFavoriteSuccess(article)),
                         catchError((err) => onToggleFavoriteFailure(err))
-                    );
-                } else {
-                    return this.articlesService.favorite(action.slug).pipe(
+                    ),
+                    this.articlesService.favorite(action.slug).pipe(
                         map(({ article }) => {
                             return onToggleFavoriteSuccess(article);
                         }),
                         catchError((err) => onToggleFavoriteFailure(err))
-                    );
-                }
+                    )
+                );
             })
         );
     });
