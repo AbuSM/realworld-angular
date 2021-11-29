@@ -34,4 +34,7 @@ export class ArticlesService {
     favorite(slug: string) {
         return this.apiService.post(`articles/${slug}/favorite`);
     }
+    unfavorite(slug: string) {
+        return this.apiService.delete(`articles/${slug}/favorite`);
+    }
 }

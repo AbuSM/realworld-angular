@@ -22,7 +22,7 @@ export const fetchAllArticlesFailure = createAction(
 
 export const onToggleFavorite = createAction(
     ARTICLE_FAVORITE_ACTION,
-    props<{ slug: string }>()
+    props<{ slug: string; favorited: boolean }>()
 );
 
 export const onToggleFavoriteSuccess = createAction(
