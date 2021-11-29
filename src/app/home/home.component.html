@@ -5,9 +5,9 @@
 <div class="container page">
     <div class="row">
         <div class="col-md-9">
-            <app-tabs>
-                <ng-container *ngIf="articles$ | async as articles">
-                    <tab title="Your feed">
+            <ng-container *ngIf="articles$ | async as articles">
+                <app-tabs (tabChanged)="onTabChange($event)">
+                    <tab title="Your feed" id="1">
                         <ng-container
                             *ngIf="articles.isLoading === false; else spinner"
                         >
@@ -25,9 +25,21 @@
                             ></app-spinner>
                         </ng-template>
                     </tab>
-                </ng-container>
-                <tab title="Global feed"> template</tab>
-            </app-tabs>
+                    <tab title="Global feed" id="2">
+                        <ng-container
+                            *ngIf="!!articles.articles.length; else noComponent"
+                        >
+                            <app-post
+                                *ngFor="let post of articles.articles"
+                                [post]="post"
+                            ></app-post>
+                        </ng-container>
+                        <ng-template #noComponent>
+                            No article found(
+                        </ng-template>
+                    </tab>
+                </app-tabs>
+            </ng-container>
         </div>
         <div class="col-md-3">
             <div class="sidebar">

@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
-import { MainComponent } from './layout';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: MainComponent,
+        loadChildren: () =>
+            import('./home/home.module').then((m) => m.HomeModule),
     },
     {
         path: 'settings',

@@ -1,17 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, startWith } from 'rxjs';
-import { getAllArticles } from '../../article/+store/article.selectors';
-import { ArticlesService, TagsService } from '../../services';
-import { fetchAllArticles } from '../../article/+store/article.actions';
-import { ArticleModel } from '../../models';
+import { getAllArticles } from '../article/+store/article.selectors';
+import { ArticlesService, TagsService } from '../services';
+import {
+    fetchAllArticles,
+    fetchFeedArticles,
+} from '../article/+store/article.actions';
+import { ArticleModel } from '../models';
 
 @Component({
     selector: 'app-main',
-    templateUrl: './main.component.html',
-    styleUrls: ['./main.component.less'],
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.less'],
 })
-export class MainComponent implements OnInit {
+export class HomeComponent implements OnInit {
     tags$: Observable<{ tags: string[] }>;
     articles$: Observable<ReturnType<typeof getAllArticles>>;
     isLogged: boolean = true;
@@ -23,9 +26,16 @@ export class MainComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.store.dispatch(fetchAllArticles());
         this.tags$ = this.tagsService.fetchAll().pipe(startWith({ tags: [] }));
         this.articles$ = this.store.select(getAllArticles);
+    }
+
+    onTabChange(activeTab: string | number) {
+        if (Number(activeTab) === 1) {
+            this.store.dispatch(fetchAllArticles());
+        } else {
+            this.store.dispatch(fetchFeedArticles());
+        }
     }
 
     trackArticle(index: number, articleRow: ArticleModel) {
