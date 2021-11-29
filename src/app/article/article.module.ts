@@ -6,6 +6,8 @@ import { SharedModule } from '../shared';
 import { ArticleResolverService } from './article-resolver.service';
 import { EffectsModule } from '@ngrx/effects';
 import { ArticleEffects } from './+store/article.effects';
+import { StoreModule } from '@ngrx/store';
+import { articleReducer } from './+store/article.reducers';
 
 @NgModule({
     declarations: [ArticleComponent],
@@ -13,6 +15,7 @@ import { ArticleEffects } from './+store/article.effects';
         CommonModule,
         ArticleRoutingModule,
         SharedModule,
+        StoreModule.forFeature('articles', articleReducer),
         EffectsModule.forFeature([ArticleEffects]),
     ],
     providers: [ArticleResolverService],
