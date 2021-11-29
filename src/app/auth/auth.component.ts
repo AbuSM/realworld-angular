@@ -1,17 +1,17 @@
-import {Component, OnInit, OnDestroy } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
     FormBuilder,
     FormGroup,
     FormControl,
     Validators,
 } from '@angular/forms';
-import {Subscription} from 'rxjs';
-import {AuthModel, ErrorsModel} from '../models';
-import {AuthService} from '../services';
-import {authorize} from './+store/auth.actions';
-import {Store} from '@ngrx/store';
-import {getAuthData} from "./+store/auth.selector";
+import { Subscription } from 'rxjs';
+import { AuthModel, ErrorsModel } from '../models';
+import { AuthService } from '../services';
+import { authorize } from './+store/auth.actions';
+import { Store } from '@ngrx/store';
+import { getAuthData } from './+store/auth.selector';
 
 @Component({
     selector: 'app-login',
@@ -21,7 +21,7 @@ import {getAuthData} from "./+store/auth.selector";
 export class AuthComponent implements OnInit, OnDestroy {
     authType: string = '';
     title: string = '';
-    errors: ErrorsModel = {errors: {}};
+    errors: ErrorsModel = { errors: {} };
     isLoading = false;
     authForm: FormGroup;
     subscriptions: Subscription = new Subscription();
@@ -52,20 +52,20 @@ export class AuthComponent implements OnInit, OnDestroy {
     }
 
     onSubmit() {
-        this.errors = {errors: {}};
+        this.errors = { errors: {} };
         this.isLoading = true;
         const credentials: AuthModel = this.authForm.value;
         this.store.dispatch(
-            authorize({loginType: this.authType, credentials})
+            authorize({ loginType: this.authType, credentials })
         );
         this.subscriptions.add(
             this.store.select(getAuthData).subscribe({
                 next: (state) => {
-                    this.errors = state.error
+                    this.errors = state.error;
                     this.isLoading = state.isLoading;
-                }
+                },
             })
-        )
+        );
     }
 
     ngOnDestroy(): void {

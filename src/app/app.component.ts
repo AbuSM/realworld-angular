@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { checkAccess } from './auth/+store/auth.actions';
-import {getItem} from "./utils";
+import { getItem } from './utils';
 
 @Component({
     selector: 'app-root',

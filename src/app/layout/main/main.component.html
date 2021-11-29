@@ -6,16 +6,23 @@
     <div class="row">
         <div class="col-md-9">
             <app-tabs>
-                <ng-container *ngIf="(posts$ | async) as posts;">
+                <ng-container *ngIf="articles$ | async as articles">
                     <tab title="Your feed">
-                        <ng-container *ngIf="posts.isLoading === false; else spinner">
+                        <ng-container
+                            *ngIf="articles.isLoading === false; else spinner"
+                        >
                             <app-post
-                                *ngFor="let post of (posts$ | async).articles"
+                                *ngFor="
+                                    let post of (articles$ | async).articles
+                                "
                                 [post]="post"
                             ></app-post>
                         </ng-container>
                         <ng-template #spinner>
-                            <app-spinner type="lg" [loading]="posts.isLoading"></app-spinner>
+                            <app-spinner
+                                type="lg"
+                                [loading]="articles.isLoading"
+                            ></app-spinner>
                         </ng-template>
                     </tab>
                 </ng-container>
