@@ -7,7 +7,16 @@ import { ArticleModel } from '../../models';
     styleUrls: ['./post.component.less'],
 })
 export class PostComponent {
-    @Input() post: ArticleModel;
+    @Input() post: ArticleModel = {
+        slug: '',
+        title: '',
+        favoritesCount: 0,
+        description: '',
+        body: '',
+        tagList: [],
+        favorited: false,
+        author: null,
+    };
 
     constructor() {}
 }
