@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {Store} from '@ngrx/store';
-import {Actions, createEffect, ofType} from '@ngrx/effects';
+import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
     fetchAllArticles,
     fetchAllArticlesSuccess,
@@ -9,8 +9,8 @@ import {
     onToggleFavoriteFailure,
     onToggleFavoriteSuccess,
 } from './article.actions';
-import {exhaustMap, map, of, iif, catchError} from 'rxjs';
-import {ArticlesService} from '../../services';
+import { exhaustMap, map, of, iif, catchError } from 'rxjs';
+import { ArticlesService } from '../../services';
 
 @Injectable()
 export class ArticleEffects {
@@ -18,16 +18,15 @@ export class ArticleEffects {
         private actions$: Actions,
         private store: Store,
         private articlesService: ArticlesService
-    ) {
-    }
+    ) {}
 
     onFetchAll$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(fetchAllArticles),
             exhaustMap(() => {
                 return this.articlesService.query().pipe(
-                    map(({articles}) =>
-                        fetchAllArticlesSuccess({articles})
+                    map(({ articles }) =>
+                        fetchAllArticlesSuccess({ articles })
                     ),
                     catchError((err) => of(fetchAllArticlesFailure(err)))
                 );
@@ -42,16 +41,16 @@ export class ArticleEffects {
                 return iif(
                     () => action.favorited,
                     this.articlesService.unfavorite(action.slug).pipe(
-                        map(({article}) => onToggleFavoriteSuccess(article)),
+                        map(({ article }) => onToggleFavoriteSuccess(article)),
                         catchError((err) => onToggleFavoriteFailure(err))
                     ),
                     this.articlesService.favorite(action.slug).pipe(
-                        map(({article}) => {
+                        map(({ article }) => {
                             return onToggleFavoriteSuccess(article);
                         }),
                         catchError((err) => onToggleFavoriteFailure(err))
                     )
-                )
+                );
             })
         );
     });
