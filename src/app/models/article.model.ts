@@ -6,9 +6,9 @@ export interface ArticleModel {
     description: string;
     body: string;
     tagList: string[];
-    createdAt: string;
-    updatedAt: string;
+    author: ProfileModel;
     favorited: boolean;
     favoritesCount: number;
-    author: ProfileModel;
+    createdAt?: string;
+    updatedAt?: string;
 }

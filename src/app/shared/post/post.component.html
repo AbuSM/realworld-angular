@@ -5,7 +5,7 @@
             [date]="post.createdAt"
         ></app-profile>
         <app-favorite-button [article]="post">
-            {{ post.favoritesCount || 0 }}
+            {{ post.favoritesCount }}
         </app-favorite-button>
     </div>
     <a routerLink="/post/{{ post.slug }}" class="post-body">
