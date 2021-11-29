@@ -2,17 +2,23 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { QueryModel } from '../models/query.model';
 import { Observable } from 'rxjs';
-import { ArticleModel } from '../models';
+import { ArticleModel, ArticlesWrapModel, ArticleWrapModel } from '../models';
 
 @Injectable()
 export class ArticlesService {
     constructor(private apiService: ApiService) {}
 
-    query(config: QueryModel = {}): Observable<{ articles: ArticleModel[] }> {
+    query(config: QueryModel = {}): Observable<ArticlesWrapModel> {
         return this.apiService.get('articles', config);
     }
 
-    create(data: ArticleModel): Observable<{ article: ArticleModel }> {
+    feed(
+        config: QueryModel = { limit: 10, offset: 0 }
+    ): Observable<ArticlesWrapModel> {
+        return this.apiService.get('articles/feed', config);
+    }
+
+    create(data: ArticleModel): Observable<ArticleWrapModel> {
         return this.apiService.post('articles', { article: data });
     }
 
@@ -34,6 +40,7 @@ export class ArticlesService {
     favorite(slug: string) {
         return this.apiService.post(`articles/${slug}/favorite`);
     }
+
     unfavorite(slug: string) {
         return this.apiService.delete(`articles/${slug}/favorite`);
     }

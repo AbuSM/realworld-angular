@@ -12,3 +12,10 @@ export interface ArticleModel {
     createdAt?: string;
     updatedAt?: string;
 }
+
+export interface ArticlesWrapModel {
+    articles: ArticleModel[];
+}
+export interface ArticleWrapModel {
+    article: ArticleModel;
+}

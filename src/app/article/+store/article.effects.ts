@@ -8,8 +8,9 @@ import {
     onToggleFavorite,
     onToggleFavoriteFailure,
     onToggleFavoriteSuccess,
+    fetchFeedArticles,
 } from './article.actions';
-import { exhaustMap, map, of, iif, catchError } from 'rxjs';
+import { exhaustMap, map, of, iif, catchError, filter } from 'rxjs';
 import { ArticlesService } from '../../services';
 
 @Injectable()
@@ -28,6 +29,18 @@ export class ArticleEffects {
                     map(({ articles }) =>
                         fetchAllArticlesSuccess({ articles })
                     ),
+                    catchError((err) => of(fetchAllArticlesFailure(err)))
+                );
+            })
+        );
+    });
+
+    onFetchFeed = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(fetchFeedArticles),
+            exhaustMap(() => {
+                return this.articlesService.feed().pipe(
+                    map((articles) => fetchAllArticlesSuccess(articles)),
                     catchError((err) => of(fetchAllArticlesFailure(err)))
                 );
             })

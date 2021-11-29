@@ -16,6 +16,8 @@ import { AppComponent } from './app.component';
 import { LayoutModule } from './layout/layout.module';
 import { AuthModule } from './auth/auth.module';
 import { SharedModule } from './shared';
+import { HomeModule } from './home/home.module';
+import { ArticleEffects } from './article/+store/article.effects';
 import { StoreModule } from '@ngrx/store';
 import { authReducer } from './auth/+store/auth.reducer';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
@@ -37,7 +39,8 @@ import { userReducer } from './profile/+store/profile.reducers';
             articles: articleReducer,
             user: userReducer,
         }),
-        EffectsModule.forRoot([]),
+        HomeModule,
+        EffectsModule.forRoot([ArticleEffects]),
     ],
     providers: [
         AuthService,
