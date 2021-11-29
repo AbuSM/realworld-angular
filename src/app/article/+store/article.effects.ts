@@ -25,13 +25,10 @@ export class ArticleEffects {
         return this.actions$.pipe(
             ofType(fetchAllArticles),
             exhaustMap(() => {
-                return this.articlesService.query().pipe(
-                    map(({ articles }) =>
-                        fetchAllArticlesSuccess({ articles })
-                    ),
-                    catchError((err) => of(fetchAllArticlesFailure(err)))
-                );
-            })
+                return this.articlesService.query();
+            }),
+            map(({ articles }) => fetchAllArticlesSuccess({ articles })),
+            catchError((err) => of(fetchAllArticlesFailure(err)))
         );
     });
 

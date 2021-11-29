@@ -17,12 +17,10 @@ import { LayoutModule } from './layout/layout.module';
 import { AuthModule } from './auth/auth.module';
 import { SharedModule } from './shared';
 import { HomeModule } from './home/home.module';
-import { ArticleEffects } from './article/+store/article.effects';
 import { StoreModule } from '@ngrx/store';
 import { authReducer } from './auth/+store/auth.reducer';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { EffectsModule } from '@ngrx/effects';
-import { articleReducer } from './article/+store/article.reducers';
 import { userReducer } from './profile/+store/profile.reducers';
 
 @NgModule({
@@ -36,11 +34,10 @@ import { userReducer } from './profile/+store/profile.reducers';
         AppRoutingModule,
         StoreModule.forRoot({
             auth: authReducer,
-            articles: articleReducer,
             user: userReducer,
         }),
         HomeModule,
-        EffectsModule.forRoot([ArticleEffects]),
+        EffectsModule.forRoot([]),
     ],
     providers: [
         AuthService,
