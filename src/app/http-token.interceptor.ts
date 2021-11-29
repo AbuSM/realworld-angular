@@ -6,7 +6,7 @@ import {
     HttpInterceptor,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { getItem } from './utils';
+import { getToken } from './utils';
 
 @Injectable()
 export class HttpTokenInterceptor implements HttpInterceptor {
@@ -20,7 +20,7 @@ export class HttpTokenInterceptor implements HttpInterceptor {
             'Content-Type': 'application/json',
             Accept: 'application/json',
         };
-        const token = getItem();
+        const token = getToken();
 
         if (token) {
             headersConfig['Authorization'] = `Token ${token}`;

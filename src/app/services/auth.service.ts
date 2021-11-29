@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ProfileModel, UserCredentialsModel, UserModel } from '../models';
 import { ApiService } from './api.service';
 import { map, Observable } from 'rxjs';
-import { clear, setItem } from '../utils';
+import { clearStorage, setToken } from '../utils';
 
 @Injectable()
 export class AuthService {
@@ -22,7 +22,7 @@ export class AuthService {
     }
 
     setAuth(user: UserModel): void {
-        setItem(user.token);
+        setToken(user.token);
     }
 
     checkUser(): Observable<{ user: ProfileModel }> {
@@ -34,6 +34,6 @@ export class AuthService {
     }
 
     logout() {
-        clear();
+        clearStorage();
     }
 }
