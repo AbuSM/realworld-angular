@@ -8,6 +8,11 @@ export const getIsLogged = createSelector(
     (state) => state.isLogged
 );
 
+export const getAuthData = createSelector(
+    getAuthState,
+    (state) => state
+)
+
 export const getUserData = createSelector(getAuthState, (state) => ({
     ...state.user,
     isLogged: state.isLogged,
