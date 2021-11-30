@@ -9,7 +9,7 @@ export class ArticlesService {
     constructor(private apiService: ApiService) {}
 
     query(config: QueryModel = {}): Observable<ArticlesWrapModel> {
-        return this.apiService.get('articles', config);
+        return this.apiService.get('articles', { params: config });
     }
 
     feed(

@@ -30,35 +30,21 @@
         <div class="row">
             <div class="col-xs-12 col-md-10 offset-md-1">
                 <div class="articles-toggle">
-                    <ul class="nav nav-pills outline-active">
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }"
-                                [routerLink]="['/user', user.username]"
-                            >
-                                My Posts
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a
-                                class="nav-link"
-                                routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }"
-                                [routerLink]="[
-                                    '/user',
-                                    user.username,
-                                    'favorites'
-                                ]"
-                            >
-                                Favorited Posts
-                            </a>
-                        </li>
-                    </ul>
+                    <app-tabs (tabChanged)="onTabChange($event)">
+                        <tab title="My Posts" [id]="1">
+                            <app-post
+                                *ngFor="let article of articles"
+                                [post]="article"
+                            ></app-post>
+                        </tab>
+                        <tab title="Favorited Posts" [id]="2">
+                            <app-post
+                                *ngFor="let article of articles"
+                                [post]="article"
+                            ></app-post>
+                        </tab>
+                    </app-tabs>
                 </div>
-
-                <!--                <router-outlet></router-outlet>-->
             </div>
         </div>
     </div>
