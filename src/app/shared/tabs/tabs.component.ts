@@ -22,7 +22,7 @@ export class TabsComponent implements AfterContentInit {
 
     constructor() {}
 
-    selectTab(tab: TabModel) {
+    selectTab(tab: TabModel = {title: ''}) {
         this.tabs.toArray().forEach((tab) => (tab.active = false));
         tab.active = true;
         this.tabChanged.emit(tab.id);
