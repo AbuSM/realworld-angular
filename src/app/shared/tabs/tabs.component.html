@@ -5,9 +5,12 @@
             *ngFor="let tab of tabs"
             (click)="selectTab(tab)"
         >
-            <a href="#" class="nav-link" [ngClass]="{ active: tab.active }">{{
-                tab.title
-            }}</a>
+            <a
+                class="nav-link"
+                role="button"
+                [ngClass]="{ active: tab.active }"
+                >{{ tab.title }}</a
+            >
         </li>
     </ul>
     <ng-content></ng-content>
