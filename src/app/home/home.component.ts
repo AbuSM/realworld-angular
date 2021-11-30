@@ -9,6 +9,8 @@ import {
 } from '../article/+store/article.actions';
 import { ArticleModel } from '../models';
 
+const ALL_ARTICLES_TAB = 1;
+
 @Component({
     selector: 'app-main',
     templateUrl: './home.component.html',
@@ -31,7 +33,7 @@ export class HomeComponent implements OnInit {
     }
 
     onTabChange(activeTab: string | number) {
-        if (Number(activeTab) === 1) {
+        if (Number(activeTab) === ALL_ARTICLES_TAB) {
             this.store.dispatch(fetchAllArticles());
         } else {
             this.store.dispatch(fetchFeedArticles());
