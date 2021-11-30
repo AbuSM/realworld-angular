@@ -19,3 +19,11 @@ export interface ArticlesWrapModel {
 export interface ArticleWrapModel {
     article: ArticleModel;
 }
+
+export interface CommentModel {
+    body: string;
+    author: ProfileModel;
+    id?: number;
+    createdAt?: string;
+    updatedAt?: string;
+}

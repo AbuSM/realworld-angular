@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ArticleModel } from '../models';
-import { ArticlesService } from '../services';
+import { FormControl } from '@angular/forms';
+import { finalize, Observable, startWith, Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { finalize, Observable, startWith, Subscription } from 'rxjs';
-import { getIsUser } from '../auth/+store/auth.selector';
+import { ArticleModel, CommentModel, ErrorsModel } from '../models';
+import { ArticlesService } from '../services';
+import { getIsLogged, getIsUser } from '../auth/+store/auth.selector';
 
 @Component({
     selector: 'app-article',
@@ -12,14 +13,15 @@ import { getIsUser } from '../auth/+store/auth.selector';
     styleUrls: ['./article.component.less'],
 })
 export class ArticleComponent implements OnInit, OnDestroy {
-    commentErrors;
-    comments;
+    comments: CommentModel[];
     article: ArticleModel;
     canModify$: Observable<boolean>;
+    commentControl = new FormControl();
+    isLogged$: Observable<boolean>;
     isLoading: boolean = false;
     isModalOpen: boolean = false;
-    errors = null;
-    subscription: Subscription = new Subscription();
+    errors: ErrorsModel = { errors: null };
+    subscriptions: Subscription = new Subscription();
 
     constructor(
         private articlesService: ArticlesService,
@@ -33,6 +35,13 @@ export class ArticleComponent implements OnInit, OnDestroy {
         this.canModify$ = this.store
             .select(getIsUser(this.article.author.username))
             .pipe(startWith(false));
+        this.isLogged$ = this.store.select(getIsLogged).pipe(startWith(false));
+        this.subscriptions.add(
+            this.articlesService.getComments(this.article.slug).subscribe({
+                next: ({ comments }) => (this.comments = comments),
+                error: (err) => (this.errors = err),
+            })
+        );
     }
 
     openModal() {
@@ -45,22 +54,51 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
     onDeleteArticle() {
         this.isLoading = true;
-        this.subscription = this.articlesService
-            .delete(this.article.slug)
-            .pipe(finalize(() => (this.isLoading = false)))
-            .subscribe({
-                next: () => this.router.navigateByUrl('/'),
-                error: (err) => (this.errors = err),
-            });
+        this.subscriptions.add(
+            this.articlesService
+                .delete(this.article.slug)
+                .pipe(finalize(() => (this.isLoading = false)))
+                .subscribe({
+                    next: () => this.router.navigateByUrl('/'),
+                    error: (err) => (this.errors = err),
+                })
+        );
     }
 
     onToggleFollowing(event: Event) {}
 
     onToggleFavorite(event: Event) {}
 
-    onDeleteComment() {}
+    onCommentSubmit() {
+        this.subscriptions.add(
+            this.articlesService
+                .addComment(this.article.slug, this.commentControl.value)
+                .subscribe({
+                    next: ({ comment }) => {
+                        this.comments.push(comment);
+                        this.commentControl.reset('');
+                    },
+                    error: (err) => (this.errors = err),
+                })
+        );
+    }
+
+    onDeleteComment(id: number) {
+        this.subscriptions.add(
+            this.articlesService
+                .deleteComment(this.article.slug, id)
+                .subscribe({
+                    next: () => {
+                        this.comments = this.comments.filter(
+                            (comment) => comment.id !== id
+                        );
+                    },
+                    error: (err) => (this.errors = err),
+                })
+        );
+    }
 
     ngOnDestroy() {
-        this.subscription.unsubscribe();
+        this.subscriptions.unsubscribe();
     }
 }

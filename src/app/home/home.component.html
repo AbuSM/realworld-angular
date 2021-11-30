@@ -27,15 +27,15 @@
                     </tab>
                     <tab title="Global feed" id="2">
                         <ng-container
-                            *ngIf="!!articles.articles.length; else noComponent"
+                            *ngIf="!!articles.articles.length; else noArticles"
                         >
                             <app-post
                                 *ngFor="let post of articles.articles"
                                 [post]="post"
                             ></app-post>
                         </ng-container>
-                        <ng-template #noComponent>
-                            No article found(
+                        <ng-template #noArticles>
+                            <div class="mt-4">No articles found(</div>
                         </ng-template>
                     </tab>
                 </app-tabs>

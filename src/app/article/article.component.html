@@ -3,7 +3,7 @@
         <div class="container">
             <h1>{{ article.title }}</h1>
             <app-article-meta [article]="article">
-                <span *ngIf="(canModify$ | async) === false; else buttons">
+                <span *ngIf="canModify$ | async; else buttons">
                     <button
                         class="btn btn-sm btn-outline-secondary m-1"
                         [routerLink]="['/editor', article.slug]"
@@ -105,45 +105,54 @@
             </app-article-meta>
         </div>
 
-        <!--        <div class="row">-->
-        <!--            <div class="col-xs-12 col-md-8 offset-md-2">-->
-
-        <!--                <div *appShowAuthed="true">-->
-        <!--                    <app-errors-list [errors]="commentErrors"></app-errors-list>-->
-        <!--                    <form class="card comment-form" (ngSubmit)="addComment()">-->
-        <!--                        <fieldset [disabled]="isSubmitting">-->
-        <!--                            <div class="card-block">-->
-        <!--                <textarea class="form-control"-->
-        <!--                          placeholder="Write a comment..."-->
-        <!--                          rows="3"-->
-        <!--                          [formControl]="commentControl"-->
-        <!--                >-->
-
-        <!--                </textarea>-->
-        <!--                            </div>-->
-        <!--                            <div class="card-footer">-->
-        <!--                                <img [src]="currentUser.image" class="comment-author-img"/>-->
-        <!--                                <button class="btn btn-sm btn-primary" type="submit">-->
-        <!--                                    Post Comment-->
-        <!--                                </button>-->
-        <!--                            </div>-->
-        <!--                        </fieldset>-->
-        <!--                    </form>-->
-        <!--                </div>-->
-
-        <!--                <div *appShowAuthed="false">-->
-        <!--                    <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add-->
-        <!--                    comments on this article.-->
-        <!--                </div>-->
-
-        <!--                <app-article-comment-->
-        <!--                    *ngFor="let comment of comments"-->
-        <!--                    [comment]="comment"-->
-        <!--                    (deleteComment)="onDeleteComment(comment)">-->
-        <!--                </app-article-comment>-->
-
-        <!--            </div>-->
-        <!--        </div>-->
+        <div class="row">
+            <div class="col-xs-12 col-md-8 offset-md-2">
+                <div *ngIf="isLogged$ | async; else signIn">
+                    <app-errors-list [errors]="errors"></app-errors-list>
+                    <form
+                        class="card comment-form"
+                        (ngSubmit)="onCommentSubmit()"
+                    >
+                        <fieldset [disabled]="isLoading">
+                            <div class="card-block">
+                                <textarea
+                                    class="form-control"
+                                    placeholder="Write a comment..."
+                                    rows="3"
+                                    [formControl]="commentControl"
+                                ></textarea>
+                            </div>
+                            <div class="card-footer">
+                                <img
+                                    [src]="article.author.image"
+                                    class="comment-author-img"
+                                />
+                                <button
+                                    class="btn btn-sm btn-primary"
+                                    type="submit"
+                                >
+                                    Post Comment
+                                </button>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <ng-template #signIn>
+                    <div>
+                        <a [routerLink]="['/login']">Sign in</a> or
+                        <a [routerLink]="['/register']">sign up</a> to add
+                        comments on this article.
+                    </div>
+                </ng-template>
+                <app-article-comment
+                    *ngFor="let comment of comments"
+                    [comment]="comment"
+                    [canModify]="canModify$ | async"
+                    (deleteComment)="onDeleteComment($event)"
+                >
+                </app-article-comment>
+            </div>
+        </div>
     </div>
 </div>
 <app-modal
