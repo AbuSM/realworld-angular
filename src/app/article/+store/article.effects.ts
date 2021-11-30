@@ -24,8 +24,8 @@ export class ArticleEffects {
     onFetchAll$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(fetchAllArticles),
-            exhaustMap(() => {
-                return this.articlesService.query();
+            exhaustMap(({ noToken }) => {
+                return this.articlesService.query({ noToken });
             }),
             map(({ articles }) => fetchAllArticlesSuccess({ articles })),
             catchError((err) => of(fetchAllArticlesFailure(err)))

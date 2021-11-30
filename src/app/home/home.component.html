@@ -9,21 +9,28 @@
                 <app-tabs (tabChanged)="onTabChange($event)">
                     <tab title="Your feed" id="1" *ngIf="isLogged$ | async">
                         <ng-container
-                            *ngIf="articles.isLoading === false; else spinner"
+                            *ngIf="!!articles.articles.length; else noArticles"
                         >
-                            <app-post
-                                *ngFor="
-                                    let post of (articles$ | async).articles
+                            <ng-container
+                                *ngIf="
+                                    articles.isLoading === false;
+                                    else spinner
                                 "
-                                [post]="post"
-                            ></app-post>
+                            >
+                                <app-post
+                                    *ngFor="
+                                        let post of (articles$ | async).articles
+                                    "
+                                    [post]="post"
+                                ></app-post>
+                            </ng-container>
+                            <ng-template #spinner>
+                                <app-spinner
+                                    type="lg"
+                                    [loading]="articles.isLoading"
+                                ></app-spinner>
+                            </ng-template>
                         </ng-container>
-                        <ng-template #spinner>
-                            <app-spinner
-                                type="lg"
-                                [loading]="articles.isLoading"
-                            ></app-spinner>
-                        </ng-template>
                     </tab>
                     <tab title="Global feed" id="2">
                         <ng-container

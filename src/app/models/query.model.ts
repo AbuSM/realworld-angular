@@ -3,4 +3,5 @@ export interface QueryModel {
     offset?: number;
     author?: string;
     favorited?: string;
+    noToken?: boolean;
 }

@@ -10,7 +10,10 @@ export const ARTICLE_FAVORITE_ACTION = '[Article Component] Favorite';
 export const ARTICLE_FAVORITE_SUCCESS = '[Article Component] Favorite Success';
 export const ARTICLE_FAVORITE_FAILURE = '[Article Component] Favorite Failure';
 
-export const fetchAllArticles = createAction(ARTICLE_FETCH_ALL);
+export const fetchAllArticles = createAction(
+    ARTICLE_FETCH_ALL,
+    props<{ noToken?: boolean }>()
+);
 export const fetchAllArticlesSuccess = createAction(
     ARTICLE_FETCH_ALL_SUCCESS,
     props<ArticlesWrapModel>()
