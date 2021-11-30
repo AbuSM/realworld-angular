@@ -1,4 +1,4 @@
-<div class="container-fluid main-header" *ngIf="!isLogged">
+<div class="container-fluid main-header" *ngIf="(isLogged$ | async) === false">
     <h1>conduit</h1>
     <p>A place to share your knowledge.</p>
 </div>
@@ -7,7 +7,7 @@
         <div class="col-md-9">
             <ng-container *ngIf="articles$ | async as articles">
                 <app-tabs (tabChanged)="onTabChange($event)">
-                    <tab title="Your feed" id="1">
+                    <tab title="Your feed" id="1" *ngIf="isLogged$ | async">
                         <ng-container
                             *ngIf="articles.isLoading === false; else spinner"
                         >

@@ -8,6 +8,7 @@ import {
     fetchFeedArticles,
 } from '../article/+store/article.actions';
 import { ArticleModel } from '../models';
+import {getIsLogged} from "../auth/+store/auth.selector";
 
 @Component({
     selector: 'app-main',
@@ -17,7 +18,7 @@ import { ArticleModel } from '../models';
 export class HomeComponent implements OnInit {
     tags$: Observable<{ tags: string[] }>;
     articles$: Observable<ReturnType<typeof getAllArticles>>;
-    isLogged: boolean = true;
+    isLogged$: Observable<boolean>;
 
     constructor(
         private tagsService: TagsService,
@@ -28,13 +29,14 @@ export class HomeComponent implements OnInit {
     ngOnInit() {
         this.tags$ = this.tagsService.fetchAll().pipe(startWith({ tags: [] }));
         this.articles$ = this.store.select(getAllArticles);
+        this.isLogged$ = this.store.select(getIsLogged);
     }
 
     onTabChange(activeTab: string | number) {
         if (Number(activeTab) === 1) {
-            this.store.dispatch(fetchAllArticles());
-        } else {
             this.store.dispatch(fetchFeedArticles());
+        } else {
+            this.store.dispatch(fetchAllArticles());
         }
     }
 
