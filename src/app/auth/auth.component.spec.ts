@@ -1,16 +1,26 @@
-import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {
+    ComponentFixture,
+    fakeAsync,
+    TestBed,
+    tick,
+} from '@angular/core/testing';
 
-import {AuthComponent} from './auth.component';
-import {ApiService, AuthService} from "../services";
-import {RouterTestingModule} from "@angular/router/testing";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {HttpClientModule} from "@angular/common/http";
-import {FormBuilder, FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {ActionsSubject, ReducerManager, ReducerManagerDispatcher, StateObservable, Store} from "@ngrx/store";
-import {provideMockStore} from "@ngrx/store/testing";
-import {ActivatedRoute, UrlSegment} from "@angular/router";
-import {Observable, of, from} from "rxjs";
-
+import { AuthComponent } from './auth.component';
+import { ApiService, AuthService } from '../services';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+    ActionsSubject,
+    ReducerManager,
+    ReducerManagerDispatcher,
+    StateObservable,
+    Store,
+} from '@ngrx/store';
+import { provideMockStore } from '@ngrx/store/testing';
+import { ActivatedRoute, UrlSegment } from '@angular/router';
+import { Observable, of, from } from 'rxjs';
 
 describe('AuthComponent', () => {
     let component: AuthComponent;
@@ -22,10 +32,15 @@ describe('AuthComponent', () => {
 
     beforeEach(async () => {
         routeStub = {
-            url: of([new UrlSegment('/register', {})])
-        }
+            url: of([new UrlSegment('/register', {})]),
+        };
         await TestBed.configureTestingModule({
-            imports: [RouterTestingModule, HttpClientTestingModule, ReactiveFormsModule, FormsModule],
+            imports: [
+                RouterTestingModule,
+                HttpClientTestingModule,
+                ReactiveFormsModule,
+                FormsModule,
+            ],
             declarations: [AuthComponent],
             providers: [
                 AuthComponent,
@@ -38,10 +53,10 @@ describe('AuthComponent', () => {
                 ActionsSubject,
                 ReducerManager,
                 ReducerManagerDispatcher,
-                provideMockStore({initialState})
+                provideMockStore({ initialState }),
                 // {provide: ActivatedRoute, useValue: routeStub}
-            ]
-        }).compileComponents()
+            ],
+        }).compileComponents();
     });
 
     beforeEach(() => {
@@ -60,7 +75,7 @@ describe('AuthComponent', () => {
         expect(component.isLoading).toBe(false);
         expect(component.authType).toBe('');
         expect(component.title).toBe('');
-        expect(component.errors).toEqual({errors: {}});
+        expect(component.errors).toEqual({ errors: {} });
     });
     it('should be Falsy when form is empty', () => {
         expect(component.authForm.valid).toBeFalsy();
@@ -83,7 +98,7 @@ describe('AuthComponent', () => {
     //     expect(component.title).toBe('Sign in');
     // }));
     it('should define whether submit button works fine', () => {
-        let {email, username, password} = component.authForm.controls;
+        let { email, username, password } = component.authForm.controls;
         expect(username).toBeUndefined();
         const form = component.authForm;
         email.setValue('test');
@@ -97,5 +112,5 @@ describe('AuthComponent', () => {
         component.authForm.controls['password'].setValue('test');
         expect(component.authForm.valid).toBeTruthy();
         // component.onSubmit()
-    })
+    });
 });

@@ -19,7 +19,7 @@ export class PostComponent {
             username: null,
             bio: '',
             image: '',
-            following: false
+            following: false,
         },
     };
 

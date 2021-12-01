@@ -1,8 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import {ActionsSubject, ReducerManager, ReducerManagerDispatcher, StateObservable, Store} from "@ngrx/store";
-import {provideMockStore} from "@ngrx/store/testing";
+import {
+    ActionsSubject,
+    ReducerManager,
+    ReducerManagerDispatcher,
+    StateObservable,
+    Store,
+} from '@ngrx/store';
+import { provideMockStore } from '@ngrx/store/testing';
 
 describe('AppComponent', () => {
     const initialState = {};
@@ -16,8 +22,8 @@ describe('AppComponent', () => {
                 ActionsSubject,
                 ReducerManager,
                 ReducerManagerDispatcher,
-                provideMockStore({initialState})
-            ]
+                provideMockStore({ initialState }),
+            ],
         }).compileComponents();
     });
 

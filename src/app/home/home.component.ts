@@ -8,7 +8,7 @@ import {
     fetchFeedArticles,
 } from '../article/+store/article.actions';
 import { ArticleModel } from '../models';
-import {getIsLogged} from "../auth/+store/auth.selector";
+import { getIsLogged } from '../auth/+store/auth.selector';
 
 const ALL_ARTICLES_TAB = 1;
 

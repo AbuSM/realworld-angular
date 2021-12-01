@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
     FormBuilder,
@@ -34,7 +34,10 @@ export class AuthComponent implements OnInit, OnDestroy {
         private store: Store<{ auth: boolean }>
     ) {
         this.authForm = this.fb.group({
-            email: ['', Validators.compose([Validators.email, Validators.required])],
+            email: [
+                '',
+                Validators.compose([Validators.email, Validators.required]),
+            ],
             password: ['', Validators.required],
         });
     }
