@@ -8,7 +8,7 @@ import {
     fetchFeedArticles,
 } from '../article/+store/article.actions';
 import { ArticleModel } from '../models';
-import {getIsLogged} from "../auth/+store/auth.selector";
+import { getIsLogged } from '../auth/+store/auth.selector';
 
 const ALL_ARTICLES_TAB = 1;
 
@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
         if (Number(activeTab) === ALL_ARTICLES_TAB) {
             this.store.dispatch(fetchFeedArticles());
         } else {
-            this.store.dispatch(fetchAllArticles());
+            this.store.dispatch(fetchAllArticles({ noToken: true }));
         }
     }
 

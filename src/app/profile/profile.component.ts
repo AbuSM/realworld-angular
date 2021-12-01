@@ -26,6 +26,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     user: ProfileModel;
     user$: Observable<any>;
     articles: ArticleModel[] = [];
+    noDataText: string = '';
 
     ngOnInit() {
         this.username = this.route.snapshot.params['username'];
@@ -41,7 +42,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
         let config: {};
         if (activeTab === USER_FEED_ACTIVE_TAB) {
             config = { author: this.username };
+            this.noDataText = '';
         } else {
+            this.noDataText = 'favorited';
             config = { favorited: this.username };
         }
         this.subscriptions.add(
@@ -52,7 +55,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
 
     onToggleFollowing(event: Event) {
-        this.user.following = false;
+        this.user.following = !this.user.following;
     }
 
     ngOnDestroy() {

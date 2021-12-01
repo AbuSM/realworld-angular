@@ -21,12 +21,12 @@ export class HttpTokenInterceptor implements HttpInterceptor {
             Accept: 'application/json',
         };
         const token = getToken();
-
-        if (token) {
+        if (token && !request.params.has('noToken')) {
             headersConfig['Authorization'] = `Token ${token}`;
         }
+        let params = request.params.delete('noToken');
 
-        const req = request.clone({ setHeaders: headersConfig });
+        const req = request.clone({ setHeaders: headersConfig, params });
         return next.handle(req);
     }
 }
