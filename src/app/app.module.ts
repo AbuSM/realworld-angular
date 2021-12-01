@@ -21,7 +21,9 @@ import { StoreModule } from '@ngrx/store';
 import { authReducer } from './auth/+store/auth.reducer';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { EffectsModule } from '@ngrx/effects';
-import { userReducer } from './profile/+store/profile.reducers';
+import { profileReducer } from './profile/+store/profile.reducers';
+import { ProfileEffects } from './profile/+store/profile.effects';
+import { ProfileModule } from './profile/profile.module';
 
 @NgModule({
     declarations: [AppComponent, NotFoundPageComponent],
@@ -32,9 +34,9 @@ import { userReducer } from './profile/+store/profile.reducers';
         LayoutModule,
         HttpClientModule,
         AppRoutingModule,
+        ProfileModule,
         StoreModule.forRoot({
             auth: authReducer,
-            user: userReducer,
         }),
         HomeModule,
         EffectsModule.forRoot([]),

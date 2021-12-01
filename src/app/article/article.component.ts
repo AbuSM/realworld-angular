@@ -3,9 +3,16 @@ import { FormControl } from '@angular/forms';
 import { finalize, Observable, startWith, Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { ArticleModel, CommentModel, ErrorsModel } from '../models';
-import { ArticlesService } from '../services';
+import {
+    ArticleModel,
+    CommentModel,
+    ErrorsModel,
+    ProfileModel,
+} from '../models';
+import { ArticlesService, ProfileService } from '../services';
 import { getIsLogged, getIsUser } from '../auth/+store/auth.selector';
+import { getProfile } from '../profile/+store/profile.selectors';
+import { fetchProfile } from '../profile/+store/profile.actions';
 
 @Component({
     selector: 'app-article',
@@ -22,9 +29,11 @@ export class ArticleComponent implements OnInit, OnDestroy {
     isModalOpen: boolean = false;
     errors: ErrorsModel = { errors: null };
     subscriptions: Subscription = new Subscription();
+    profile$: Observable<{ profile: ProfileModel }>;
 
     constructor(
         private articlesService: ArticlesService,
+        private profileService: ProfileService,
         private route: ActivatedRoute,
         private router: Router,
         private store: Store
@@ -42,6 +51,10 @@ export class ArticleComponent implements OnInit, OnDestroy {
                 error: (err) => (this.errors = err),
             })
         );
+        this.store.dispatch(
+            fetchProfile({ username: this.article.author.username })
+        );
+        this.profile$ = this.store.select(getProfile);
     }
 
     openModal() {
@@ -64,10 +77,6 @@ export class ArticleComponent implements OnInit, OnDestroy {
                 })
         );
     }
-
-    onToggleFollowing(event: Event) {}
-
-    onToggleFavorite(event: Event) {}
 
     onCommentSubmit() {
         this.subscriptions.add(

@@ -5,9 +5,13 @@ import {
     onToggleFollow,
     onToggleFollowSuccess,
     onToggleFollowFailure,
+    fetchProfile,
+    fetchProfileSuccess,
+    fetchProfileFailure,
 } from './profile.actions';
-import { exhaustMap, map, catchError } from 'rxjs';
+import { exhaustMap, map, catchError, iif } from 'rxjs';
 import { ProfileService } from '../../services';
+import { ProfileModel } from '../../models';
 
 @Injectable()
 export class ProfileEffects {
@@ -17,21 +21,38 @@ export class ProfileEffects {
         private profileService: ProfileService
     ) {}
 
+    fetchProfile$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(fetchProfile),
+            exhaustMap((action) => {
+                return this.profileService.get(action.username);
+            }),
+            map(({ profile }: { profile: ProfileModel }) =>
+                fetchProfileSuccess(profile)
+            ),
+            catchError((err) => fetchProfileFailure(err))
+        );
+    });
+
     onFollow$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(onToggleFollow),
             exhaustMap((action) => {
-                if (action.follow) {
-                    return this.profileService.unfollow(action.username).pipe(
-                        map(({ profile }) => onToggleFollowSuccess(profile)),
+                return iif(
+                    () => action.following,
+                    this.profileService.unfollow(action.username).pipe(
+                        map(({ profile }: { profile: ProfileModel }) =>
+                            onToggleFollowSuccess(profile)
+                        ),
                         catchError((err) => onToggleFollowFailure(err))
-                    );
-                } else {
-                    return this.profileService.follow(action.username).pipe(
-                        map(({ profile }) => onToggleFollowSuccess(profile)),
+                    ),
+                    this.profileService.follow(action.username).pipe(
+                        map(({ profile }: { profile: ProfileModel }) =>
+                            onToggleFollowSuccess(profile)
+                        ),
                         catchError((err) => onToggleFollowFailure(err))
-                    );
-                }
+                    )
+                );
             })
         );
     });

@@ -1,6 +1,6 @@
-import { ArticleModel } from '../../models';
+import { ProfileModel } from '../../models';
 
 export interface ProfileState {
     isLoading: boolean;
-    articles: ArticleModel[];
+    profile: ProfileModel;
 }

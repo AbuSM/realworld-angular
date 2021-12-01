@@ -3,19 +3,31 @@ import {
     onToggleFollow,
     onToggleFollowSuccess,
     onToggleFollowFailure,
+    fetchProfile,
+    fetchProfileSuccess,
 } from './profile.actions';
+import { ProfileModel } from '../../models';
 
 export const initialState = {
     isLoading: false as boolean,
+    profile: {} as ProfileModel,
 };
 
-const _userReducer = createReducer(
+const _profileReducer = createReducer(
     initialState,
     on(onToggleFollow, (state) => state),
-    on(onToggleFollowSuccess, (state) => state),
-    on(onToggleFollowFailure, (state) => state)
+    on(onToggleFollowSuccess, (state, profile: ProfileModel) => ({
+        ...state,
+        profile,
+    })),
+    on(onToggleFollowFailure, (state) => state),
+    on(fetchProfile, (state) => state),
+    on(fetchProfileSuccess, (state, profile: ProfileModel) => ({
+        ...state,
+        profile,
+    }))
 );
 
-export function userReducer(state: any, action: any) {
-    return _userReducer(state, action);
+export function profileReducer(state: any, action: any) {
+    return _profileReducer(state, action);
 }
