@@ -23,14 +23,10 @@
                 <ng-template #buttons>
                     <span>
                         <app-follow-button
-                            [profile]="article.author"
-                            (toggle)="onToggleFollowing($event)"
+                            [profile]="(profile$ | async).profile"
                         >
                         </app-follow-button>
-                        <app-favorite-button
-                            [article]="article"
-                            (toggle)="onToggleFavorite($event)"
-                        >
+                        <app-favorite-button [article]="article">
                             {{ article.favorited ? "Unfavorite" : "Favorite" }}
                             Article
                             <span class="counter">
@@ -86,14 +82,10 @@
                 <ng-template #span2>
                     <span>
                         <app-follow-button
-                            [profile]="article.author"
-                            (toggle)="onToggleFollowing($event)"
+                            [profile]="(profile$ | async).profile"
                         >
                         </app-follow-button>
-                        <app-favorite-button
-                            [article]="article"
-                            (toggle)="onToggleFavorite($event)"
-                        >
+                        <app-favorite-button [article]="article">
                             {{ article.favorited ? "Unfavorite" : "Favorite" }}
                             Article
                             <span class="counter"

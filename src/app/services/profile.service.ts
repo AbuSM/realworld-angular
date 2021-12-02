@@ -5,11 +5,15 @@ import { ApiService } from './api.service';
 export class ProfileService {
     constructor(private apiService: ApiService) {}
 
+    get(username: string) {
+        return this.apiService.get(`profiles/${username}`);
+    }
+
     follow(username: string) {
-        return this.apiService.post(`/profiles/${username}/follow`);
+        return this.apiService.post(`profiles/${username}/follow`);
     }
 
     unfollow(username: string) {
-        return this.apiService.delete(`/profiles/${username}/follow`);
+        return this.apiService.delete(`profiles/${username}/follow`);
     }
 }

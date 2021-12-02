@@ -9,7 +9,6 @@
                     <app-follow-button
                         *ngIf="user.username !== username; else editProfile"
                         [profile]="user"
-                        (toggle)="onToggleFollowing($event)"
                     >
                     </app-follow-button>
                     <ng-template #editProfile>
