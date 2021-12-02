@@ -66,6 +66,7 @@ describe('AuthComponent', () => {
         authService = TestBed.inject(AuthService);
         activatedRoute = TestBed.inject(ActivatedRoute);
         fixture.detectChanges();
+        component.authForm.reset('');
     });
 
     it('should create', () => {
