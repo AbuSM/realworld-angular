@@ -36,9 +36,9 @@ export class HomeComponent implements OnInit {
 
     onTabChange(activeTab: string | number) {
         if (Number(activeTab) === ALL_ARTICLES_TAB) {
-            this.store.dispatch(fetchAllArticles({ noToken: true }));
-        } else {
             this.store.dispatch(fetchFeedArticles());
+        } else {
+            this.store.dispatch(fetchAllArticles());
         }
     }
 

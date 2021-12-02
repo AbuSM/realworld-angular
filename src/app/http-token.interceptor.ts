@@ -21,7 +21,7 @@ export class HttpTokenInterceptor implements HttpInterceptor {
             Accept: 'application/json',
         };
         const token = getToken();
-        if (token && !request.params.has('noToken')) {
+        if (token && !request.params.get('noToken')) {
             headersConfig['Authorization'] = `Token ${token}`;
         }
         let params = request.params.delete('noToken');

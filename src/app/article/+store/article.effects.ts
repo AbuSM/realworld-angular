@@ -10,8 +10,9 @@ import {
     onToggleFavoriteSuccess,
     fetchFeedArticles,
 } from './article.actions';
-import { exhaustMap, map, of, iif, catchError } from 'rxjs';
+import { exhaustMap, map, of, iif, catchError, withLatestFrom } from 'rxjs';
 import { ArticlesService } from '../../services';
+import { getIsLogged } from '../../auth/+store/auth.selector';
 
 @Injectable()
 export class ArticleEffects {
@@ -24,8 +25,9 @@ export class ArticleEffects {
     onFetchAll$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(fetchAllArticles),
-            exhaustMap(({ noToken }) => {
-                return this.articlesService.query({ noToken });
+            withLatestFrom(this.store.select(getIsLogged)),
+            exhaustMap((action: any[] = []) => {
+                return this.articlesService.query({ noToken: !action[1] });
             }),
             map(({ articles }) => fetchAllArticlesSuccess({ articles })),
             catchError((err) => of(fetchAllArticlesFailure(err)))
