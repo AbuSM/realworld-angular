@@ -34,7 +34,10 @@ export class AuthComponent implements OnInit, OnDestroy {
         private store: Store<{ auth: boolean }>
     ) {
         this.authForm = this.fb.group({
-            email: ['', Validators.required],
+            email: [
+                '',
+                Validators.compose([Validators.email, Validators.required]),
+            ],
             password: ['', Validators.required],
         });
     }
@@ -45,7 +48,10 @@ export class AuthComponent implements OnInit, OnDestroy {
                 this.authType = data[data.length - 1].path;
                 this.title = this.authType === 'login' ? 'Sign in' : 'Sign up';
                 if (this.authType === 'register') {
-                    this.authForm.addControl('username', new FormControl());
+                    this.authForm.addControl(
+                        'username',
+                        new FormControl('', [Validators.required])
+                    );
                 }
             })
         );

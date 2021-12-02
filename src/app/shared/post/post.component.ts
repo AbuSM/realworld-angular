@@ -15,7 +15,12 @@ export class PostComponent {
         body: '',
         tagList: [],
         favorited: false,
-        author: null,
+        author: {
+            username: null,
+            bio: '',
+            image: '',
+            following: false,
+        },
     };
 
     constructor() {}
