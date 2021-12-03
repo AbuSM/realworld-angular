@@ -1,11 +1,13 @@
 import { fakeAsync, TestBed } from '@angular/core/testing';
 
 import { AuthService } from './auth.service';
-import {ProfileModel, UserCredentialsModel, UserModel} from '../models';
-import {clearStorage, getToken, setToken} from '../utils';
+import { ProfileModel, UserCredentialsModel, UserModel } from '../models';
+import { clearStorage, getToken, setToken } from '../utils';
 import { ApiService } from './api.service';
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-
+import {
+    HttpClientTestingModule,
+    HttpTestingController,
+} from '@angular/common/http/testing';
 
 const checkStorageForEmpty = () => {
     const token = getToken();
@@ -46,11 +48,11 @@ describe('AuthService', () => {
                 checkStorageForData();
                 done();
             },
-            error: err => done.fail(err)
+            error: (err) => done.fail(err),
         });
     });
 
-    xit('should register user and check if user exists', ((done: DoneFn) => {
+    xit('should register user and check if user exists', (done: DoneFn) => {
         const user = {
             username: 'test4',
             password: 'test',
@@ -63,12 +65,12 @@ describe('AuthService', () => {
                 done();
             },
             error: (err) => {
-                console.error("Error in register test: ", err);
+                console.error('Error in register test: ', err);
                 done.fail(err);
             },
-            complete: () => done()
+            complete: () => done(),
         });
-    }));
+    });
     it('setAuth method should work fine', () => {
         const user = {
             token: 'test',
@@ -91,7 +93,7 @@ describe('AuthService 2', () => {
             providers: [AuthService, ApiService],
         });
         service = TestBed.inject(AuthService);
-        httpTestingController = TestBed.inject(HttpTestingController)
+        httpTestingController = TestBed.inject(HttpTestingController);
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
     });
 
@@ -102,9 +104,9 @@ describe('AuthService 2', () => {
                 expect(user).toContain(userCredentials);
                 done();
             },
-            error: err => {
-                done.fail(err)
-            }
+            error: (err) => {
+                done.fail(err);
+            },
         });
     });
 
@@ -118,18 +120,18 @@ describe('AuthService 2', () => {
     xit('updateUser should work fine', (done: DoneFn) => {
         const newUser = {
             username: 'newTest',
-            ...user
-        }
+            ...user,
+        };
         checkStorageForData();
         service.updateUser(newUser).subscribe({
-            next: value => {
+            next: (value) => {
                 expect(value).toContain(newUser);
-                done()
+                done();
             },
-            error: err => {
-                console.error("Error in updateUser test: ", err);
+            error: (err) => {
+                console.error('Error in updateUser test: ', err);
                 done.fail(err);
-            }
-        })
-    })
+            },
+        });
+    });
 });
