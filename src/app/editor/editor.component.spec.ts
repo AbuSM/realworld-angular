@@ -171,15 +171,19 @@ describe('EditorComponent', () => {
     it('check `onSubmit` method failure operation', () => {
         component.articleForm.patchValue(article);
         component.articleForm.controls['description'].reset('');
-        component.onSubmit()
+        component.onSubmit();
         fixture.detectChanges();
         const req = httpTestingController.expectOne(`${baseUrl}articles`);
-        const msg = {errors: {description: ["can't be blank"]}};
-        req.flush(msg, {status: 422, statusText: 'Unprocessable entity'})
+        const msg = { errors: { description: ["can't be blank"] } };
+        req.flush(msg, { status: 422, statusText: 'Unprocessable entity' });
         expect(component.errors).toEqual(msg);
         fixture.detectChanges();
-        const liEl: HTMLLIElement = fixture.debugElement.query(By.css('app-errors-list > ul > li:first-child')).nativeElement;
-        expect(liEl.innerText.trim()).toEqual(`description ${msg.errors.description[0]}`);
+        const liEl: HTMLLIElement = fixture.debugElement.query(
+            By.css('app-errors-list > ul > li:first-child')
+        ).nativeElement;
+        expect(liEl.innerText.trim()).toEqual(
+            `description ${msg.errors.description[0]}`
+        );
     });
 
     afterEach(() => {

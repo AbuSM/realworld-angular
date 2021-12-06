@@ -8,7 +8,7 @@ import {
     logout,
     updateUser,
 } from './auth.actions';
-import { exhaustMap, map, of, catchError } from 'rxjs';
+import { exhaustMap, map, of, catchError, tap, switchMap } from 'rxjs';
 import { AuthService } from '../../services';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
@@ -35,8 +35,7 @@ export class AuthEffects {
                             return authorizeSuccess(user);
                         }),
                         catchError((error: any) => {
-                            const value = authorizeFailure(error);
-                            return of(value);
+                            return of(authorizeFailure(error));
                         })
                     );
             })
