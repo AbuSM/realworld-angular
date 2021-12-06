@@ -25,6 +25,7 @@ describe('EditorComponent', () => {
         snapshot: { data: { article: null } },
     };
     let router: Router;
+    const baseUrl = 'http://localhost:3000/api/';
 
     class RouterStub {
         navigateByUrl(url: string) {
@@ -64,7 +65,6 @@ describe('EditorComponent', () => {
                 HttpClientTestingModule,
                 RouterTestingModule,
                 ReactiveFormsModule,
-                HttpTestingController,
                 SharedModule,
                 LayoutModule,
             ],
@@ -168,9 +168,18 @@ describe('EditorComponent', () => {
         expect(navArgs).toBe(`/post/${article.slug}`);
     });
 
-    xit('check `onSubmit` method failure operation', () => {
-        const req = httpTestingController.expectOne('/post/');
-        // spyOn(articleService, 'create').and.returnValue(of(new Error({description: ["description can't be blank"]})));
+    it('check `onSubmit` method failure operation', () => {
+        component.articleForm.patchValue(article);
+        component.articleForm.controls['description'].reset('');
+        component.onSubmit()
+        fixture.detectChanges();
+        const req = httpTestingController.expectOne(`${baseUrl}articles`);
+        const msg = {errors: {description: ["can't be blank"]}};
+        req.flush(msg, {status: 422, statusText: 'Unprocessable entity'})
+        expect(component.errors).toEqual(msg);
+        fixture.detectChanges();
+        const liEl: HTMLLIElement = fixture.debugElement.query(By.css('app-errors-list > ul > li:first-child')).nativeElement;
+        expect(liEl.innerText.trim()).toEqual(`description ${msg.errors.description[0]}`);
     });
 
     afterEach(() => {
