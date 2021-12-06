@@ -35,7 +35,6 @@ export class EditorComponent implements OnInit, OnDestroy {
             body: '',
             tagList: [],
         });
-
         this.article.tagList = [];
     }
 
@@ -55,6 +54,22 @@ export class EditorComponent implements OnInit, OnDestroy {
         this.isLoading = false;
     }
 
+    addTag() {
+        const value: string = String(this.tagField.value).trim();
+        if (
+            this.article.tagList.findIndex(
+                (item: string) => item.toLowerCase() === value.toLowerCase()
+            ) === -1
+        ) {
+            this.article.tagList.push(value);
+            this.tagField.setValue('');
+        }
+    }
+
+    removeTag(tag: string) {
+        this.article.tagList.splice(this.article.tagList.indexOf(tag), 1);
+    }
+
     onSubmit() {
         this.isLoading = true;
         if (this.submitType === 'create') {
@@ -62,8 +77,9 @@ export class EditorComponent implements OnInit, OnDestroy {
             const data: ArticleModel = this.articleForm.value;
             this.subscriptions.add(
                 this.articlesService.create(data).subscribe({
-                    next: ({ article }) =>
-                        this.router.navigateByUrl(`/post/${article.slug}`),
+                    next: ({ article }) => {
+                        this.router.navigateByUrl(`/post/${article.slug}`);
+                    },
                     error: (err) => this.errorHandler(err),
                 })
             );
@@ -77,22 +93,6 @@ export class EditorComponent implements OnInit, OnDestroy {
                 })
             );
         }
-    }
-
-    addTag() {
-        const value: string = this.tagField.value.trim() as string;
-        if (
-            this.article.tagList.findIndex(
-                (item: string) => item.toLowerCase() === value.toLowerCase()
-            ) === -1
-        ) {
-            this.article.tagList.push(this.tagField.value);
-            this.tagField.setValue('');
-        }
-    }
-
-    removeTag(tag) {
-        this.article.tagList.splice(this.article.tagList.indexOf(tag), 1);
     }
 
     ngOnDestroy() {

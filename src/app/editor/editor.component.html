@@ -42,7 +42,7 @@
                                 (keyup.enter)="addTag()"
                             />
 
-                            <div class="tag-list">
+                            <div class="tag-list" *ngIf="article">
                                 <span
                                     *ngFor="let tag of article.tagList"
                                     class="tag tag-pill"
