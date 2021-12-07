@@ -8,7 +8,7 @@ import { clearStorage, setToken } from '../utils';
 export class AuthService {
     constructor(private apiService: ApiService) {}
 
-    authUser(authType: string, credentials: UserCredentialsModel) {
+    authUser(authType: string, credentials: UserCredentialsModel): Observable<{user: UserModel}> {
         return this.apiService
             .post(`users${authType === 'login' ? '/login' : ''}`, {
                 user: credentials,
@@ -25,15 +25,15 @@ export class AuthService {
         setToken(user.token);
     }
 
-    checkUser(): Observable<{ user: ProfileModel }> {
+    checkUser(): Observable<{ user: UserModel }> {
         return this.apiService.get('user');
     }
 
-    updateUser(user: ProfileModel): Observable<{ user: ProfileModel }> {
+    updateUser(user: ProfileModel): Observable<{ user: UserModel }> {
         return this.apiService.put('user', { user });
     }
 
-    logout() {
+    logout(): void {
         clearStorage();
     }
 }

@@ -34,7 +34,7 @@ export class ArticleEffects {
         );
     });
 
-    onFetchFeed = createEffect(() => {
+    onFetchFeed$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(fetchFeedArticles),
             exhaustMap(() => {
