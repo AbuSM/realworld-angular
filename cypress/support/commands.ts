@@ -49,11 +49,11 @@ Cypress.Commands.add('login' as keyof Chainable, () => {
     cy.get('[type=email]').type('test@test.ru');
     cy.get('[type=password]').type('test');
     cy.get('button').click();
-    return;
+    cy.wait(500);
 })
 
-Cypress.Commands.add('logout', () => {
+Cypress.Commands.add('logout' as keyof Chainable, () => {
     cy.contains('Login').should('not.exist')
     cy.get('.avatar').click()
-    cy.contains('Logout').click()
+    cy.contains('Logout').click();
 })
