@@ -54,10 +54,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
         );
     }
 
-    log(value) {
-        console.log(value);
-    }
-
     onToggleFollowing(event: Event) {
         this.user.following = !this.user.following;
     }
