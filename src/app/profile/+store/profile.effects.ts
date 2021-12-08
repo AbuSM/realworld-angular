@@ -37,8 +37,8 @@ export class ProfileEffects {
     onFollow$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(onToggleFollow),
-            exhaustMap((action) => {
-                return iif(
+            exhaustMap((action) =>
+                iif(
                     () => action.following,
                     this.profileService.unfollow(action.username).pipe(
                         map(({ profile }: { profile: ProfileModel }) =>
@@ -52,8 +52,8 @@ export class ProfileEffects {
                         ),
                         catchError((err) => onToggleFollowFailure(err))
                     )
-                );
-            })
+                )
+            )
         );
     });
 }
