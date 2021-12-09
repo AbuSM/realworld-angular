@@ -18,6 +18,7 @@ describe('Home page test', () => {
         cy.url().should('include', '/');
         cy.wait('@getTags');
         cy.contains('Popular Tags');
+        cy.get('.sidebar').should('have.css', 'background-color').and('eq', 'rgb(243, 243, 243)');
         cy.get('.sidebar').find('span.tag.tag-pill').then($el => {
             const elArr = Array.from($el);
             for (let i = 0; i < elArr.length; i++) {
