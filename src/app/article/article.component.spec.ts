@@ -8,16 +8,15 @@ import { Action } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
-import { ArticleEffects } from './+store/article.effects';
 import { article, user, profile } from './stubs';
 import { By } from '@angular/platform-browser';
+import {DebugElement} from "@angular/core";
 
 describe('ArticleComponent', () => {
     let component: ArticleComponent;
     let fixture: ComponentFixture<ArticleComponent>;
 
     let actions$ = new Observable<Action>();
-    let effects$: ArticleEffects;
     let store: MockStore;
     const initialState = {
         auth: {
@@ -106,22 +105,38 @@ describe('ArticleComponent', () => {
     });
 
     describe('Test inner methods', () => {
-        beforeEach(() => {
+        beforeEach((done: DoneFn) => {
+            store.setState(initialState);
             component.ngOnInit();
             fixture.detectChanges();
+            fixture.whenStable();
+            store.refreshState();
+            done();
         });
         it('check modal methods', () => {
             expect(component.isModalOpen).toBeFalsy();
             component.openModal();
             expect(component.isModalOpen).toBeTruthy();
-            const modalEl = fixture.debugElement.query(
-                By.css('app-modal')
-            ).nativeElement;
-            debugger;
             component.closeModal();
             expect(component.isModalOpen).toBeFalsy();
         });
 
-        it('check other methods', () => {});
+        // TODO need to be completed. Faced with issue that `delete_button` found as `null`
+        xit('check modal component', (done: DoneFn) => {
+            expect(component.isModalOpen).toBeFalsy();
+            component.canModify$.subscribe({
+                next: value => {
+                    debugger;
+                    fixture.debugElement.query(By.css('#delete_button')).nativeElement.click();
+                    expect(component.isModalOpen).toBeTruthy();
+                    const modalEl: DebugElement = fixture.debugElement.query(
+                        By.css('app-modal')
+                    )
+                    const title = modalEl.query(By.css('div.modal-title'));
+                    done()
+                },
+                error: err => done.fail(err)
+            })
+        })
     });
 });
