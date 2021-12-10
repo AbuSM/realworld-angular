@@ -10,6 +10,7 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
 import { ArticleEffects } from './+store/article.effects';
 import { article, user, profile } from './stubs';
+import {By} from "@angular/platform-browser";
 
 describe('ArticleComponent', () => {
     let component: ArticleComponent;
@@ -103,4 +104,25 @@ describe('ArticleComponent', () => {
             error: (err) => done.fail(err),
         });
     });
+
+    describe('Test inner methods', () => {
+        beforeEach(() => {
+            component.ngOnInit();
+            fixture.detectChanges();
+        })
+        it('check modal methods', () => {
+            expect(component.isModalOpen).toBeFalsy();
+            component.openModal();
+            expect(component.isModalOpen).toBeTruthy();
+            const modalEl = fixture.debugElement.query(By.css('app-modal')).nativeElement;
+            debugger;
+            component.closeModal();
+            expect(component.isModalOpen).toBeFalsy();
+        });
+
+        it('check other methods', () => {
+
+        })
+
+    })
 });
