@@ -36,10 +36,17 @@
                         <ng-container
                             *ngIf="!!articles.articles.length; else noArticles"
                         >
-                            <app-post
-                                *ngFor="let post of articles.articles"
-                                [post]="post"
-                            ></app-post>
+                            <ng-template
+                                *ngVar="articles.articles as _articles"
+                            >
+                                <app-post
+                                    *ngFor="
+                                        let post of _articles;
+                                        trackBy: trackArticle
+                                    "
+                                    [post]="post"
+                                ></app-post>
+                            </ng-template>
                         </ng-container>
                         <ng-template #noArticles>
                             <div class="mt-4">No articles found(</div>
