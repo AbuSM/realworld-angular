@@ -1,4 +1,4 @@
-<div class="article-page">
+<div class="article-page" *ngVar="profile$ | async as profile">
     <div class="banner">
         <div class="container">
             <h1>{{ article.title }}</h1>
@@ -22,9 +22,7 @@
                 </span>
                 <ng-template #buttons>
                     <span>
-                        <app-follow-button
-                            [profile]="(profile$ | async).profile"
-                        >
+                        <app-follow-button [profile]="profile.profile">
                         </app-follow-button>
                         <app-favorite-button [article]="article">
                             {{ article.favorited ? "Unfavorite" : "Favorite" }}
@@ -81,9 +79,7 @@
                 </span>
                 <ng-template #span2>
                     <span>
-                        <app-follow-button
-                            [profile]="(profile$ | async).profile"
-                        >
+                        <app-follow-button [profile]="profile.profile">
                         </app-follow-button>
                         <app-favorite-button [article]="article">
                             {{ article.favorited ? "Unfavorite" : "Favorite" }}

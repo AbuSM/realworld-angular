@@ -11,6 +11,7 @@ export interface ArticleModel {
     favoritesCount: number;
     createdAt?: string;
     updatedAt?: string;
+    comments?: unknown;
 }
 
 export interface ArticlesWrapModel {
