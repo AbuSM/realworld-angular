@@ -10,7 +10,7 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
 import { article, user, profile } from './stubs';
 import { By } from '@angular/platform-browser';
-import {DebugElement} from "@angular/core";
+import { DebugElement } from '@angular/core';
 
 describe('ArticleComponent', () => {
     let component: ArticleComponent;
@@ -125,18 +125,20 @@ describe('ArticleComponent', () => {
         xit('check modal component', (done: DoneFn) => {
             expect(component.isModalOpen).toBeFalsy();
             component.canModify$.subscribe({
-                next: value => {
+                next: (value) => {
                     debugger;
-                    fixture.debugElement.query(By.css('#delete_button')).nativeElement.click();
+                    fixture.debugElement
+                        .query(By.css('#delete_button'))
+                        .nativeElement.click();
                     expect(component.isModalOpen).toBeTruthy();
                     const modalEl: DebugElement = fixture.debugElement.query(
                         By.css('app-modal')
-                    )
+                    );
                     const title = modalEl.query(By.css('div.modal-title'));
-                    done()
+                    done();
                 },
-                error: err => done.fail(err)
-            })
-        })
+                error: (err) => done.fail(err),
+            });
+        });
     });
 });
