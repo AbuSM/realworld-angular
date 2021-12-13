@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SettingsComponent } from './settings.component';
-import {Router} from '@angular/router';
-import {ApiService, AuthService} from "../services";
-import {MockStore, provideMockStore} from "@ngrx/store/testing";
-import {ActionsSubject, StateObservable, Store} from "@ngrx/store";
-import {hot} from 'jasmine-marbles';
-import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {RouterTestingModule} from "@angular/router/testing";
-import {FormBuilder, ReactiveFormsModule} from "@angular/forms";
-import {SharedModule} from "../shared";
-import {CommonModule} from "@angular/common";
-import {user as userStub} from '../stubs';
-
+import { Router } from '@angular/router';
+import { ApiService, AuthService } from '../services';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { ActionsSubject, StateObservable, Store } from '@ngrx/store';
+import { hot } from 'jasmine-marbles';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../shared';
+import { CommonModule } from '@angular/common';
+import { user as userStub } from '../stubs';
 
 describe('SettingsComponent', () => {
     let component: SettingsComponent;
@@ -29,10 +28,7 @@ describe('SettingsComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [
-                HttpClientTestingModule,
-                RouterTestingModule
-            ],
+            imports: [HttpClientTestingModule, RouterTestingModule],
             declarations: [SettingsComponent],
             providers: [
                 SettingsComponent,
@@ -46,7 +42,7 @@ describe('SettingsComponent', () => {
                 provideMockStore({}),
                 AuthService,
                 ApiService,
-                {provide: Router, useClass: RouterStub}
+                { provide: Router, useClass: RouterStub },
             ],
         }).compileComponents();
     });
@@ -68,17 +64,19 @@ describe('SettingsComponent', () => {
             isLogged: true,
             isLoading: false,
             ...userStub,
-        }
+        };
         const user = {
             email: userStub.email,
             username: userStub.username,
             bio: userStub.bio,
             image: userStub.image,
-            password: ''
-        }
-        storeSpy.getUserData.and.returnValue(hot('--a|', {
-            a: userData
-        }));
+            password: '',
+        };
+        storeSpy.getUserData.and.returnValue(
+            hot('--a|', {
+                a: userData,
+            })
+        );
 
         fixture.detectChanges();
 
@@ -87,5 +85,5 @@ describe('SettingsComponent', () => {
         fixture.whenStable();
         expect(component.settingsForm.value).toEqual(user);
         done();
-    })
+    });
 });

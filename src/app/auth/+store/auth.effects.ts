@@ -8,7 +8,7 @@ import {
     logout,
     updateUser,
 } from './auth.actions';
-import {exhaustMap, map, of, catchError, tap } from 'rxjs';
+import { exhaustMap, map, of, catchError, tap } from 'rxjs';
 import { AuthService } from '../../services';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
@@ -71,7 +71,8 @@ export class AuthEffects {
         { dispatch: false }
     );
 
-    updateUser$ = createEffect(() => {
+    updateUser$ = createEffect(
+        () => {
             return this.actions$.pipe(
                 ofType(updateUser),
                 tap(({ user }: { user: ProfileModel }) => {

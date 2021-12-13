@@ -8,7 +8,10 @@ import { clearStorage, setToken } from '../utils';
 export class AuthService {
     constructor(private apiService: ApiService) {}
 
-    authUser(authType: string, credentials: UserCredentialsModel): Observable<{user: UserModel}> {
+    authUser(
+        authType: string,
+        credentials: UserCredentialsModel
+    ): Observable<{ user: UserModel }> {
         return this.apiService
             .post(`users${authType === 'login' ? '/login' : ''}`, {
                 user: credentials,
