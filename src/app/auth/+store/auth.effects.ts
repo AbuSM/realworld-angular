@@ -32,10 +32,10 @@ export class AuthEffects {
                     .pipe(
                         map(({ user }) => {
                             this.router.navigateByUrl('/');
-                            return authorizeSuccess(user);
+                            return authorizeSuccess({ user });
                         }),
                         catchError((error: any) => {
-                            return of(authorizeFailure(error));
+                            return of(authorizeFailure({ error }));
                         })
                     );
             })
@@ -47,11 +47,11 @@ export class AuthEffects {
             ofType(checkAccess),
             exhaustMap(() => {
                 return this.authService.checkUser().pipe(
-                    map(({ user }) => authorizeSuccess(user)),
+                    map(({ user }) => authorizeSuccess({ user })),
                     catchError((error) => {
                         this.store.dispatch(logout());
                         this.router.navigateByUrl('/');
-                        return of(authorizeFailure(error));
+                        return of(authorizeFailure({ error }));
                     })
                 );
             })

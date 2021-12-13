@@ -22,10 +22,9 @@ import { authReducer } from './auth/+store/auth.reducer';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { EffectsModule } from '@ngrx/effects';
 import { ProfileModule } from './profile/profile.module';
-import { NgVarDirective } from './ng-var.directive';
 
 @NgModule({
-    declarations: [AppComponent, NotFoundPageComponent, NgVarDirective],
+    declarations: [AppComponent, NotFoundPageComponent],
     imports: [
         BrowserModule,
         SharedModule,
