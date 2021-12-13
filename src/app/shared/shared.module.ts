@@ -10,6 +10,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { ModalComponent } from './modal/modal.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { TabComponent } from './tabs/tab/tab.component';
+import { NgVarDirective } from './+directives/ng-var.directive';
 
 @NgModule({
     declarations: [
@@ -24,6 +25,7 @@ import { TabComponent } from './tabs/tab/tab.component';
         ModalComponent,
         TabsComponent,
         TabComponent,
+        NgVarDirective,
     ],
     imports: [CommonModule, RouterModule],
     exports: [
@@ -38,6 +40,7 @@ import { TabComponent } from './tabs/tab/tab.component';
         ModalComponent,
         TabsComponent,
         TabComponent,
+        NgVarDirective,
     ],
 })
 export class SharedModule {}

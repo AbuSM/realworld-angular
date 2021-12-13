@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { finalize, Observable, startWith, Subscription } from 'rxjs';
+import { finalize, Observable, of, startWith, Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import {
@@ -22,14 +22,16 @@ import { fetchProfile } from '../profile/+store/profile.actions';
 export class ArticleComponent implements OnInit, OnDestroy {
     comments: CommentModel[];
     article: ArticleModel;
-    canModify$: Observable<boolean>;
+    canModify$: Observable<boolean> = of(false);
     commentControl = new FormControl();
-    isLogged$: Observable<boolean>;
+    isLogged$: Observable<boolean> = of(false);
     isLoading: boolean = false;
     isModalOpen: boolean = false;
     errors: ErrorsModel = { errors: null };
     subscriptions: Subscription = new Subscription();
-    profile$: Observable<{ profile: ProfileModel }>;
+    profile$: Observable<{ profile: ProfileModel }> = of({
+        profile: {} as ProfileModel,
+    });
 
     constructor(
         private articlesService: ArticlesService,
@@ -41,10 +43,10 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.article = this.route.snapshot.data['article'].article;
-        this.canModify$ = this.store
-            .select(getIsUser(this.article.author.username))
-            .pipe(startWith(false));
-        this.isLogged$ = this.store.select(getIsLogged).pipe(startWith(false));
+        this.canModify$ = this.store.select(
+            getIsUser(this.article.author.username)
+        );
+        this.isLogged$ = this.store.select(getIsLogged);
         this.subscriptions.add(
             this.articlesService.getComments(this.article.slug).subscribe({
                 next: ({ comments }) => (this.comments = comments),

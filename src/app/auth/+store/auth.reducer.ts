@@ -21,17 +21,17 @@ const _authReducer = createReducer(
         ...state,
         isLoading: true,
     })),
-    on(authorizeSuccess, (state, user) => ({
+    on(authorizeSuccess, (state, { user }) => ({
         ...state,
         isLoading: false,
         isLogged: true,
         user,
     })),
-    on(authorizeFailure, (state, payload) => ({
+    on(authorizeFailure, (state, { error }) => ({
         ...state,
         isLoading: false,
         isLogged: false,
-        error: payload,
+        error,
     })),
     on(checkAccess, (state) => ({
         ...state,

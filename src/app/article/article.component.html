@@ -1,4 +1,4 @@
-<div class="article-page">
+<div class="article-page" *ngVar="profile$ | async as profile">
     <div class="banner">
         <div class="container">
             <h1>{{ article.title }}</h1>
@@ -22,9 +22,7 @@
                 </span>
                 <ng-template #buttons>
                     <span>
-                        <app-follow-button
-                            [profile]="(profile$ | async).profile"
-                        >
+                        <app-follow-button [profile]="profile.profile">
                         </app-follow-button>
                         <app-favorite-button [article]="article">
                             {{ article.favorited ? "Unfavorite" : "Favorite" }}
@@ -72,6 +70,7 @@
                         class="btn btn-sm btn-outline-danger m-1"
                         [ngClass]="{ disabled: false }"
                         (click)="openModal()"
+                        id="delete_button"
                         data-toggle="modal"
                         data-target="#modal_container"
                     >
@@ -81,9 +80,7 @@
                 </span>
                 <ng-template #span2>
                     <span>
-                        <app-follow-button
-                            [profile]="(profile$ | async).profile"
-                        >
+                        <app-follow-button [profile]="profile.profile">
                         </app-follow-button>
                         <app-favorite-button [article]="article">
                             {{ article.favorited ? "Unfavorite" : "Favorite" }}
