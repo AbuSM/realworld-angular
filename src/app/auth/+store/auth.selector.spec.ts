@@ -4,14 +4,14 @@ import {ProfileModel} from "../../models";
 import {profile} from '../../stubs';
 
 describe('Auth selectors', () => {
-    let initialState: AuthState = {
-        isLogged: false,
-        isLoading: false,
-        error: null,
-        user: {} as ProfileModel
-    }
 
     it('check default values of selectors', () => {
+        const initialState: AuthState = {
+            isLogged: false,
+            isLoading: false,
+            error: null,
+            user: {} as ProfileModel
+        }
         let result = getIsLogged.projector(initialState);
         expect(result).toBeFalsy();
         result = getIsUser('test3').projector(initialState);
@@ -21,7 +21,7 @@ describe('Auth selectors', () => {
     })
 
     it('check selectors with data', () => {
-        initialState = {
+        const initialState = {
             isLogged: true,
             isLoading: false,
             error: null,
