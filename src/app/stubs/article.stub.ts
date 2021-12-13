@@ -1,4 +1,4 @@
-import { ArticleModel } from '../../models';
+import { ArticleModel } from '../models';
 
 export const article: ArticleModel = {
     author: {

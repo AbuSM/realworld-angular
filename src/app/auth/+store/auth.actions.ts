@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { UserCredentialsModel } from '../../models';
+import { ProfileModel, UserCredentialsModel, UserModel } from '../../models';
 
 export const AUTHORIZE_REQUEST = '[Auth Component] Authorize Request';
 export const AUTHORIZE_SUCCESS = '[Auth Component] Authorize Success';
@@ -16,12 +16,12 @@ export const authorize = createAction(
 
 export const authorizeSuccess = createAction(
     AUTHORIZE_SUCCESS,
-    (payload = {}) => payload
+    props<{ user: UserModel | ProfileModel }>()
 );
 
 export const authorizeFailure = createAction(
     AUTHORIZE_FAILURE,
-    props<{ error: string }>()
+    props<{ error: unknown }>()
 );
 
 export const checkAccess = createAction(AUTHORIZE_CHECK_REQUEST);
