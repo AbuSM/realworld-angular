@@ -1,0 +1,18 @@
+{
+    "article": {
+        "author": {
+            "username": "test3",
+            "image": "https://api.realworld.io/images/smiley-cyrus.jpeg"
+        },
+        "body": "test body for cypress",
+        "comments": [],
+        "createdAt": "2021-12-03T09:29:01.790Z",
+        "description": "cypress description",
+        "favorited": false,
+        "favoritesCount": 0,
+        "slug": "cypress-1",
+        "tagList": ["test1", "test2"],
+        "title": "cypress test title",
+        "updatedAt": "2021-12-03T12:35:34.228Z"
+    }
+}
