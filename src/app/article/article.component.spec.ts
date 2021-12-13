@@ -8,7 +8,7 @@ import { Action } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
-import { article, user, profile } from './stubs';
+import { article, user, profile } from '../stubs';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 

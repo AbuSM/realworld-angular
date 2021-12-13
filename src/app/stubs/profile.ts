@@ -1,4 +1,4 @@
-import { ProfileModel } from '../../models';
+import { ProfileModel } from '../models';
 
 export const profile = {
     username: 'test3',
