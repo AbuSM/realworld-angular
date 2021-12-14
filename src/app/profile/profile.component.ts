@@ -2,11 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ArticlesService, AuthService } from '../services';
 import { UserModel, ProfileModel, ArticleModel } from '../models';
-import {Observable, of, startWith, Subscription} from 'rxjs';
+import { Observable, of, startWith, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { getUserData } from '../auth/+store/auth.selector';
-import {fetchArticles} from "../article/+store/article.actions";
-import {getAllArticles} from "../article/+store/article.selectors";
+import { fetchArticles } from '../article/+store/article.actions';
+import { getAllArticles } from '../article/+store/article.selectors';
 
 const USER_FEED_ACTIVE_TAB = 1;
 
@@ -27,7 +27,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
     username!: string;
     user: ProfileModel;
     user$: Observable<any>;
-    articles$: Observable<ReturnType<typeof getAllArticles>> = of({isLoading: false, articles: []});
+    articles$: Observable<ReturnType<typeof getAllArticles>> = of({
+        isLoading: false,
+        articles: [],
+    });
     noDataText: string = '';
 
     ngOnInit() {
@@ -38,7 +41,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 next: (user) => (this.user = user),
             })
         );
-        this.articles$.pipe(startWith({isLoading: false, articles: []}));
+        this.articles$.pipe(startWith({ isLoading: false, articles: [] }));
         this.onTabChange(1);
     }
 
@@ -51,8 +54,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
             this.noDataText = 'favorited';
             config = { favorited: this.username };
         }
-        this.store.dispatch(fetchArticles({config}));
-        this.articles$ = this.store.select(getAllArticles)
+        this.store.dispatch(fetchArticles({ config }));
+        this.articles$ = this.store.select(getAllArticles);
     }
 
     onToggleFollowing(event: Event) {
