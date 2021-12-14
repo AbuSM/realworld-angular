@@ -5,7 +5,9 @@ import {
     onToggleFavoriteSuccess,
     onToggleFavoriteFailure,
     fetchAllArticles,
+    fetchArticlesSuccess,
     fetchAllArticlesSuccess,
+    fetchArticlesFailure,
     fetchAllArticlesFailure,
 } from './article.actions';
 
@@ -16,16 +18,17 @@ export const initialState = {
 
 const _articleReducer = createReducer(
     initialState,
-    on(fetchAllArticles, onToggleFavorite, (state) => ({
-        ...state,
-        isLoading: true,
-    })),
-    on(fetchAllArticlesSuccess, (state, { articles }) => ({
-        ...state,
-        isLoading: false,
-        articles,
-    })),
-    on(fetchAllArticlesFailure, (state, error) => ({
+    on(fetchAllArticles, onToggleFavorite, (state) => state),
+    on(
+        fetchAllArticlesSuccess,
+        fetchArticlesSuccess,
+        (state, { articles }) => ({
+            ...state,
+            isLoading: false,
+            articles,
+        })
+    ),
+    on(fetchAllArticlesFailure, fetchArticlesFailure, (state, error) => ({
         ...state,
         isLoading: false,
         error,

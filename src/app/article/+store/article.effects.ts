@@ -9,6 +9,9 @@ import {
     onToggleFavoriteFailure,
     onToggleFavoriteSuccess,
     fetchFeedArticles,
+    fetchArticles,
+    fetchArticlesSuccess,
+    fetchArticlesFailure,
 } from './article.actions';
 import { exhaustMap, map, of, iif, catchError, withLatestFrom } from 'rxjs';
 import { ArticlesService } from '../../services';
@@ -21,6 +24,17 @@ export class ArticleEffects {
         private store: Store,
         private articlesService: ArticlesService
     ) {}
+
+    onFetch$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(fetchArticles),
+            exhaustMap((action) => {
+                return this.articlesService.query(action.config);
+            }),
+            map(({ articles }) => fetchArticlesSuccess({ articles })),
+            catchError((err) => of(fetchArticlesFailure(err)))
+        )
+    );
 
     onFetchAll$ = createEffect(() => {
         return this.actions$.pipe(
