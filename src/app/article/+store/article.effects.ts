@@ -28,10 +28,8 @@ export class ArticleEffects {
     onFetch$ = createEffect(() =>
         this.actions$.pipe(
             ofType(fetchArticles),
-            withLatestFrom(this.store.select(getIsLogged)),
             exhaustMap((action) => {
-                const { config } = action[0];
-                return this.articlesService.query(config);
+                return this.articlesService.query(action.config);
             }),
             map(({ articles }) => fetchArticlesSuccess({ articles })),
             catchError((err) => of(fetchArticlesFailure(err)))
