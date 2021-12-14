@@ -11,6 +11,7 @@ import { ModalComponent } from './modal/modal.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { TabComponent } from './tabs/tab/tab.component';
 import { NgVarDirective } from './+directives/ng-var.directive';
+import { CardComponent } from './card/card.component';
 
 @NgModule({
     declarations: [
@@ -26,6 +27,7 @@ import { NgVarDirective } from './+directives/ng-var.directive';
         TabsComponent,
         TabComponent,
         NgVarDirective,
+        CardComponent,
     ],
     imports: [CommonModule, RouterModule],
     exports: [
@@ -41,6 +43,7 @@ import { NgVarDirective } from './+directives/ng-var.directive';
         TabsComponent,
         TabComponent,
         NgVarDirective,
+        CardComponent,
     ],
 })
 export class SharedModule {}

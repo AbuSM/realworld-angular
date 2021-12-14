@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ArticlesService, AuthService } from '../services';
-import { UserModel, ProfileModel, ArticleModel } from '../models';
+import { UserModel, ProfileModel, ArticleModel, CardModel } from '../models';
 import { Observable, startWith, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { getUserData } from '../auth/+store/auth.selector';
@@ -27,6 +27,21 @@ export class ProfileComponent implements OnInit, OnDestroy {
     user$: Observable<any>;
     articles: ArticleModel[] = [];
     noDataText: string = '';
+
+    cards: CardModel[] = [
+        {
+            title: 'Start a data driven discussion',
+            time: 4,
+        },
+        {
+            title: 'Use goals to improve results',
+            time: 3,
+        },
+        {
+            title: 'Use data to make better meetings',
+            time: 4,
+        },
+    ];
 
     ngOnInit() {
         this.username = this.route.snapshot.params['username'];
