@@ -3,11 +3,12 @@ import { Router } from '@angular/router';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Action, StoreModule } from '@ngrx/store';
 import { Observable, of, throwError } from 'rxjs';
-import { AuthEffects } from './auth.effects';
-import { AUTHORIZE_REQUEST } from './auth.actions';
-import { AuthService } from '../../services';
-import { UserCredentialsModel } from '../../models';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AuthEffects } from './auth.effects';
+import * as AuthActions from './auth.actions';
+import { AuthService } from '../../services';
+import { UserCredentialsModel, UserModel } from '../../models';
+import { TestScheduler } from 'rxjs/testing';
 
 describe('AuthEffects', () => {
     let actions$ = new Observable<Action>();
@@ -45,12 +46,16 @@ describe('AuthEffects', () => {
             email: 'test@test.ru',
             password: 'test',
         } as UserCredentialsModel;
+        const userResponse = {
+            email: user.email,
+            username: 'test3',
+        } as UserModel;
         actions$ = of({
-            type: AUTHORIZE_REQUEST,
+            type: AuthActions.AUTHORIZE_REQUEST,
             loginType: 'login',
             credentials: user,
         });
-        authService.authUser.and.returnValue(of({ user }));
+        authService.authUser.and.returnValue(of({ user: userResponse }));
         effects.auth$.subscribe();
         expect(authService.authUser).toHaveBeenCalledWith('login', user);
         expect(routerSpy.navigateByUrl).toHaveBeenCalledWith('/');
@@ -65,7 +70,7 @@ describe('AuthEffects', () => {
             statusText: 'Forbidden',
         });
         actions$ = of({
-            type: AUTHORIZE_REQUEST,
+            type: AuthActions.AUTHORIZE_REQUEST,
             loginType: 'login',
             credentials: user,
         });
@@ -74,5 +79,32 @@ describe('AuthEffects', () => {
         expect(authService.authUser).toHaveBeenCalledWith('login', user);
         expect(routerSpy.navigateByUrl).not.toHaveBeenCalled();
         done();
+    });
+
+    describe('AuthEffects with marble testing', () => {
+        let testScheduler: TestScheduler;
+        beforeEach(() => {
+            testScheduler = new TestScheduler((actual, expected) => {
+                expect(actual).toEqual(expected);
+            });
+        });
+        const user = {
+            username: 'test3',
+            bio: '',
+        } as UserModel;
+        xit('check checkAuth effect', () => {
+            testScheduler.run(({ cold, hot, expectObservable }) => {
+                authService.checkUser.and.returnValue(
+                    hot('a|', { a: { user } })
+                );
+
+                expectObservable(effects.checkAuth$).toBe('a-', {
+                    a: {
+                        type: AuthActions.checkAccess,
+                        user,
+                    },
+                });
+            });
+        });
     });
 });

@@ -13,7 +13,6 @@ import { AuthService } from '../services';
     styleUrls: ['./settings.component.less'],
 })
 export class SettingsComponent implements OnInit, OnDestroy {
-    user$: Observable<object>;
     subscriptions: Subscription = new Subscription();
     settingsForm: FormGroup;
     errors = {};
