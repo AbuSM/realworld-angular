@@ -8,7 +8,7 @@ import { getUserData } from '../auth/+store/auth.selector';
 import { fetchArticles } from '../article/+store/article.actions';
 import { getAllArticles } from '../article/+store/article.selectors';
 import { fetchCards } from './+store/profile.actions';
-import { getCards } from "./+store/profile.selectors";
+import { getCards } from './+store/profile.selectors';
 
 const USER_FEED_ACTIVE_TAB = 1;
 
