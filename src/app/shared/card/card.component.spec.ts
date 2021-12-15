@@ -70,7 +70,9 @@ describe('CardComponent', () => {
         );
         expect(component.data.isNew).toBeTruthy();
         component.onClick(cards[0]);
-        expect(window.alert).toHaveBeenCalledWith('You successfully clicked to button');
+        expect(window.alert).toHaveBeenCalledWith(
+            'You successfully clicked to button'
+        );
         component.data = initialState.cards[0];
         fixture.detectChanges();
         fixture.whenStable();

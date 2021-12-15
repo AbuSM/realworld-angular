@@ -10,8 +10,8 @@ import { Observable, of, tap } from 'rxjs';
 import { getToken } from './utils';
 
 interface CacheType {
-    resp: HttpResponse<any>
-    time?: number,
+    resp: HttpResponse<any>;
+    time?: number;
 }
 
 const CACHE_DELAY = 60;
@@ -39,13 +39,20 @@ export class HttpTokenInterceptor implements HttpInterceptor {
             const { params, url } = req;
             const key = `${url}?${params.toString()}`;
             const cachedResponse = this.cache.get(key);
-            if (cachedResponse && (CACHE_DELAY > ((new Date().getTime() - cachedResponse.time) / 1000))) {
+            if (
+                cachedResponse &&
+                CACHE_DELAY >
+                    (new Date().getTime() - cachedResponse.time) / 1000
+            ) {
                 return of(cachedResponse.resp.clone());
             } else {
                 return next.handle(req).pipe(
                     tap((resp) => {
                         if (resp instanceof HttpResponse) {
-                            this.cache.set(key, {resp, time: new Date().getTime()});
+                            this.cache.set(key, {
+                                resp,
+                                time: new Date().getTime(),
+                            });
                         }
                     })
                 );
