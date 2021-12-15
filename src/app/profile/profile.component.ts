@@ -1,12 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ArticlesService, AuthService } from '../services';
-import { UserModel, ProfileModel, ArticleModel, CardModel } from '../models';
-import { Observable, startWith, Subscription } from 'rxjs';
+import { UserModel, ProfileModel, CardModel } from '../models';
+import { Observable, of, startWith, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { getUserData } from '../auth/+store/auth.selector';
-import { getCards } from './+store/profile.selectors';
+import { fetchArticles } from '../article/+store/article.actions';
+import { getAllArticles } from '../article/+store/article.selectors';
 import { fetchCards } from './+store/profile.actions';
+import { getCards } from "./+store/profile.selectors";
 
 const USER_FEED_ACTIVE_TAB = 1;
 
@@ -27,7 +29,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
     username!: string;
     user: ProfileModel;
     user$: Observable<any>;
-    articles: ArticleModel[] = [];
+    articles$: Observable<ReturnType<typeof getAllArticles>> = of({
+        isLoading: false,
+        articles: [],
+    });
     noDataText: string = '';
     cards$: Observable<CardModel[]>;
 
@@ -41,6 +46,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
         );
         this.store.dispatch(fetchCards());
         this.cards$ = this.store.select(getCards);
+        this.articles$.pipe(startWith({ isLoading: false, articles: [] }));
+        this.onTabChange(1);
     }
 
     onTabChange(activeTab: number | string) {
@@ -52,14 +59,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
             this.noDataText = 'favorited';
             config = { favorited: this.username };
         }
-        this.subscriptions.add(
-            this.articlesService.query(config).subscribe({
-                next: ({ articles }) => (this.articles = articles),
-            })
-        );
+        this.store.dispatch(fetchArticles({ config }));
+        this.articles$ = this.store.select(getAllArticles);
     }
 
-    onToggleFollowing(event: Event) {
+    onToggleFollowing() {
         this.user.following = !this.user.following;
     }
 

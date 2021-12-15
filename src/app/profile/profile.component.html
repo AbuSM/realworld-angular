@@ -25,10 +25,16 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container" *ngIf="articles$ | async as articlesState">
         <div class="row">
-            <div class="col-xs-12 col-md-10 offset-md-1">
-                <div class="articles-toggle">
+            <div
+                class="col-xs-12 col-md-10 offset-md-1"
+                *ngVar="articlesState.articles as articles"
+            >
+                <div
+                    class="articles-toggle"
+                    *ngIf="!articlesState.isLoading; else spinner"
+                >
                     <app-tabs (tabChanged)="onTabChange($event)">
                         <ng-container
                             *ngIf="!!articles.length; else noArticles"
@@ -64,6 +70,11 @@
                         </ng-template>
                     </app-tabs>
                 </div>
+                <ng-template #spinner>
+                    <app-spinner
+                        [loading]="(articles$ | async).isLoading"
+                    ></app-spinner>
+                </ng-template>
             </div>
         </div>
     </div>
