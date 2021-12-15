@@ -5,6 +5,8 @@ import { UserModel, ProfileModel, ArticleModel, CardModel } from '../models';
 import { Observable, startWith, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { getUserData } from '../auth/+store/auth.selector';
+import { getCards } from './+store/profile.selectors';
+import { fetchCards } from './+store/profile.actions';
 
 const USER_FEED_ACTIVE_TAB = 1;
 
@@ -27,21 +29,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     user$: Observable<any>;
     articles: ArticleModel[] = [];
     noDataText: string = '';
-
-    cards: CardModel[] = [
-        {
-            title: 'Start a data driven discussion',
-            time: 4,
-        },
-        {
-            title: 'Use goals to improve results',
-            time: 3,
-        },
-        {
-            title: 'Use data to make better meetings',
-            time: 4,
-        },
-    ];
+    cards$: Observable<CardModel[]>;
 
     ngOnInit() {
         this.username = this.route.snapshot.params['username'];
@@ -51,6 +39,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 next: (user) => (this.user = user),
             })
         );
+        this.store.dispatch(fetchCards());
+        this.cards$ = this.store.select(getCards);
     }
 
     onTabChange(activeTab: number | string) {

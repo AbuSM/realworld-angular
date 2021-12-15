@@ -5,12 +5,16 @@ import {
     onToggleFollowFailure,
     fetchProfile,
     fetchProfileSuccess,
+    fetchCards,
+    fetchCardsSuccess,
+    clickNewCard,
 } from './profile.actions';
 import { ProfileModel } from '../../models';
 
 export const initialState = {
     isLoading: false as boolean,
     profile: {} as ProfileModel,
+    cards: [],
 };
 
 const _profileReducer = createReducer(
@@ -25,6 +29,25 @@ const _profileReducer = createReducer(
     on(fetchProfileSuccess, (state, profile: ProfileModel) => ({
         ...state,
         profile,
+    })),
+    on(fetchCards, (state) => ({
+        ...state,
+        isLoading: true,
+    })),
+    on(fetchCardsSuccess, (state, { cards }) => ({
+        ...state,
+        cards,
+    })),
+    on(clickNewCard, (state, { card }) => ({
+        ...state,
+        cards: state.cards.map((prevCard) => {
+            return prevCard.id === card.id
+                ? {
+                      ...card,
+                      isNew: false,
+                  }
+                : prevCard;
+        }),
     }))
 );
 

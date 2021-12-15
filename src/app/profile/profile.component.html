@@ -45,7 +45,11 @@
                                 [post]="article"
                             ></app-post>
                         </tab>
-                        <tab [id]="3" title="Card">
+                        <tab
+                            [id]="3"
+                            title="Card"
+                            *ngIf="cards$ | async as cards"
+                        >
                             <div class="mt-2 d-flex flex-wrap">
                                 <app-card
                                     *ngFor="let card of cards"

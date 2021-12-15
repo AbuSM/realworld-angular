@@ -4,3 +4,5 @@ import { ProfileState } from './profile.state';
 const _getProfile = createFeatureSelector<ProfileState>('profile');
 
 export const getProfile = createSelector(_getProfile, (state) => state);
+
+export const getCards = createSelector(_getProfile, (state) => state.cards);
