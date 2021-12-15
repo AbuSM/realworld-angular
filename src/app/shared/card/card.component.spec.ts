@@ -53,6 +53,7 @@ describe('CardComponent', () => {
     });
 
     it('check `click` method', (done: DoneFn) => {
+        spyOn(window, 'alert');
         spyOn(mockStore, 'dispatch').and.callFake(
             (action: ReturnType<typeof clickNewCard>) => {
                 const card = action.card;
@@ -69,6 +70,7 @@ describe('CardComponent', () => {
         );
         expect(component.data.isNew).toBeTruthy();
         component.onClick(cards[0]);
+        expect(window.alert).toHaveBeenCalledWith('You successfully clicked to button');
         component.data = initialState.cards[0];
         fixture.detectChanges();
         fixture.whenStable();
