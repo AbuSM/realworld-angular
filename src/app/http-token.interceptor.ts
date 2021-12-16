@@ -9,10 +9,17 @@ import {
 import { Observable, of, tap } from 'rxjs';
 import { getToken } from './utils';
 
+interface CacheType {
+    resp: HttpResponse<any>;
+    time?: number;
+}
+
+const CACHE_DELAY = 60;
+
 @Injectable()
 export class HttpTokenInterceptor implements HttpInterceptor {
     constructor() {}
-    private cache: Map<string, HttpResponse<any>> = new Map();
+    private cache: Map<string, CacheType> = new Map();
 
     intercept(
         request: HttpRequest<unknown>,
@@ -32,13 +39,20 @@ export class HttpTokenInterceptor implements HttpInterceptor {
             const { params, url } = req;
             const key = `${url}?${params.toString()}`;
             const cachedResponse = this.cache.get(key);
-            if (cachedResponse) {
-                return of(cachedResponse.clone());
+            if (
+                cachedResponse &&
+                CACHE_DELAY >
+                    (new Date().getTime() - cachedResponse.time) / 1000
+            ) {
+                return of(cachedResponse.resp.clone());
             } else {
                 return next.handle(req).pipe(
-                    tap((value) => {
-                        if (value instanceof HttpResponse) {
-                            this.cache.set(key, value);
+                    tap((resp) => {
+                        if (resp instanceof HttpResponse) {
+                            this.cache.set(key, {
+                                resp,
+                                time: new Date().getTime(),
+                            });
                         }
                     })
                 );
