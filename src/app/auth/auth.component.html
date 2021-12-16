@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 offset-md-3 col-xs-12">
-            <div class="text-center">
+            <div class="text-center" [attr.aria-label]="title">
                 <h2>{{ title }}</h2>
                 <p>
                     <a routerLink="/register" *ngIf="authType === 'login'"
@@ -13,7 +13,11 @@
                 </p>
             </div>
             <app-errors-list [errors]="errors"></app-errors-list>
-            <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+            <form
+                [formGroup]="authForm"
+                (ngSubmit)="onSubmit()"
+                [attr.aria-label]="authType + 'form'"
+            >
                 <div class="form-group" *ngIf="authType === 'register'">
                     <input
                         type="text"

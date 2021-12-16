@@ -1,9 +1,11 @@
 <div class="tabs">
-    <ul class="nav nav-pills outline-active">
+    <ul class="nav nav-pills outline-active" role="tablist">
         <li
             class="nav-item ng-hide"
             *ngFor="let tab of tabs"
             (click)="selectTab(tab)"
+            role="tab"
+            [id]="tab.id"
         >
             <a
                 class="nav-link"

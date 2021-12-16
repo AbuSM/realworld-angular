@@ -2,6 +2,7 @@
     class="mt-2 d-flex overflow-hidden"
     #cardsDiv
     *ngIf="cards$ | async as cards"
+    role="slider"
 >
     <app-card *ngFor="let card of cards" [data]="card"></app-card>
 </div>
@@ -11,6 +12,7 @@
         [ngClass]="{ disabled: disabled === 'left' }"
         role="button"
         (click)="leftClick()"
+        aria-label="Previous slide"
     >
         <span><</span>
     </button>
@@ -19,6 +21,7 @@
         [ngClass]="{ disabled: disabled === 'right' }"
         role="button"
         (click)="rightClick()"
+        aria-label="next slide"
     >
         <span>></span>
     </button>

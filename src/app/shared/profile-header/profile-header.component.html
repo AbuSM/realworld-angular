@@ -1,7 +1,7 @@
 <div class="profile">
     <a [routerLink]="['/user', username]">
         <img
-            alt="user-img"
+            alt="user profile image"
             class="user-img"
             src="https://api.realworld.io/images/smiley-cyrus.jpeg"
         />
@@ -10,6 +10,8 @@
         <a
             [routerLink]="['/user', username]"
             [class]="!date ? 'nav-link' : 'profile-link'"
+            aria-label="profile"
+            role="navigation"
         >
             {{ username }}
         </a>

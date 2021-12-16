@@ -4,7 +4,12 @@
             <div class="col-md-6 offset-md-3 col-xs-12">
                 <h1 class="text-xs-center">Your Settings</h1>
                 <app-errors-list [errors]="errors"></app-errors-list>
-                <form [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
+                <form
+                    [formGroup]="settingsForm"
+                    (ngSubmit)="onSubmit()"
+                    role="form"
+                    aria-label="Settings"
+                >
                     <fieldset>
                         <fieldset class="form-group">
                             <input

@@ -1,12 +1,19 @@
 <div class="container">
-    <nav class="navbar navbar-light navbar-expand-sm">
+    <nav class="navbar navbar-light navbar-expand-sm" role="navigation">
         <div class="navbar-header">
             <a href="#" class="navbar-brand">conduit</a>
         </div>
         <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a routerLink="" class="nav-link">Home</a>
+                    <a
+                        routerLink=""
+                        class="nav-link"
+                        aria-label="Home page"
+                        role="navigation"
+                    >
+                        Home
+                    </a>
                 </li>
                 <ng-container
                     *ngIf="
@@ -19,6 +26,8 @@
                             routerLink="/login"
                             routerLinkActive="active"
                             class="nav-link"
+                            role="navigation"
+                            aria-label="Login page"
                             >Sign in</a
                         >
                     </li>
@@ -27,6 +36,8 @@
                             routerLink="/register"
                             routerLinkActive="active"
                             class="nav-link"
+                            role="navigation"
+                            aria-label="Registration page"
                             >Sign up</a
                         >
                     </li>
@@ -37,6 +48,8 @@
                             routerLink="/editor"
                             routerLinkActive="active"
                             class="nav-link"
+                            aria-label="New Article page"
+                            role="navigation"
                         >
                             <i class="ion-compose"></i>
                             New article
@@ -47,6 +60,8 @@
                             routerLink="/settings"
                             routerLinkActive="active"
                             class="nav-link"
+                            aria-label="Settings page"
+                            role="navigation"
                         >
                             <i class="ion-gear-a"></i>
                             Settings

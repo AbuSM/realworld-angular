@@ -1,9 +1,11 @@
-<div class="card m-2" (click)="onClick(data)">
+<div class="card m-2" (click)="onClick(data)" aria-label="Card">
     <div class="card-img-top"></div>
-    <div class="card-body">
-        <h5 class="card-title">
+    <div class="card-body" aria-label="Card body">
+        <h5 class="card-title" aria-label="Card title">
             {{ data.title }}
-            <span class="badge" *ngIf="data.isNew">New</span>
+            <span class="badge" *ngIf="data.isNew" aria-label="New card"
+                >New</span
+            >
         </h5>
         <div class="card-text">
             <i class="icon-clock icon-alarm"></i>
