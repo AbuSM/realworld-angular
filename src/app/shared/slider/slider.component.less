@@ -1,0 +1,22 @@
+button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    span {
+        display: inline-block;
+        height: 24px;
+        width: 24px;
+    }
+    &:hover {
+        background: rgba(0, 0, 0, 0.1);
+        transition: background 0.3s;
+    }
+}
+.disabled {
+    opacity: 0.5;
+    &:hover {
+        background: none;
+    }
+}

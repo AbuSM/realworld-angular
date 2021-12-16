@@ -34,7 +34,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
         articles: [],
     });
     noDataText: string = '';
-    cards$: Observable<CardModel[]>;
 
     ngOnInit() {
         this.username = this.route.snapshot.params['username'];
@@ -45,7 +44,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
             })
         );
         this.store.dispatch(fetchCards());
-        this.cards$ = this.store.select(getCards);
         this.articles$.pipe(startWith({ isLoading: false, articles: [] }));
         this.onTabChange(1);
     }

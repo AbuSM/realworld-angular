@@ -12,6 +12,7 @@ import { TabsComponent } from './tabs/tabs.component';
 import { TabComponent } from './tabs/tab/tab.component';
 import { NgVarDirective } from './+directives/ng-var.directive';
 import { CardComponent } from './card/card.component';
+import { SliderComponent } from './slider/slider.component';
 
 @NgModule({
     declarations: [
@@ -28,6 +29,7 @@ import { CardComponent } from './card/card.component';
         TabComponent,
         NgVarDirective,
         CardComponent,
+        SliderComponent,
     ],
     imports: [CommonModule, RouterModule],
     exports: [
@@ -44,6 +46,7 @@ import { CardComponent } from './card/card.component';
         TabComponent,
         NgVarDirective,
         CardComponent,
+        SliderComponent,
     ],
 })
 export class SharedModule {}

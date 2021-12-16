@@ -1,0 +1,25 @@
+<div
+    class="mt-2 d-flex overflow-hidden"
+    #cardsDiv
+    *ngIf="cards$ | async as cards"
+>
+    <app-card *ngFor="let card of cards" [data]="card"></app-card>
+</div>
+<div class="controls">
+    <button
+        class="btn-left"
+        [ngClass]="{ disabled: disabled === 'left' }"
+        role="button"
+        (click)="leftClick()"
+    >
+        <span><</span>
+    </button>
+    <button
+        class="btn-right"
+        [ngClass]="{ disabled: disabled === 'right' }"
+        role="button"
+        (click)="rightClick()"
+    >
+        <span>></span>
+    </button>
+</div>
