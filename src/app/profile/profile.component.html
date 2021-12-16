@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-md-10 offset-md-1">
-                    <img [src]="user.image" class="user-img" />
+                    <img [src]="user.image" class="user-img" alt="user-image" />
                     <h4>{{ user.username }}</h4>
                     <p>{{ user.bio }}</p>
                     <app-follow-button
@@ -51,17 +51,8 @@
                                 [post]="article"
                             ></app-post>
                         </tab>
-                        <tab
-                            [id]="3"
-                            title="Card"
-                            *ngIf="cards$ | async as cards"
-                        >
-                            <div class="mt-2 d-flex flex-wrap">
-                                <app-card
-                                    *ngFor="let card of cards"
-                                    [data]="card"
-                                ></app-card>
-                            </div>
+                        <tab [id]="3" title="Cards">
+                            <app-slider></app-slider>
                         </tab>
                         <ng-template #noArticles>
                             <div class="mt-3">

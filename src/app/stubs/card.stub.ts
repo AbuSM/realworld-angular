@@ -19,4 +19,10 @@ export const cards: CardModel[] = [
         time: 4,
         isNew: true,
     },
+    {
+        id: 4,
+        title: 'Create reports from data you have',
+        time: 2,
+        isNew: true,
+    },
 ];
