@@ -8,10 +8,15 @@ import {
     fetchProfile,
     fetchProfileSuccess,
     fetchProfileFailure,
+    fetchCards,
+    fetchCardsSuccess,
+    fetchCardsFailure,
+    clickNewCard,
 } from './profile.actions';
-import { exhaustMap, map, catchError, iif } from 'rxjs';
+import { exhaustMap, map, catchError, iif, of } from 'rxjs';
 import { ProfileService } from '../../services';
 import { ProfileModel } from '../../models';
+import { cards } from '../../stubs';
 
 @Injectable()
 export class ProfileEffects {
@@ -56,4 +61,25 @@ export class ProfileEffects {
             )
         );
     });
+
+    fetchCards$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(fetchCards),
+            exhaustMap((action) => {
+                return of(cards).pipe(
+                    map((cards) => fetchCardsSuccess({ cards })),
+                    catchError((err) => fetchCardsFailure(err))
+                );
+            })
+        )
+    );
+
+    onClickNewCard$ = createEffect(
+        () =>
+            this.actions$.pipe(
+                ofType(clickNewCard),
+                exhaustMap((action) => of(action.card))
+            ),
+        { dispatch: false }
+    );
 }
